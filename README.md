@@ -5,5 +5,5 @@ The git for the Python Story Utility Package library.
 [Python 3.x](https://www.python.org/downloads/)
 
 
-### Endorsements
+### Endorsements:
 **sus 10/10 👍👍** -[sexnine](https://github.com/sexnine)
