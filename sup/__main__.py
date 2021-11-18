@@ -162,7 +162,7 @@ class Story:
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 				temp_list = [sub_story[0]]
 				continue
-			if i.startswith("-TAG") or i.startswith("- TAG"):
+			if i.startswith(("-TAG", "- TAG")):
 				tag = i.split(" ", 2)[1]
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
@@ -270,7 +270,7 @@ class Story:
 			
 	def __run_line__(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
-		if not any((curr_line.startswith(f"-{i}") or curr_line.startswith(f"- {i}")) for i in self.function_dict):
+		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
 			self.io(curr_line)
 			self.__stay_function__()
 		else:
