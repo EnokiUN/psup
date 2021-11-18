@@ -1,0 +1,165 @@
+# note: this all has been done without the attribute feature
+[STORY main]
+Once upon a time, There was an Amogos walking around in the park.
+His name was Helly, you are Helly.
+
+Suddenly an imposter of the red variety appeared before him.
+The imposter was thirsty for blood.
+- OPTION {{
+    Run away to electrical $$STAY,
+    Eat the imposter $$STORY Becoming the Imposter, 
+    Run away to the button $$JUMP Button1}}
+
+You saw death right infront of you, the silly red imposter had forgotten in which pocket he had put his knife,
+you used this opportunity to run the fuck away
+You ran into the ship, into the storage "If i can reach electrical he can't find me there!" or you so thought, upon reaching the door you realized it's been closed
+- OPTION  {{
+    Embrace Death $$STORY Death, 
+    Loop to button hoping he won't find you $$STAY, 
+    Deicde it's a good time to eat the imposter $$STORY Becoming-the-Imposter}}
+
+You saw death right infront of you, the silly red imposter had forgotten in which pocket he had put his knife,
+you used this opportunity to run the fuck away
+You ran into the ship, into the storage and straight to the button...
+- OPTION Contiune... $$SKIP 1
+- TAG Button1 
+You loop around to the button you can hear the clap of his asschicks in the hallways, you immediately go for the button and...
+BOOM, lights out, this is horrible you have no idea what to do at this point
+- OPTION {{
+    not like this... $$JUMP gys-tgt, 
+    vent in \#general $$STAY, 
+    start walking in the dark towards electrical $$STORY Electrical}}
+
+    You try to go discord but you realize the wifi is off because of the blackout...
+being disappointed you
+- OPTION{{
+    N start walking in the dark towards electrical $$STORY Electrical-with-flashlight, 
+    keep spamming the button $$JUMP Death, 
+    Hide near the windows $$JUMP x}}
+- TAG gys-tgt
+You are perishing in agony but quickly gather yourself to make a proper choice
+- OPTION{{ 
+    start walking in the dark towards electrical $$STORY Electrical, 
+    keep spamming the button $$STORY Death, 
+    Hide near the windows $$JUMP x}}
+- TAG x
+Hello, Im the narrator, I have no idea what happens when you hide near the windows
+I guess you will never know too, goodbye :)
+- END
+
+
+
+[STORY Electrical]
+You practically can't even see 2 meters ahead of you (this story isn't in america yes) but you try your best to navigate to Electrical
+you are silently walking till you accidentally break the sound barrier by hitting a table, you can hear the claps of his asschicks
+this is bad
+- OPTION{{
+    Loop around the other way to Electrical $$STAY
+    Embrace Death this far into the story tree (Can you tell im out of options?)$$STORY Death, 
+    Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
+}}
+you decide it's better to loop around to Electrical instead of directly going there
+while slowly walking towards your destination you hear people screaming, no good no good
+- OPTION{{
+    Walk faster $$STAY
+    Keep it slow $$SKIP 2
+}}
+You start walking faster, it feels like running
+until you hit a pipe and fall down, the imposter probably didn't hear that
+you decide to go slower after what just happened
+you reach the electrical, "finally" you think
+you go inside and see sparkles from where it should be the fuse box from your memory
+- OPTION{{
+    Fix it $$STAY
+}}
+not a religious person, but you start praying anyway, or better to say the character does
+you open the fuse box and you realize you can't see which fuse is the "red fuse"
+it's all luck now 2/3 you lose, 1/3 you find the right fuse
+- OPTION {{
+    left fuse... $$STORY Death-electrical
+    middle fuse... $$STORY Death-electrical 
+    right fuse... $$STAY
+}}
+and, it's done, the lights are back on, and it hurts, a lot
+you quickly go to the vent and hide inside, this is the secret technique you learned by staying in all of those amongus modded lobbies
+the imposter is in the room, he can't seem to find you
+and you hear the sound of the button alarm...
+- END
+
+[Story Electrical-with-flashlight]
+You practically can't even see 2 meters ahead of You
+but before you do anything you quickly realize you have a phone...
+after feeling stupid for some seconds you start walking towards electrical, being careful to not shine the light somewhere that would give you away
+you are at the door to the hallway which has electrical door in it, you can hear the heavy breathing of the imposter
+- OPTION{{
+    Loop around the other way to Electrical $$JUMP looping
+    Wait $$STAY, 
+    Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
+}}
+You wait patiently, hoping for a miracle, and a miracle happens
+you hear the sound of Anon, the guy who trolls you on twitter
+ZOOOM goes the imposter past the door frame, completely missing you
+feeling refreshed you...
+- OPTION {{Go to electrical $$JUMP electrical-door}}
+HAHAHAHAHAHAH UNREACHABLE TEXT I WIN
+- TAG looping
+you decide it's better to loop around to Electrical instead of directly going there
+while slowly walking towards your destination you hear people screaming, no good no good
+- TAG electrical-door
+you reach the electrical, "finally" you think
+you go inside and see sparkles from where it should be the fuse box from your memory
+- OPTION{{
+    Fix it $$STAY
+}}
+not a religious person, but you start praying anyway, or better to say the character does
+you open the fuse box and you realize you can't see which fuse is the "red fuse"
+it's all luck now 2/3 you lose, 1/3 you find the right fuse
+- OPTION {{
+    left fuse... $$STORY Death-electrical,
+    middle fuse... $$STORY Death-electrical,
+    right fuse... $$JUMP correct,
+    wait, i have a fucking flashlight $$STAY
+}}
+oh yeah... you do.. with the help of the light you find out the right fuse was the right one
+- TAG correct
+and, it's done, the lights are back on, and the light hurts, a lot, your eyes are burning
+you quickly go to the vent and hide inside, this is the secret technique you learned by staying in all of those amongus modded lobbies
+the imposter is in the room, he can't seem to find you
+and you hear the sound of the button alarm...
+- END
+
+[STORY Death]
+*clap* *clap* *clap*
+you can hear it... slowly approaching...
+*clap* *clap* *clap*
+the sussy imposter comes close to you
+out of immense fear you try to escape but he's too fast 
+his tongue wraps around your body 
+and you are eaten 
+good grief
+- END
+
+[STORY Death-electrical]
+the fuse box makes a loud boom sounds, this sussy fuse box technology is not helping at all
+*clap* *clap* *clap*
+you can hear it... slowly approaching...
+*clap* *clap* *clap*
+you try to quickly fix the light but you realize even if you do it's too late
+yet you find out the right side fuse was the right fuse
+and you succumb to death after turning the lights for your fellow crew mates...
+- END
+
+
+
+
+
+[STORY Becoming-the-Imposter]
+there's this huge grin on the sussy red imposter's space suit
+but there's a bigger one on yours
+you open your mouth, approximately spanning up 1.5m tall
+you take the air in, all of it, just absolutely sucking the entire air molecules of the room
+red imposter starts running away very scared, but he can't fight against the sheer suckion of your mouth 
+he is now inside your mouth you can't believe this, you close your mouth and he's gone xd lol💀
+now it's supposed to be a cool story line where you eat 3 crewnates but it's midnight and i gotta sleep
+the END
+- END
