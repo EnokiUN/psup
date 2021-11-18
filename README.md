@@ -74,3 +74,20 @@ Jack started to slowly drown but a man helped him get out of the river safely.
 ```
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
+
+## The Syntax:
+So there are a set of functions you can use in a sus file, being:
+- `TAG` Creates a tag at the line that it's on.
+- `JUMP` Jumps to a tag ignoring which sub-story it exists in.
+- `SKIP` Skips a provided amount of lines.
+- `RETURN` Goes back a provided amount of lines.
+- `OPTION` Makes options, each option has some text and the function ran when that option is selected separated by `$$`.
+- `STAY` Does nothing, used with other functions to do nothing.
+- `END` Ends the whole story.
+- `ADDATTR` Adds an attribute to the player.
+- `DELATTR` Deleted an attribute from the player.
+- `CHECKATTR` Checks if the played has an attribute, if so it runs the function supplied by `$$`.
+- `CHECKNOTATTR` does the opposite of `CHECKATTR`.
+
+You can also specify sub stories by typing `[STORY sub-story-name]`.
+lines that are empty or start with `# ` are regarded as comments and are treated as if they don't exist.
