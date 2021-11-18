@@ -162,7 +162,7 @@ class Story:
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 				temp_list = [sub_story[0]]
 				continue
-			if i.startswith("-TAG"):
+			if i.startswith("-TAG") or i.startswith("- TAG"):
 				tag = i.split(" ", 2)[1]
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
