@@ -108,7 +108,7 @@ class Story:
 	def __init__(self,
 	story_path: str, 
 	io_function: Callable[[str],str]=_story_io):
-		self.path = story_path + ".sus"
+		self.path = story_path + ".sus" if not story_path.endswith('.sus') else story_path
 		self.io = io_function
 		self.line = 0
 		self.sub_story = None
@@ -128,7 +128,7 @@ class Story:
 		}
 		self.tags = dict()
 		self.attributes = list()
-		with open(self.path, "r") as sf:
+		with open(self.path, "r", encoding='UTF-8') as sf:
 			temp_text = sf.read()
 		self.text = list()
 		temp_lines = str()
