@@ -279,7 +279,7 @@ class Story:
 				temp_line = self.line 
 				if curr_line.startswith("- "):
 					curr_line = "-" + curr_line[2:]
-				self.__run_function__(curr_line)
+				self.__run_function__(curr_line[1:])
 				if temp_line == self.line:
 					self.line += 1
 				
