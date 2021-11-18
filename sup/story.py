@@ -181,12 +181,12 @@ class Story:
 		if len(args.split()) == 1:
 			if not args in self.function_dict:
 				raise StoryError(f"Unknown function: {args}")
-			self.function_dict[args[1:]]()
+			self.function_dict[args]()
 		else:
 			func, args = args.split(" ", 1)
 			if not func in self.function_dict:
 				raise StoryError(f"Unknown function: {func}")
-			self.function_dict[func[1:]](args)
+			self.function_dict[func](args)
 					
 	def __option_function__(self, args: str) -> None:
 		option_functions = [i[0].strip() for i in findall(r"\$\$(.+?)(,|$)", args)]
