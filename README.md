@@ -26,7 +26,7 @@ Jack was scared as he had no idea what the thing in the bushes could be.
 - OPTION {{
 	 Run away $$JUMP running-away,
 	 Go towards the Bush $$STAY,
-	 Do nothing $$JUMP 5
+	 Do nothing $$SKIP 5
 	 }}
 As Jack slowly moved towards the Bush the sound became louder.
 The Bush started shaking violently, Leaves scattered everywhere.
