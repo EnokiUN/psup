@@ -16,4 +16,4 @@ __version__ = '0.1.4a'
 
 __all__ = ["Story", "StoryError"]
 
-from __main__ import Story, StoryError
+from .story import Story, StoryError
