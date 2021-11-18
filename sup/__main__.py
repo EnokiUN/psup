@@ -149,7 +149,7 @@ class Story:
 		if self.text == []:
 			raise StoryError("Story file is empty")
 		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
-			raise StoryError(" No Story sections found")
+			raise StoryError("No Story sections found")
 		self.sub_stories = dict()
 		temp_list = list()
 		for x, i in enumerate(self.text):
@@ -163,6 +163,8 @@ class Story:
 				temp_list = [sub_story[0]]
 				continue
 			if i.startswith(("-TAG", "- TAG")):
+				if i.startswith("- "):
+					i = "-" + i[2:]
 				tag = i.split(" ", 2)[1]
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
