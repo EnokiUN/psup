@@ -3,7 +3,8 @@ The git for the Python Story Utility Package library.
 
 ## Installation:
 Install SUP by simply running **`pip install psup`** in your terminal.
-Check out our [pypy page](https://pypi.org/project/psup/)!!
+
+Check out our [pypi page](https://pypi.org/project/psup/)!!
 
 ## Requirements:
 [Python 3.6+](https://www.python.org/downloads/)
