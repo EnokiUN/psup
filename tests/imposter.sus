@@ -54,14 +54,14 @@ You practically can't even see 2 meters ahead of you (this story isn't in americ
 you are silently walking till you accidentally break the sound barrier by hitting a table, you can hear the claps of his asschicks
 this is bad
 - OPTION{{
-    Loop around the other way to Electrical $$STAY
+    Loop around the other way to Electrical $$STAY,
     Embrace Death this far into the story tree (Can you tell im out of options?)$$STORY Death, 
     Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
 }}
 you decide it's better to loop around to Electrical instead of directly going there
 while slowly walking towards your destination you hear people screaming, no good no good
 - OPTION{{
-    Walk faster $$STAY
+    Walk faster $$STAY,
     Keep it slow $$SKIP 2
 }}
 You start walking faster, it feels like running
@@ -76,8 +76,8 @@ not a religious person, but you start praying anyway, or better to say the chara
 you open the fuse box and you realize you can't see which fuse is the "red fuse"
 it's all luck now 2/3 you lose, 1/3 you find the right fuse
 - OPTION {{
-    left fuse... $$STORY Death-electrical
-    middle fuse... $$STORY Death-electrical 
+    left fuse... $$STORY Death-electrical,
+    middle fuse... $$STORY Death-electrical,
     right fuse... $$STAY
 }}
 and, it's done, the lights are back on, and it hurts, a lot
@@ -92,7 +92,7 @@ but before you do anything you quickly realize you have a phone...
 after feeling stupid for some seconds you start walking towards electrical, being careful to not shine the light somewhere that would give you away
 you are at the door to the hallway which has electrical door in it, you can hear the heavy breathing of the imposter
 - OPTION{{
-    Loop around the other way to Electrical $$JUMP looping
+    Loop around the other way to Electrical $$JUMP looping,
     Wait $$STAY, 
     Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
 }}
