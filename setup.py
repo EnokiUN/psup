@@ -45,7 +45,7 @@ setup(name='psup',
       license='MIT',
       description='A simple library for making complex stories and games.',
       long_description=readme,
-      long_description_content_type="text/x-rst",
+      long_description_content_type="text/markdown",
       include_package_data=True,
       python_requires='>=3.8.0',
       classifiers=[
