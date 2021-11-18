@@ -4,7 +4,9 @@ SUP makes making text based stories or games with options, diverging paths, diff
 and more take you a minimum of 3 lines of code.
 
 All the other stuff including the story's script, options, endings, attributes and more is
-handled in a Story Utility Script (sus for short) file in a way designed to be fast and simple."""
+handled in a Story Utility Script (sus for short) file in a way designed to be fast and simple.
+
+"""
 
 from re import findall
 from sys import stdout
@@ -18,7 +20,9 @@ class StoryError(BaseException):
 	.. versionadded:: 0.1.1
 	
 	These exceptions are almost always present because of a syntax error
-	present in your Story Utility Script (sus) file."""
+	present in your Story Utility Script (sus) file.
+
+	"""
 	def __str__(self):
 		return f"{self.args[0]}, for more info check the the SUP docs."
 
