@@ -1,5 +1,5 @@
 # note: this all has been done without the attribute feature
-[STORY main]
+[STORY MAIN]
 Once upon a time, There was an Amogos walking around in the park.
 His name was Helly, you are Helly.
 
@@ -7,16 +7,16 @@ Suddenly an imposter of the red variety appeared before him.
 The imposter was thirsty for blood.
 - OPTION {{
     Run away to electrical $$STAY,
-    Eat the imposter $$STORY Becoming the Imposter, 
+    Eat the imposter $$STORY BECOMING-THE-IMPOSTER, 
     Run away to the button $$JUMP Button1}}
 
 You saw death right infront of you, the silly red imposter had forgotten in which pocket he had put his knife,
 you used this opportunity to run the fuck away
 You ran into the ship, into the storage "If i can reach electrical he can't find me there!" or you so thought, upon reaching the door you realized it's been closed
 - OPTION  {{
-    Embrace Death $$STORY Death, 
-    Loop to button hoping he won't find you $$STAY, 
-    Deicde it's a good time to eat the imposter $$STORY Becoming-the-Imposter}}
+    Embrace Death $$STORY DEATH, 
+    Loop to the button hoping he won't find you $$STAY, 
+    Deicde it's a good time to eat the imposter $$STORY BECOMING-THE-IMPOSTER}}
 
 You saw death right infront of you, the silly red imposter had forgotten in which pocket he had put his knife,
 you used this opportunity to run the fuck away
@@ -28,40 +28,263 @@ BOOM, lights out, this is horrible you have no idea what to do at this point
 - OPTION {{
     not like this... $$JUMP gys-tgt, 
     vent in \#general $$STAY, 
-    start walking in the dark towards electrical $$STORY Electrical}}
+    start walking in the dark towards electrical $$STORY ELECTRICAL}}
 
     You try to go discord but you realize the wifi is off because of the blackout...
 being disappointed you
 - OPTION{{
-    N start walking in the dark towards electrical $$STORY Electrical-with-flashlight, 
-    keep spamming the button $$JUMP Death, 
+    N start walking in the dark towards electrical $$STORY ELECTRICAL-WITH-FLASHLIGHT, 
+    keep spamming the button $$STORY DEATH, 
     Hide near the windows $$JUMP x}}
 - TAG gys-tgt
 You are perishing in agony but quickly gather yourself to make a proper choice
 - OPTION{{ 
-    start walking in the dark towards electrical $$STORY Electrical, 
-    keep spamming the button $$STORY Death, 
+    start walking in the dark towards electrical $$STORY ELECTRICAL, 
+    keep spamming the button $$STORY DEATH, 
     Hide near the windows $$JUMP x}}
 - TAG x
-Hello, Im the narrator, I have no idea what happens when you hide near the windows
-I guess you will never know too, goodbye :)
+You decide you prefer to just hide and wait rather than to take action,
+...
+...
+...
+it's rather quiet
+...
+...
+...
+YOU HEAR SCREAMS, LOUD NOISES 
+It must be the imposter, but what will you do now, rest and hope your dear crewmates survive this endavor?
+- OPTION{{ 
+    start walking in the dark towards electrical $$STORY SCREAMING-ELECTRICAL, 
+    nah im kinda comfy here can even sleep $$STAY}}
+...
+...
+oh there was a footstep in the distance
+...
+from the strange sounds that are echoing you can guess that your friends are hiding
+- OPTION{{ 
+    Make a noise $$STAY, 
+    SHH IM TRYING TO SLEEP HERE $$STORY DEATH-HIDING}}
+
+Either by replaying the game or by being selfless
+you decide to make a noise so you
+- OPTION {{
+    Pretend you're an elephant $$JUMP noise,
+    Make meow noises, maybe red likes it $$JUMP noise,
+    EGGZIO NUMELATES, KORUMBLIUM ENJANKIO, HONTENYA DE FALSA $$STAY,
+    Acio Imposter, Alarte Ascendare, ah-REST-oh mo-MEN-tum $$STORY SPELL
+}}
+You start shouting "EGGZIO NUMELATES, KORUMBLIUM ENJANKIO, HONTENYA DE FALSA" over and over
+- TAG noise
+After making such a sound you realize that it did not matter what sound you made
+he'd not know the difference, the imposter's claps can be heard from a distance
+closing in, coming to you,
+him being distracted to you is good, cause your crewmate friends can go and fix the lights and maybe you can press the button
+but what do you do in this situation?
+- OPTION {{
+    just stay put... $$JUMP stay-put,
+    I SHOULD DO SOMETHING $$STAY
+}}
+you decide just staying and doing nothing is not the correct way to do this
+- OPTION {{
+    Wait nvm i shouldn't... $$JUMP stay-put,
+    RUN RUN RUN RUN $$STAY,
+    go somewhere else... *whisper* quietly... $$SKIP 2
+}}
+You try to run but your legs reject such an idea and you propose being quiet
+they're quite pleased, so you roll with that
+you quietly position yourself behind the other desk, maybe it will buy you few seconds?
+- ADDATR slightly-better
+- TAG stay-put
+The imposter is dashing towards your position at this point
+suddenly you can't stop thinking about E=MC**2
+- CHECKATTR slightly-better $$STORY TO-BUTTON
+he lunges towards you, it's too late,
+at the last seconds, the lights come back
+but it's too late
+knowing that the crewmates will find your body and report red 
+you can't help but feel pride for your sacrifice 
+- END
+
+[STORY TO-BUTTON]
+the imposter lunges towards where you were 
+*THUNK* he hits the fucking wall like an idiot
+seriously don't these dudes have night vision?
+being glad that you decided to change your position
+you run towards the button
+and everything is perfect
+right as you reach the button, the lights turn on 
+and the button is pressed...
+- OPTION {{Contiune... $$STORY BUTTON}}
+
+[STORY BUTTON]
+*Sussy-button-sfx.mp3*
+by a miracle, you are in the discussions now, you should be safe 
+the people in the discussion are, red, blue, brown, it seems orange and green are dead 
+- OPTION {{
+    Start a comprhensive review of facts and explain what just happened $$STORY VOTED-OUT1,
+    Red kinda sus $$STAY
+}}
+"Red kinda sus" you said, "I agree" says brown 
+"NOOOO ITS GREEN" a clear objection from red
+- ADDATTR slip-up-1
+- OPTION {{
+    "sus" $$STAY,
+    "Green is dead" $$JUMP green-ded
+}}
+you respond with "sus"
+"SHUT UP ITS GREEENN I SAW HIM KILL" said red calmly 
+"But green is already dead red" responded brown
+- ADDATTR slip-up-2
+- TAG green-ded
+"AND HOW DID YOU KNOW!!" - red 2021
+"good question" exclaims brown
+blue who had not talked all this time breaks the flow of conversation with "BROWN SUS, SUSSY"
+- OPTION {{
+    "sussy bakas, white castle burger" $$STAY,
+    "No it's red, i saw him follow me" $$STORY VOTED-OUT2
+}}
+good job that should keep them on their toes!
+"What?" would be what brown would say if he had the ability to type
+"I was in asteroids" said red
+"There are no asteroids in this map dude..." replied brown, he's wrong, this map has asteroids
+Blue: "BUT I WAS AT ASTEROIDS" 
+- OPTION {{
+    "I was at asteroids" $$STAY,
+    "How was red at asteroids?" $$STORY VOTED-OUT2
+}}
+Blue: "Yeah i saw him there"
+you clearly weren't at asteroids were you?
+Red: "But i was there not him"
+Blue: "LIEEE-"
+The voting time has come upon us, it's time to vote the sussy imposter
+you vote
+- OPTION {{
+    Vote yourself $$STAY,
+    Vote Red $JUMP vote-red
+}}
+your galaxy brain decided to vote itself
+red also voted you
+blue wanted to follow suit but red looked extra sussy
+brown also voted red
+it was a tie...
+- OPTION {{ Continue... $$JUMP button-continue }} 
+- TAG vote-red
+You voted red, hoping to end amogus 
+red voted you 
+blue being the good crewmate, also voted you 
+brown kept their suspicions and voted red 
+it was a tie...
+- TAG button-continue
+normal life started again, 4 of you looking at each other
+🗿     🗿
+  table
+🗿     🗿
+the Red imposta is looking at you, mad
+at this moment you involuntarily started pointing at him and saying "sus"
+the other 2 crewmates were just looking at red
+all this stress caused him to sabotage the reactor
+he started to spam the button
+and blue was just staring at him 
+you and brown started walking to reactor 
+with the power of 2 hands you two just stopped the reactor meltdown
+while going out of the reactor room you realized...
+- OPTION {{
+    "I have a task at storage" $$STAY,
+    say nothing and move on $JUMP reached-button
+}}
+- ADDATTR looped-around
+you went to fill your gass with brown
+you also realized you had already filled the gass
+hoping brown won't realize you just faked filling the gass 
+you two move on to the button to see why it hasn't been pressed yet
+- TAG reached-button
+you reach the button but you witness a horrific sight 
+blue's body has been sliced in two, one slice is missing 
+- OPTION {{
+    RUN FOR THE BUTTON $$CHECKATTR looped-around $$STORY FINAL-BUTTON
+}}
+You try your best to run for the button but unfortunately the red figure was waiting for you in the hallway
+He leaps at you and produces a very huge machinegun to create the newest delight by creating 210 holes in your body 
+You are dead 
+you can only imagine what he did to brown 
+But sadly you will never see it (why would you want to see it)
+- END
+
+[STORY FINAL-BUTTON]
+You run for the button, you run so fast, 
+you realize the sussy red was waiting for you two in the hallway
+he's too late to stop you from pressing the button...
+*Sussy-button-sfx.mp3*
+...
+"BROWN HE KILLED HER, HE KILLED BLUE" said red 
+"ITS HIM I SWEAR ON MY CREWMATE LICENSE"
+"PLEASE YOU GOTTA BELIEVE ME"
+- OPTION {{
+    vote red $$STAY,
+    Vote red $$STAY, 
+    Vote Red $$STAY
+}}
+"DON'T LET HIM GASLIGHT YOU I TOTALLY SAW HIM DO IT I WAS VERY SHOCKED"
+"YOU WILL REGRET VOTING ME"
+Brown votes red 
+"WHAT"
+"fuck"
+Red was the imposter  
+0 imposters remaning
+...
+you and brown marry, you two complete all the tasks
+and become sussy imposters tgt, gg 
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠛⠛⠛⠛⠛⠛⢛⣿⠿⠟⠛⠛⠛⠛⠛⠛⠿⠿⣿⣟⠛⠛⠛⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⣛
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣇⠀⠀⠀⠀⢠⡿⠁⣀⢀⢀⠀⣀⠀⣀⠀⠀⡀⣀⠙⢷⡀⠺⠿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃⣰⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⢸⡇⢰⢿⣿⢻⡿⣿⢿⣯⡼⣧⡇⣿⡆⢸⡇⠀⠀⠙⣿⣿⣿⣿⣿⣿⣿⠃⢀⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⣀⡀⠀⠘⢷⣀⠀⠀⠀⠀⠉⠀⠈⠀⠀⠀⠀⢀⣼⠃⠀⠀⠀⠉⠛⠿⢿⣿⣿⡏⠀⣼⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠉⠀⡀⠀⠀⠉⠛⢷⣄⠈⢙⡷⠀⠀⣠⣤⣤⣤⣤⣤⡴⠾⠋⠁⣠⡶⠶⠶⠶⠶⣤⡀⠀⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠐⠉⠉⠁⠀⠀⠀⠀⠹⣶⠻⠟⠛⠛⠋⠀⠀⠀⡏⠀⠀⠀⠀⢠⡏⣠⣤⠤⠤⣄⡈⢻⡄⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⢰⡖⠲⣶⣶⢤⡤⠤⣤⣿⡆⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀⡾⠀⠻⣷⣶⡶⠾⠃⠈⣿⣿⡇⠀⣿⡿⠿⢿
+⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⢀⣉⣛⠛⠉⢠⡙⠲⢿⣿⠃⠀⠀⠀⠀⠀⠀⢰⠇⠀⠀⠀⢰⡇⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀⣿⣧⣤⣿
+⣿⣿⣿⣿⣿⣿⣿⣿⣷⣤⣌⠛⠿⠿⠖⣎⣤⣶⡛⠁⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⠀⣾⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⣿⣿⠟⠋⠉⠙⠛⠻⣿⣿⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⢠⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⡿⠁⠀⠠⢤⡀⠀⢀⡬⠟⣻⣿⣯⠍⠻⣆⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⢸⡇⠀⣠⠶⠶⠶⢶⡀⠀⠀⢸⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⣿⠃⠀⡀⠀⠀⠉⠓⠋⠀⠀⣳⣾⡴⠂⠀⢹⡆⠀⠀⠀⠀⢀⣸⣰⣛⣛⣺⣀⣀⣸⣆⣀⣀⣸⣇⣀⣀⣸⣿⡇⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⡏⠀⠀⠉⠓⢦⣄⣀⣠⣴⣿⣷⣼⣵⣻⡄⠀⡇⠀⠀⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿
+⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠉⢹⣿⣿⣿⣿⣿⣍⣀⣸⣧⣤⣤⣤⣤⣼⣄⣀⣀⣀⡀⠀⢀⣀⣠⣤⣤⣤⣤⣤⣤⣀⣀⣀⠀⠀⠀⠀⠀
+⠛⠛⢻⡏⠀⠀⠀⠀⠀⠀⠀⠀⣾⠀⠀⠀⠀⠀⠈⠉⠁⠀⠀⠀⠀⠀⠉⠉⠉⠛⠛⠛⠛⠛⠉⠉⠀⠀⠀⠀⠀⠉⠉⠉⠛⠛⠛⠛⠛⠛
+⣀⣀⣸⠁⠀⠀⢀⣶⣶⣦⠀⢀⣟⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣠⣄⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀
 - END
 
 
+[STORY VOTED-OUT1]
+what just came out of your mouth was amazing
+so much that no one understood wtf are you talking about
+the dicussion ended with 4 votes on your head
+you died bro, YOU DIED 
+- END
 
-[STORY Electrical]
+[STORY VOTED-OUT2]
+did you really think logic is how this works?
+have you ever read among us in your life?
+well now you have, "read", among us
+and you are voted out
+off the ship
+out of the airlock
+GOOD BYE
+- END
+
+
+[STORY ELECTRICAL]
 You practically can't even see 2 meters ahead of you (this story isn't in america yes) but you try your best to navigate to Electrical
 you are silently walking till you accidentally break the sound barrier by hitting a table, you can hear the claps of his asschicks
 this is bad
 - OPTION{{
-    Loop around the other way to Electrical $$STAY
-    Embrace Death this far into the story tree (Can you tell im out of options?)$$STORY Death, 
-    Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
+    Loop around the other way to Electrical $$STAY,
+    Embrace Death this far into the story tree (Can you tell im out of options?)$$STORY DEATH, 
+    Face the Imposter, hoping for a good meal $$STORY BECOMING-THE-IMPOSTER
 }}
 you decide it's better to loop around to Electrical instead of directly going there
 while slowly walking towards your destination you hear people screaming, no good no good
 - OPTION{{
-    Walk faster $$STAY
+    Walk faster $$STAY,
     Keep it slow $$SKIP 2
 }}
 You start walking faster, it feels like running
@@ -76,8 +299,8 @@ not a religious person, but you start praying anyway, or better to say the chara
 you open the fuse box and you realize you can't see which fuse is the "red fuse"
 it's all luck now 2/3 you lose, 1/3 you find the right fuse
 - OPTION {{
-    left fuse... $$STORY Death-electrical
-    middle fuse... $$STORY Death-electrical 
+    left fuse... $$STORY DEATH-ELECTRICAL,
+    middle fuse... $$STORY DEATH-ELECTRICAL,
     right fuse... $$STAY
 }}
 and, it's done, the lights are back on, and it hurts, a lot
@@ -86,15 +309,15 @@ the imposter is in the room, he can't seem to find you
 and you hear the sound of the button alarm...
 - END
 
-[Story Electrical-with-flashlight]
+[STORY ELECTRICAL-WITH-FLASHLIGHT]
 You practically can't even see 2 meters ahead of You
 but before you do anything you quickly realize you have a phone...
 after feeling stupid for some seconds you start walking towards electrical, being careful to not shine the light somewhere that would give you away
 you are at the door to the hallway which has electrical door in it, you can hear the heavy breathing of the imposter
 - OPTION{{
-    Loop around the other way to Electrical $$JUMP looping
+    Loop around the other way to Electrical $$JUMP looping,
     Wait $$STAY, 
-    Face the Imposter, hoping for a good meal $$STORY Becoming-the-Imposter
+    Face the Imposter, hoping for a good meal $$STORY BECOMING-THE-IMPOSTER
 }}
 You wait patiently, hoping for a miracle, and a miracle happens
 you hear the sound of Anon, the guy who trolls you on twitter
@@ -115,8 +338,8 @@ not a religious person, but you start praying anyway, or better to say the chara
 you open the fuse box and you realize you can't see which fuse is the "red fuse"
 it's all luck now 2/3 you lose, 1/3 you find the right fuse
 - OPTION {{
-    left fuse... $$STORY Death-electrical,
-    middle fuse... $$STORY Death-electrical,
+    left fuse... $$STORY DEATH-ELECTRICAL,
+    middle fuse... $$STORY DEATH-ELECTRICAL,
     right fuse... $$JUMP correct,
     wait, i have a fucking flashlight $$STAY
 }}
@@ -126,9 +349,29 @@ and, it's done, the lights are back on, and the light hurts, a lot, your eyes ar
 you quickly go to the vent and hide inside, this is the secret technique you learned by staying in all of those amongus modded lobbies
 the imposter is in the room, he can't seem to find you
 and you hear the sound of the button alarm...
+- OPTION {{Contiune... $$STORY BUTTON}}
+
+[STORY SCREAM-ELECTRICAL]
+you walk towards the screams 
+what you can make out is the shadow of red on a body
+using your magical report button on your suit
+you call the button
+- OPTION {{Contiune... $$STORY BUTTON}}
+
+[STORY DEATH-HIDING]
+you feel like the place is comfy afterall like who wouldn't wanna be sleeping at this moment
+you put your head down, your eyes get warm, despite all the little noises being made around you you sleep
+and... sleep... you do...
+...
+everything is dark...
+...
+(...i think you just died)
+(...might've been your loud snoring i forgot to mention)
+and your story ends, you hope that no one survives to mention it
+but you can't know anyway cause you're dead
 - END
 
-[STORY Death]
+[STORY DEATH]
 *clap* *clap* *clap*
 you can hear it... slowly approaching...
 *clap* *clap* *clap*
@@ -139,7 +382,7 @@ and you are eaten
 good grief
 - END
 
-[STORY Death-electrical]
+[STORY DEATH-ELECTRICAL]
 the fuse box makes a loud boom sounds, this sussy fuse box technology is not helping at all
 *clap* *clap* *clap*
 you can hear it... slowly approaching...
@@ -150,10 +393,7 @@ and you succumb to death after turning the lights for your fellow crew mates...
 - END
 
 
-
-
-
-[STORY Becoming-the-Imposter]
+[STORY BECOMING-THE-IMPOSTER]
 there's this huge grin on the sussy red imposter's space suit
 but there's a bigger one on yours
 you open your mouth, approximately spanning up 1.5m tall
