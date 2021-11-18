@@ -72,7 +72,7 @@ The river swept Jack away.
 Jack started to slowly drown but a man helped him get out of the river safely.
 - JUMP hunter
 ```
-*more examples can be found in the [test folder](https://github.com/EnokiUN/sup/blob/main/tests/).
+*more examples can be found in the [test folder](https://github.com/EnokiUN/sup/blob/main/tests/).*
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 
