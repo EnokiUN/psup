@@ -27,13 +27,13 @@ You loop around to the button you can hear the clap of his asschicks in the hall
 BOOM, lights out, this is horrible you have no idea what to do at this point
 - OPTION {{
     not like this... $$JUMP gys-tgt, 
-    vent in \#general $$STAY, 
+    vent in #general $$STAY, 
     start walking in the dark towards electrical $$STORY ELECTRICAL}}
 
     You try to go discord but you realize the wifi is off because of the blackout...
 being disappointed you
 - OPTION{{
-    N start walking in the dark towards electrical $$STORY ELECTRICAL-WITH-FLASHLIGHT, 
+    start walking in the dark towards electrical $$STORY ELECTRICAL-WITH-FLASHLIGHT, 
     keep spamming the button $$STORY DEATH, 
     Hide near the windows $$JUMP x}}
 - TAG gys-tgt
