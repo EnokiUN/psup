@@ -2,10 +2,16 @@
 The git for the Python Story Utility Package library. 
 
 ## Requirements:
-[Python 3.x](https://www.python.org/downloads/)
+[Python 3.6+](https://www.python.org/downloads/)
 
+## Usage:
+Here's a basic story:
 
-### Endorsements:
-**sus 10/10 👍👍** -[sexnine](https://github.com/sexnine)
+```py
+from sup import Story
 
-**i made 10/10 👍👍** -[John](https://github.com/404)
+story = Story("story")
+story.run()
+```
+
+That's all the code you have to type to make a terminal based text story / game.
