@@ -7,7 +7,7 @@ Suddenly an imposter of the red variety appeared before him.
 The imposter was thirsty for blood.
 - OPTION {{
     Run away to electrical $$STAY,
-    Eat the imposter $$STORY Becoming the Imposter, 
+    Eat the imposter $$STORY Becoming-the-Imposter, 
     Run away to the button $$JUMP Button1}}
 
 You saw death right infront of you, the silly red imposter had forgotten in which pocket he had put his knife,
