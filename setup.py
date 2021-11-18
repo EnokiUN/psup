@@ -33,7 +33,7 @@ packages = [
     'sup'
 ]
 
-setup(name='Sup',
+setup(name='psup',
       author='EnokiUN',
       url='https://github.com/EnokiUN/sup',
       project_urls={
