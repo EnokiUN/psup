@@ -30,7 +30,7 @@ if version.endswith(('a', 'b', 'rc')):
         pass
 
 readme = ''
-with open('README.rst') as f:
+with open('README.md') as f:
     readme = f.read()
 
 #extras_require = {}
@@ -48,8 +48,8 @@ setup(name='Sup',
       },
       version=version,
       # packages=packages,
-      license='temo',
-      description='Temp',
+      license='MIT',
+      description='A simple library for making complex stories and games.',
       long_description=readme,
       long_description_content_type="text/x-rst",
       include_package_data=True,
