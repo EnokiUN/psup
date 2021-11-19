@@ -23,8 +23,8 @@ SOFTWARE.
 """
 
 from urllib.request import urlopen
-from .story import Story
-from .storyerror import StoryError
+from story import Story
+from storyerror import StoryError
 
 class OnlineStory(Story):
 	"""The class to play stories from the ones existing in the GitHub repository.
