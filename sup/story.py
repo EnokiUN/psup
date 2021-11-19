@@ -99,7 +99,7 @@ class Story:
 	def __init__(self,
 	reference: str, 
 	io_function: Optional[Callable[[str],str]]=_story_io):
-		self.reference = story_path + ".sus" if not story_path.endswith('.sus') else story_path
+		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
 		self.sub_story = None
