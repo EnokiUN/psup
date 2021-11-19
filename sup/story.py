@@ -182,7 +182,7 @@ class Story:
 			else:
 				func(self)
 		else:
-			if ismethod(func)
+			if ismethod(func):
 				self.func(args[1])
 			else:
 				func(self, args[1])
