@@ -32,3 +32,4 @@ class StoryError(BaseException):
 	"""
 	def __str__(self):
 		return f"{self.args[0]}, for more info check the the SUP docs."
+
