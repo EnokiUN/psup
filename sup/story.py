@@ -26,11 +26,11 @@ from re import findall
 from sys import stdout
 from time import sleep
 from random import uniform
-from typing import Callable, List, Any, Dict, Union, KwArg
+from typing import Callable, List, Any, Dict, Union, Iterable
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: str = str(), **kwargs) -> str:
+def _story_io(text: str = str(), **kwargs: Union[str, Iterable]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -98,7 +98,7 @@ class Story:
 	"""
 	def __init__(self,
 	reference: str, 
-	io_function: Callable[[str, KwArg(Any)], str]=_story_io):
+	io_function: Callable[[str, Union[str, Iterable]], str]=_story_io):
 		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
