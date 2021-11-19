@@ -50,7 +50,7 @@ def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 		return ''
 	out = ""
 	if "options" in kwargs:
-		text = "Choose one:\n" + " | ".join(kwargs["options"])
+		text = "Choose one:\n"+"\n".join([f"{x+1}) {i}" for x, i in enumerate(kwargs["options"])])
 		out = "\n> "
 	for x in text:
 		print(x, end='')
@@ -68,7 +68,7 @@ class Story:
 	reference: :class:`str`
 		A String representing the reference of the story, it can be the path of the sus file that the
 		story object will interpret and run or the story scrip directly.
-	io: Callable[[:class:`str`], :class:`str`]
+	io: Callable[[:class:`str`, Union[:class:`str`, Iterable[:class:`str`]]], :class:`str`]
 		A function that handles the input and output of data from the :class:`Story`
 		object to the desired location.
 	line: :class:`int`
@@ -128,18 +128,22 @@ class Story:
 		temp_lines = str()
 		for i in temp_text.splitlines():
 			if i and not i.startswith("# "):
-			    if temp_lines:
-			    	if "}}" in i:
-			    		temp_lines += i.replace("}}", "")
-			    		self.text.append(temp_lines.strip())
-			    		temp_lines = str()
-			    		continue
-			    	temp_lines += i
-			    	continue
-			    if i.startswith("-") and "{{" in i:
-			    	temp_lines = i.replace("{{", "")
-			    	continue
-			    self.text.append(i.strip())
+				if i.startswith("-") and "{{" in i:
+					temp_lines = i.replace("{{", "")
+					if "}}" in i:
+						temp_lines = temp_lines.replace("}}", "")
+						self.text.append(temp_lines.strip())
+						temp_lines = str()
+					continue
+				if temp_lines:
+					if "}}" in i:
+						temp_lines += i.replace("}}", "")
+						self.text.append(temp_lines.strip())
+						temp_lines = str()
+						continue
+					temp_lines += i
+					continue
+				self.text.append(i.strip())
 		if not self.text:
 			raise StoryError("Story file is empty")
 		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
@@ -162,7 +166,7 @@ class Story:
 				tag = i.split(" ", 2)[1]
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
-				self.tags[tag] = (temp_list[0], x)
+				self.tags[tag] = (temp_list[0], len(temp_list)-1)
 			temp_list.append(i)
 			if x+1 == len(self.text):
 				if len(temp_list) >= 2:
@@ -181,11 +185,13 @@ class Story:
 				func()
 			else:
 				func(self)
-		else:
+		elif func.__code__.co_argcount == 2:
 			if ismethod(func):
-				func(args[1])
+				func(arg_list[1])
 			else:
-				func(self, args[1])
+				func(self, arg_list[1])
+		else:
+			raise StoryError("Invalid parameters for function: {arg_list[0]}")
 					
 	def _option_function(self, args: str) -> None:
 		option_functions = [i[0].strip() for i in findall(r"\$\$(.+?)(,|$)", args)]
@@ -217,7 +223,7 @@ class Story:
 		
 	def _stay_function(self) -> None:
 		if self.line+1 >= len(self.sub_stories[self.sub_story]):
-			sub_stories = [i for i in self.sub_stories]
+			sub_stories = list(self.sub_stories.keys())
 			if story_index := (sub_stories.index(self.sub_story))+1 >= len(sub_stories):
 				self._end_function()
 			self.sub_story = sub_stories[story_index+1]
@@ -294,7 +300,15 @@ class Story:
 		the end of the sus file or the END function being called.
 
 		"""
-		quit()
+		print("\n\n====================\nProgram ended, do you want to play again?")
+		answer = input("> ")
+		if answer.lower().strip() in ["yes", "y"]:
+			self.line = 0
+			self.sub_story = list(self.sub_stories.keys())[0]
+			self.attributes = list()
+		else:
+			print("Alright, See you next time!")
+			quit()
 
 	def io_function(self, function: Callable[[str, Union[str, Iterable[str]]], str]) -> Callable[[str, Union[str, Iterable[str]]], str]:
 		"""The method used to set the :class:`Story` Object's I/O function to the corresponding one.
