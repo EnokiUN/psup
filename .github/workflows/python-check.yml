@@ -5,7 +5,7 @@ name: Dev branch
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 
 
