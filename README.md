@@ -7,7 +7,7 @@ Install SUP by simply running **`pip install psup`** in your terminal.
 Check out our [pypi page](https://pypi.org/project/psup/)!!
 
 ## Requirements:
-[Python 3.6+](https://www.python.org/downloads/)
+[Python 3.8+](https://www.python.org/downloads/)
 
 ## Usage:
 Here's a basic story:
