@@ -232,7 +232,7 @@ class Story:
 		self.line = 0
 		
 	def _end_function(self) -> None:
-		end()
+		self.end()
 		
 	def _skip_function(self, args: str) -> None:
 		if not args.strip().isdigit():
