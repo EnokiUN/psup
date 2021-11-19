@@ -28,7 +28,7 @@ class StoryError(BaseException):
 	.. versionadded:: 0.1.1
 	
 	These exceptions are almost always present because of a syntax error
-	present in your Story Utility Script (sus) file.
+	present in your Story Utility Script (SUS) file.
 	"""
 	def __str__(self) -> str:
 		return f"{self.args[0]}, for more info check the the SUP docs."
