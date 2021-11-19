@@ -30,18 +30,6 @@ jobs:
     - name: run pyflakes before running expensive tests
       run: |
         pyflakes .
-    - name: use lite config
-      run: |
-        cp -f common/sonnet_cfg_lite.py common/sonnet_cfg.py
-    - name: check commands structure integrity
-      run: |
-        python build_tools/cmds_to_html.py > /dev/null
-    - name: check syntax integrity
-      run: |
-        python build_tools/testimport.py
-    - name: check ramfs integrity
-      run: |
-        python build_tools/ramfsassert.py
     - name: run mypy type checking
       run: |
         mypy *.py */*.py --ignore-missing-imports --strict --warn-unreachable
