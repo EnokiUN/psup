@@ -12,7 +12,7 @@ __title__ = 'SUP'
 __author__ = 'EnokiUN'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2021-present EnokiUN'
-__version__ = '0.1.5.2a'
+__version__ = '0.1.5.3a'
 
 __all__ = ["Story", "StoryError"]
 
