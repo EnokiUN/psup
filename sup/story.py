@@ -232,7 +232,7 @@ class Story:
 		self.line = 0
 		
 	def _end_function(self) -> None:
-		quit()
+		end()
 		
 	def _skip_function(self, args: str) -> None:
 		if not args.strip().isdigit():
@@ -283,11 +283,19 @@ class Story:
 					self.line += 1
 				
 	def start(self) -> None:
-		"""The method to start the story / game of the corresponding :class:`Story` class
+		"""The method called to start the story / game of the corresponding :class:`Story` object
+
 		"""
 		while True:
 				self._run_line()
 				
+	def end(self) -> None:
+		"""The method called when the :class:`Story` object reaches an end by either hitting
+		the end of the sus file or the END function being called.
+
+		"""
+		quit()
+
 	def io_function(self, function: Callable[[str], str]) -> Callable[[str], str]:
 		"""The method used to set the :class:`Story` Object's I/O function to the corresponding one.
 		
