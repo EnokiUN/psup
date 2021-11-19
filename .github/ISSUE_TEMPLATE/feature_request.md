@@ -9,8 +9,6 @@ assignees: ''
 
 ### **Is your feature request related to a problem? If so please state that problem.**
 
-### **Describe the solution you'd like**
-
-### **Describe alternatives you've considered**
+### **Describe the feature you'd like**
 
 ### **Additional Info**
