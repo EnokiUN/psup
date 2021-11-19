@@ -323,7 +323,7 @@ class Story:
 
 		"""
 		name = name.strip().upper()
-		def inner(function):
+		def inner(function: Callable[..., Any]) -> Callable[..., Any]:
 			if name in self.function_dict:
 				raise StoryError(f"Duplicate function: {name}")
 			self.function_dict[name] = function
