@@ -27,18 +27,7 @@ from sys import stdout
 from time import sleep
 from random import uniform
 from typing import Callable, List
-
-class StoryError(BaseException):
-	"""The base Exception class for SUP.
-	
-	.. versionadded:: 0.1.1
-	
-	These exceptions are almost always present because of a syntax error
-	present in your Story Utility Script (sus) file.
-
-	"""
-	def __str__(self):
-		return f"{self.args[0]}, for more info check the the SUP docs."
+from storyerror import StoryError
 
 def _story_io(text: str = None, options: List[str] = None, error: str = None) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
