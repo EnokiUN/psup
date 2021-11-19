@@ -26,7 +26,7 @@ from re import findall
 from sys import stdout
 from time import sleep
 from random import uniform
-from typing import Callable, List, Any, Dict, Union, Iterable
+from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
 from storyerror import StoryError
 
@@ -117,7 +117,7 @@ class Story:
 		"ADDATTR": self._addattr_function,
 		"DELATTR": self._delattr_function
 		}
-		self.tags: Dict[str, List[Union[str, int]]] = dict()
+		self.tags: Dict[str, Tuple[str, int]] = dict()
 		self.attributes: List[str] = list()
 		if len(self.reference.splitlines()) > 1:
 			temp_text = self.reference
@@ -162,7 +162,7 @@ class Story:
 				tag = i.split(" ", 2)[1]
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
-				self.tags[tag] = [temp_list[0], x]
+				self.tags[tag] = (temp_list[0], x)
 			temp_list.append(i)
 			if x+1 == len(self.text):
 				if len(temp_list) >= 2:
@@ -272,7 +272,7 @@ class Story:
 	def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
 		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
-			self.io(text=curr_line)
+			self.io(curr_line)
 			self._stay_function()
 		else:
 				temp_line = self.line 
