@@ -28,7 +28,7 @@ from time import sleep
 from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
-from .storyerror import StoryError
+from storyerror import StoryError
 
 def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
@@ -99,7 +99,7 @@ class Story:
 	def __init__(self,
 	reference: str, 
 	io_function: Callable[[str, Union[str, Iterable[str]]], str]=_story_io):
-		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
+		self.reference = reference  + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
 		self.sub_story = str()
@@ -119,11 +119,7 @@ class Story:
 		}
 		self.tags: Dict[str, Tuple[str, int]] = dict()
 		self.attributes: List[str] = list()
-		if len(self.reference.splitlines()) > 1:
-			temp_text = self.reference
-		else:
-			with open(self.reference, "r", encoding='UTF-8') as sf:
-				temp_text = sf.read()
+		temp_text = self._get_text()
 		self.text: List[str] = list()
 		temp_lines = str()
 		for i in temp_text.splitlines():
@@ -174,6 +170,14 @@ class Story:
 						if sub_story[0] in self.sub_stories:
 							raise StoryError(f"Duplicate Sub-story: {sub_story}")
 					self.sub_stories[temp_list[0]] = temp_list[1:]
+					
+	def _get_text(self) -> str:
+		if len(self.reference.splitlines()) > 1:
+			temp_text = self.reference
+		else:
+			with open(self.reference, "r", encoding='UTF-8') as sf:
+				temp_text = sf.read()
+		return temp_text
 				
 	def _run_function(self, args: str) -> None:
 		arg_list = args.split(" ", 1)
