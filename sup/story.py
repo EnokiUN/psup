@@ -178,10 +178,8 @@ class Story:
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 				
 	def __run_function__(self, args: str) -> None:
-		if len(args.split()) == 1:
-			if not args in self.function_dict:
-				raise StoryError(f"Unknown function: {args}")
-			self.function_dict[args]()
+		if args.split()[0] in ["STAY", "TAG", "END"]:
+			self.function_dict[args.split()[0]]()
 		else:
 			func, args = args.split(" ", 1)
 			if not func in self.function_dict:
@@ -241,7 +239,7 @@ class Story:
 		lines = int(args.strip())
 		if lines <= 0:
 			raise StoryError("Amount of lines to skip must be positive.")
-		for _ in range(lines):
+		for _ in range(lines+1):
 			self.__stay_function__()
 			
 	def __return_function__(self, args: str) -> None:
