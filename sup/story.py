@@ -30,7 +30,7 @@ from typing import Callable, List, Any, Optional, Dict, Iterable, Union
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: str = str(), options: Optional[Iterable[str]] = None, error: Optional[str] = None) -> str:
+def _story_io(text: str = str(), **kwargs) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -45,12 +45,12 @@ def _story_io(text: str = str(), options: Optional[Iterable[str]] = None, error:
 		The player /user action relatted error for handling small mistakes like wrong input.
 		
 	"""
-	if error:
-		print(error)
+	if "error" in kwargs:
+		print(kwargs["error"])
 		return ''
 	out = ""
-	if options:
-		text = "Choose one:\n" + " | ".join(options)
+	if "options" in kwargs:
+		text = "Choose one:\n" + " | ".join(kwargs["options"])
 		out = "\n> "
 	for x in text:
 		print(x, end='')
@@ -98,7 +98,7 @@ class Story:
 	"""
 	def __init__(self,
 	reference: str, 
-	io_function: Optional[Callable[[str, Optional[List[str]], Optional[str]], str]]=_story_io):
+	io_function: Callable[[str, Optional[List[str]], Optional[str]], str]=_story_io):
 		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
