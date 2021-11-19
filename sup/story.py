@@ -30,7 +30,7 @@ from typing import Callable, List, Any, Optional, Dict, Iterable, Union
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: str = str(), options: Optional[List[str]] = None, error: Optional[str] = None) -> str:
+def _story_io(text: str = str(), options: Optional[Iterable[str]] = None, error: Optional[str] = None) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
