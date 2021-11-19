@@ -26,7 +26,7 @@ from re import findall
 from sys import stdout
 from time import sleep
 from random import uniform
-from typing import Callable, List, Any, Optional, Dict, Union
+from typing import Callable, List, Any, Optional, Dict, Union, KwArg
 from inspect import ismethod
 from storyerror import StoryError
 
@@ -98,7 +98,7 @@ class Story:
 	"""
 	def __init__(self,
 	reference: str, 
-	io_function: Callable[[str, Optional[List[str]], Optional[str]], str]=_story_io):
+	io_function: Callable[[str, KwArg(Any)], str]=_story_io):
 		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
