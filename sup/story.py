@@ -173,7 +173,7 @@ class Story:
 				
 	def _run_function(self, args: str) -> None:
 		args = args.split(" ", 1)
-		ifnot args[0] in self.function_dict:
+		if not args[0] in self.function_dict:
 			raise StoryError(f"Unknown function: {args[0]}")
 		func = self.function_dict[args[0]]
 		if func.__code__.co_argcount == 1:
