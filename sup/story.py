@@ -64,8 +64,9 @@ class Story:
 	
 	Attributes
 	-----------
-	path: :class:`str`
-		A String representing the path of the sus file that the story object will interpret and run.
+	reference: :class:`str`
+		A String representing the reference of the story, it can be the path of the sus file that the
+		story object will interpret and run or the story scrip directly.
 	io: Callable[[:class:`str`], :class:`str`]
 		A function that handles the input and output of data from the :class:`Story`
 		object to the desired location.
@@ -95,9 +96,9 @@ class Story:
 		
 	"""
 	def __init__(self,
-	story_path: str, 
+	reference: str, 
 	io_function: Callable[[str],str]=_story_io):
-		self.path = story_path + ".sus" if not story_path.endswith('.sus') else story_path
+		self.reference = story_path + ".sus" if not story_path.endswith('.sus') else story_path
 		self.io = io_function
 		self.line = 0
 		self.sub_story = None
@@ -117,8 +118,11 @@ class Story:
 		}
 		self.tags = dict()
 		self.attributes = list()
-		with open(self.path, "r", encoding='UTF-8') as sf:
-			temp_text = sf.read()
+		if len(self.reference.splitlines()) > 1:
+			temp_text = self.reference
+		else:
+			with open(self.reference, "r", encoding='UTF-8') as sf:
+				temp_text = sf.read()
 		self.text = list()
 		temp_lines = str()
 		for i in temp_text.splitlines():
