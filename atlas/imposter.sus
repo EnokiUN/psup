@@ -93,7 +93,7 @@ you decide just staying and doing nothing is not the correct way to do this
 You try to run but your legs reject such an idea and you propose being quiet
 they're quite pleased, so you roll with that
 you quietly position yourself behind the other desk, maybe it will buy you few seconds?
-- ADDATR slightly-better
+- ADDATTR slightly-better
 - TAG stay-put
 The imposter is dashing towards your position at this point
 suddenly you can't stop thinking about E=MC**2
@@ -351,7 +351,7 @@ the imposter is in the room, he can't seem to find you
 and you hear the sound of the button alarm...
 - OPTION {{Contiune... $$STORY BUTTON}}
 
-[STORY SCREAM-ELECTRICAL]
+[STORY SCREAMING-ELECTRICAL]
 you walk towards the screams 
 what you can make out is the shadow of red on a body
 using your magical report button on your suit
