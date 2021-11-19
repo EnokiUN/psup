@@ -47,16 +47,16 @@ def _story_io(text: Optional[str] = None, options: Optional[List[str]] = None, e
 	"""
 	if error:
 		print(error)
-		return None
-	out = ""
-	if options:
-		text = "Choose one:\n" + " | ".join(options)
-		out = "\n> "
-	for x in text:
-		print(x, end='')
-		stdout.flush()
-		sleep(uniform(0, 0.01))
-	return input(out)
+	else:
+		out = ""
+		if options:
+			text = "Choose one:\n" + " | ".join(options)
+			out = "\n> "
+		for x in tuple(text):
+			print(x, end='')
+			stdout.flush()
+			sleep(uniform(0, 0.01))
+		return input(out)
 
 class Story:
 	"""The base class for interpreting sus files.
