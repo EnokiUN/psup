@@ -307,7 +307,7 @@ class Story:
 		self.io = function
 		return function
 
-	def custom_function(self, name: str) -> Callable[[...], Any]:
+	def custom_function(self, name: str) -> Callable[..., Any]:
 		"""The method used to add custom functions to the :class:`Story` Object to be handled like
 		others sus functions.
 		For more info check the SUP documentation.
