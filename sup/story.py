@@ -172,18 +172,18 @@ class Story:
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 				
 	def _run_function(self, args: str) -> None:
-		args = args.split(" ", 1)
-		if not args[0] in self.function_dict:
-			raise StoryError(f"Unknown function: {args[0]}")
-		func = self.function_dict[args[0]]
+		arg_list = args.split(" ", 1)
+		if not arg_list[0] in self.function_dict:
+			raise StoryError(f"Unknown function: {arg_list[0]}")
+		func = self.function_dict[arg_list[0]]
 		if func.__code__.co_argcount == 1:
 			if ismethod(func):
-				self.func()
+				func()
 			else:
 				func(self)
 		else:
 			if ismethod(func):
-				self.func(args[1])
+				func(args[1])
 			else:
 				func(self, args[1])
 					
