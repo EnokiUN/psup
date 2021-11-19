@@ -296,7 +296,7 @@ class Story:
 		"""
 		quit()
 
-	def io_function(self, function: Callable[[str], str]) -> Callable[[str], str]:
+	def io_function(self, function: Callable[[str, Union[str, Iterable[str]]], str]) -> Callable[[str], str]:
 		"""The method used to set the :class:`Story` Object's I/O function to the corresponding one.
 		
 		This method is meant to be used as a decorator.
