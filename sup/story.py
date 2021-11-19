@@ -241,7 +241,7 @@ class Story:
 		if lines <= 0:
 			raise StoryError("Amount of lines to skip must be positive.")
 		for _ in range(lines+1):
-			self._stay_function__()
+			self._stay_function()
 			
 	def _return_function(self, args: str) -> None:
 		if not args.strip().isdigit():
