@@ -26,11 +26,11 @@ from re import findall
 from sys import stdout
 from time import sleep
 from random import uniform
-from typing import Callable, List, Any, Optional
+from typing import Callable, List, Any, Optional, Dict
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: Optional[str] = None, options: Optional[List[str]] = None, error: Optional[str] = None) -> str:
+def _story_io(text: Optional[str] = None, options: Optional[List[str]] = None, error: Optional[str] = None) -> Optional[str]:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -117,14 +117,14 @@ class Story:
 		"ADDATTR": self._addattr_function,
 		"DELATTR": self._delattr_function
 		}
-		self.tags = dict()
-		self.attributes = list()
+		self.tags: Dict[str, List[str, int]] = dict()
+		self.attributes: List[str] = list()
 		if len(self.reference.splitlines()) > 1:
 			temp_text = self.reference
 		else:
 			with open(self.reference, "r", encoding='UTF-8') as sf:
 				temp_text = sf.read()
-		self.text = list()
+		self.text: List[str] = list()
 		temp_lines = str()
 		for i in temp_text.splitlines():
 			if i and not i.startswith("# "):
@@ -140,12 +140,12 @@ class Story:
 			    	temp_lines = i.replace("{{", "")
 			    	continue
 			    self.text.append(i.strip())
-		if self.text == []:
+		if self.text:
 			raise StoryError("Story file is empty")
 		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
 			raise StoryError("No Story sections found")
-		self.sub_stories = dict()
-		temp_list = list()
+		self.sub_stories: Dict[str, List[str]] = dict()
+		temp_list: List[str] = list()
 		for x, i in enumerate(self.text):
 			if sub_story := (findall(r"\[STORY ([a-zA-Z-]+?)\]", i)):
 				if self.sub_story is None:
