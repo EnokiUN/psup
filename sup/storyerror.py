@@ -30,6 +30,6 @@ class StoryError(BaseException):
 	These exceptions are almost always present because of a syntax error
 	present in your Story Utility Script (sus) file.
 	"""
-	def __str__(self):
+	def __str__(self) -> str:
 		return f"{self.args[0]}, for more info check the the SUP docs."
 
