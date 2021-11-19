@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-### **Big Description*
+### **Bug Description**
 
 ### **Reproduction Steps**
 
