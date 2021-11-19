@@ -3,10 +3,11 @@ import re
 
 version = ''
 with open('sup/__init__.py') as f:
-    version = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE).group(1)
-
-if not version:
-    raise RuntimeError('version is not set')
+    match = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE)
+    if match is not None:
+        version = match.group(1)
+    else:
+        raise RuntimeError('version is not set')
 
 if version.endswith(('a', 'b', 'rc')):
     # append version identifier based on commit count
