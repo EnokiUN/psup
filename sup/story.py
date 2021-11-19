@@ -26,7 +26,8 @@ from re import findall
 from sys import stdout
 from time import sleep
 from random import uniform
-from typing import Callable, List
+from typing import Callable, List, Any
+from inspect import ismethod
 from storyerror import StoryError
 
 def _story_io(text: str = None, options: List[str] = None, error: str = None) -> str:
@@ -103,18 +104,18 @@ class Story:
 		self.line = 0
 		self.sub_story = None
 		self.function_dict = {
-		"OPTION": self.__option_function__,
-		"JUMP": self.__jump_function__,
-		"STAY": self.__stay_function__,
-		"TAG": self.__stay_function__,
-		"STORY": self.__story_function__,
-		"END": self.__end_function__,
-		"SKIP": self.__skip_function__,
-		"RETURN": self.__return_function__,
-		"CHECKATTR": self.__checkattr_function__,
-		"CHECKNOTATTR": self.__checknotattr_function__,
-		"ADDATTR": self.__addattr_function__,
-		"DELATTR": self.__delattr_function__
+		"OPTION": self._option_function,
+		"JUMP": self._jump_function,
+		"STAY": self._stay_function,
+		"TAG": self._stay_function,
+		"STORY": self._story_function,
+		"END": self._end_function,
+		"SKIP": self._skip_function,
+		"RETURN": self._return_function,
+		"CHECKATTR": self._checkattr_function,
+		"CHECKNOTATTR": self._checknotattr_function,
+		"ADDATTR": self._addattr_function,
+		"DELATTR": self._delattr_function
 		}
 		self.tags = dict()
 		self.attributes = list()
@@ -170,16 +171,23 @@ class Story:
 							raise StoryError(f"Duplicate Sub-story: {sub_story}")
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 				
-	def __run_function__(self, args: str) -> None:
-		if args.split()[0] in ["STAY", "TAG", "END"]:
-			self.function_dict[args.split()[0]]()
+	def _run_function(self, args: str) -> None:
+		args = args.split(" ", 1)
+		ifnot args[0] in self.function_dict:
+			raise StoryError(f"Unknown function: {args[0]}")
+		func = self.function_dict[args[0]]
+		if func.__code__.co_argcount == 1:
+			if ismethod(func):
+				self.func()
+			else:
+				func(self)
 		else:
-			func, args = args.split(" ", 1)
-			if not func in self.function_dict:
-				raise StoryError(f"Unknown function: {func}")
-			self.function_dict[func](args)
+			if ismethod(func)
+				self.func(args[1])
+			else:
+				func(self, args[1])
 					
-	def __option_function__(self, args: str) -> None:
+	def _option_function(self, args: str) -> None:
 		option_functions = [i[0].strip() for i in findall(r"\$\$(.+?)(,|$)", args)]
 		for i in option_functions:
 				if i.split()[0] not in self.function_dict:
@@ -197,36 +205,36 @@ class Story:
 					self.io(error="Invalid option, try again")
 					continue
 				option_function = option_functions[option_titles.index(option)]
-			self.__run_function__(option_function)
+			self._run_function(option_function)
 			break
 			
-	def __jump_function__(self, args: str) -> None:
+	def _jump_function(self, args: str) -> None:
 		if args.strip() not in self.tags:
 			raise StoryError(f"Tag {args.strip()} doesn't exist.")
 		tag = self.tags[args.strip()]
 		self.sub_story = tag[0]
 		self.line = tag[1]
 		
-	def __stay_function__(self) -> None:
+	def _stay_function(self) -> None:
 		if self.line+1 >= len(self.sub_stories[self.sub_story]):
 			sub_stories = [i for i in self.sub_stories]
 			if story_index := (sub_stories.index(self.sub_story))+1 >= len(sub_stories):
-				self.__end_function__()
+				self._end_function()
 			self.sub_story = sub_stories[story_index+1]
 			self.line = 0
 		else:
 			self.line += 1
 		
-	def __story_function__(self, args: str) -> None:
+	def _story_function(self, args: str) -> None:
 		if args.strip() not in self.sub_stories:
 			raise StoryError(f"Sub-story {args.strip()} doesn't exist.")
 		self.sub_story = args.strip()
 		self.line = 0
 		
-	def __end_function__(self) -> None:
+	def _end_function(self) -> None:
 		quit()
 		
-	def __skip_function__(self, args: str) -> None:
+	def _skip_function(self, args: str) -> None:
 		if not args.strip().isdigit():
 			raise StoryError(f"SKIP argument should be a number not {args.strip}")
 		lines = int(args.strip())
@@ -235,7 +243,7 @@ class Story:
 		for _ in range(lines+1):
 			self.__stay_function__()
 			
-	def __return_function__(self, args: str) -> None:
+	def _return_function(self, args: str) -> None:
 		if not args.strip().isdigit():
 			raise StoryError(F"RETURN argument should be a number not {args.strip}")
 		lines = int(args.strip())
@@ -243,34 +251,34 @@ class Story:
 			raise StoryError("Amount of lines to return must be positive.")
 		self.line = max(0, self.line-lines)
 		
-	def __checkattr_function__(self, args: str) -> None:
+	def _checkattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
 		if attr.strip() in self.attributes:
-			self.__run_function__(function)
+			self._run_function(function)
 		
-	def __checknotattr_function__(self, args: str) -> None:
+	def _checknotattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
 		if not attr.strip() in self.attributes:
-			self.__run_function__(function)
+			self._run_function(function)
 		
-	def __addattr_function__(self, args: str) -> None:
+	def _addattr_function(self, args: str) -> None:
 		if not args in self.attributes:
 			self.attributes.append(args)
 			
-	def __delattr_function__(self, args: str) -> None:
+	def _delattr_function(self, args: str) -> None:
 		if args in self.attributes:
 			self.attributes.remove(args)
 			
-	def __run_line__(self) -> None:
+	def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
 		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
 			self.io(curr_line)
-			self.__stay_function__()
+			self._stay_function()
 		else:
 				temp_line = self.line 
 				if curr_line.startswith("- "):
 					curr_line = "-" + curr_line[2:]
-				self.__run_function__(curr_line[1:])
+				self._run_function(curr_line[1:])
 				if temp_line == self.line:
 					self.line += 1
 				
@@ -278,9 +286,9 @@ class Story:
 		"""The method to start the story / game of the corresponding :class:`Story` class
 		"""
 		while True:
-				self.__run_line__()
+				self._run_line()
 				
-	def io_function(self, func: Callable[[str], None]) -> None:
+	def io_function(self, function: Callable[[str], str]) -> Callable[[str], str]:
 		"""The method used to set the :class:`Story` Object's I/O function to the corresponding one.
 		
 		This method is meant to be used as a decorator.
@@ -288,4 +296,28 @@ class Story:
 		.. versionadded:: 0.1.1
 		
 		"""
-		self.io = func
+		self.io = function
+		return function
+
+	def custom_function(self, name: str) -> Callable[[...], Any]:
+		"""The method used to add custom functions to the :class:`Story` Object to be handled like
+		others sus functions.
+		For more info check the SUP documentation.
+
+		This method is meant to be used as a decorator.
+
+		.. versionadded:: 0.1.6
+
+		Parameters
+		-----------
+		name: :class:`str
+			The string representing the name of the function.
+
+		"""
+		name = name.strip().upper()
+		def inner(function):
+			if name in self.function_dict:
+				raise StoryError(f"Duplicate function: {name}")
+			self.function_dict[name] = function
+			return function
+		return inner
