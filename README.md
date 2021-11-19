@@ -1,4 +1,6 @@
-# SUP <img width=25px src="/assets/logo.png">
+<img width=200px src="/assets/logo.png">
+
+# SUP
 The git for the Python Story Utility Package library. 
 
 ## Installation:
