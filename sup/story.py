@@ -30,7 +30,7 @@ from typing import Callable, List, Any, Optional, Dict, Iterable
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: Optional[Iterable[str]] = None, options: Optional[List[str]] = None, error: Optional[str] = None) -> Optional[str]:
+def _story_io(text: str = str(), options: Optional[List[str]] = None, error: Optional[str] = None) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -47,16 +47,16 @@ def _story_io(text: Optional[Iterable[str]] = None, options: Optional[List[str]]
 	"""
 	if error:
 		print(error)
-	else:
-		out = ""
-		if options:
-			text = "Choose one:\n" + " | ".join(options)
-			out = "\n> "
-		for x in text:
-			print(x, end='')
-			stdout.flush()
-			sleep(uniform(0, 0.01))
-		return input(out)
+		return ''
+	out = ""
+	if options:
+		text = "Choose one:\n" + " | ".join(options)
+		out = "\n> "
+	for x in text:
+		print(x, end='')
+		stdout.flush()
+		sleep(uniform(0, 0.01))
+	return input(out)
 
 class Story:
 	"""The base class for interpreting sus files.
@@ -98,7 +98,7 @@ class Story:
 	"""
 	def __init__(self,
 	reference: str, 
-	io_function: Optional[Callable[Optional[Iterable[str]], Optional[str]]]=_story_io):
+	io_function: Optional[Callable[[str, Optional[List[str]], Optional[str]], str]]=_story_io):
 		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
@@ -117,7 +117,7 @@ class Story:
 		"ADDATTR": self._addattr_function,
 		"DELATTR": self._delattr_function
 		}
-		self.tags: Dict[str, List[str, int]] = dict()
+		self.tags: Dict[str, List[Union[str, int]]] = dict()
 		self.attributes: List[str] = list()
 		if len(self.reference.splitlines()) > 1:
 			temp_text = self.reference
@@ -140,7 +140,7 @@ class Story:
 			    	temp_lines = i.replace("{{", "")
 			    	continue
 			    self.text.append(i.strip())
-		if self.text:
+		if not self.text:
 			raise StoryError("Story file is empty")
 		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
 			raise StoryError("No Story sections found")
