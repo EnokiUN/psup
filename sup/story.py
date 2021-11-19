@@ -30,7 +30,7 @@ from typing import Callable, List, Any, Dict, Union, Iterable
 from inspect import ismethod
 from storyerror import StoryError
 
-def _story_io(text: str = str(), **kwargs: Union[str, Iterable]) -> str:
+def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -98,11 +98,11 @@ class Story:
 	"""
 	def __init__(self,
 	reference: str, 
-	io_function: Callable[[str, Union[str, Iterable]], str]=_story_io):
+	io_function: Callable[[str, Union[str, Iterable[str]]], str]=_story_io):
 		self.reference = reference + ".sus" if not reference.endswith('.sus') else reference
 		self.io = io_function
 		self.line = 0
-		self.sub_story = None
+		self.sub_story = str()
 		self.function_dict = {
 		"OPTION": self._option_function,
 		"JUMP": self._jump_function,
@@ -148,7 +148,7 @@ class Story:
 		temp_list: List[str] = list()
 		for x, i in enumerate(self.text):
 			if sub_story := (findall(r"\[STORY ([a-zA-Z-]+?)\]", i)):
-				if self.sub_story is None:
+				if not self.sub_story:
 					self.sub_story = sub_story[0]
 				if len(temp_list) >= 2:
 					if sub_story[0] in self.sub_stories:
@@ -241,7 +241,7 @@ class Story:
 		if lines <= 0:
 			raise StoryError("Amount of lines to skip must be positive.")
 		for _ in range(lines+1):
-			self.__stay_function__()
+			self._stay_function__()
 			
 	def _return_function(self, args: str) -> None:
 		if not args.strip().isdigit():
@@ -272,7 +272,7 @@ class Story:
 	def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
 		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
-			self.io(curr_line)
+			self.io(text=curr_line)
 			self._stay_function()
 		else:
 				temp_line = self.line 
