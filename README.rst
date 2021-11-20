@@ -1,4 +1,4 @@
-.. image:: /assets/logo.svg
+.. image:: /assets/og-logo.png
     :width: 200
     :alt: logo
 
