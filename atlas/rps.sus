@@ -1,0 +1,33 @@
+# A simple Rock Paper Scissors game by Me, Enoki :>
+[STORY main]
+-OPTION {{
+rock $$ADDATTR rock, 
+paper $$ADDATTR paper, 
+scissors $$ADDATTR scissors
+}}
+-RANDOM {{
+ADDATTR erock, 
+ADDATTR epaper,
+ADDATTR escissors
+}}
+-CHECKATTR erock $$SAY I chose rock.
+-CHECKATTR epaper $$SAY I chose paper.
+-CHECKATTR escissors $$SAY I chose scissors.
+-CHECKATTR rock erock $$JUMP tie
+-CHECKATTR paper epaper $$JUMP tie
+-CHECKATTR scissors escissors $$JUMP tie
+-CHECKATTR rock epaper $$JUMP lost
+-CHECKATTR paper escissors $$JUMP lost
+-CHECKATTR scissors erock $$JUMP lost
+-CHECKATTR paper erock $$JUMP won
+-CHECKATTR scissors epaper $$JUMP won
+-CHECKATTR rock escissors $$JUMP won
+-TAG tie
+It's a tie.
+-END
+-TAG lost
+You lost.
+-END
+-TAG won
+You won.
+-END
