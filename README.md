@@ -31,7 +31,7 @@ Once upon a time a boy named Jack was strolling by the river.
 Suddenly he heard something move in the bushes.
 Jack was scared as he had no idea what the thing in the bushes could be.
 - OPTION {{
-	 Run away $$JUMP running-away,
+	 Run away $$STORY running-away,
 	 Go towards the Bush $$STAY,
 	 Do nothing $$SKIP 5
 	 }}
