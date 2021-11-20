@@ -27,7 +27,7 @@ if version.endswith(('a', 'b', 'rc')):
         pass
 
 readme = ''
-with open('README.md') as f:
+with open('README.rst') as f:
     readme = f.read()
 
 packages = [
@@ -52,7 +52,7 @@ setup(name='psup',
         },
       description='A simple library for making complex stories and games.',
       long_description=readme,
-      long_description_content_type="text/markdown",
+      long_description_content_type="text/x-rst",
       include_package_data=True,
       python_requires='>=3.8.0',
       classifiers=[

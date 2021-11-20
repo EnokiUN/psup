@@ -24,11 +24,10 @@ SOFTWARE.
 
 from .story import Story
 from .onlinestory import OnlineStory
-from .storyerror import StoryError
 from argparse import ArgumentParser
 from os import system, name
 
-def main():
+def main() -> None:
     # CLI handling
     parser = ArgumentParser(prog='Sus Utility Package CLI', description='Runs a story directly from the terminal')
     parser.add_argument('story', metavar='Story-name', type=str, help='Name of the story')
