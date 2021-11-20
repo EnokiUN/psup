@@ -1,4 +1,4 @@
-.. image:: /assets/logo.png
+.. image:: /assets/logo.svg
     :width: 200
     :alt: logo
 
