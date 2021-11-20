@@ -25,11 +25,26 @@ SOFTWARE.
 from .story import Story
 from .onlinestory import OnlineStory
 from .storyerror import StoryError
+from argparse import ArgumentParser
+from os import system, name
 
 def main():
-    # CLI stuff.
-
-
+    # CLI handling
+    parser = ArgumentParser(prog='Sus Utility Package CLI', description='Runs a story directly from the terminal')
+    parser.add_argument('story', metavar='Story-name', type=str, help='Name of the story')
+    parser.add_argument('--online-story', dest='online', action='store_const', const=True, default=False,
+                        help="(Optional) Tries to fetch the story from the github page")
+    args = parser.parse_args()
+    online = args.online
+    storyname = args.story
+    # easy
+    if online:
+        story = OnlineStory(storyname)
+    else:
+        story = Story(storyname)
+    system('cls' if name=='nt' else 'clear')
+    story.start()
+    
 if __name__ == '__main__':
     main()
     
