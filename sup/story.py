@@ -22,13 +22,14 @@ SOFTWARE.
 
 """
 
-from re import findall
+from re import findall, split
 from sys import stdout
 from time import sleep
 from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
-from .storyerror import StoryError
+from random import choice
+from storyerror import StoryError
 
 def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
@@ -99,7 +100,7 @@ class Story:
 	def __init__(self,
 	reference: str, 
 	io_function: Callable[[str, Union[str, Iterable[str]]], str]=_story_io):
-		self.reference = reference  + ".sus" if not reference.endswith('.sus') else reference
+		self.reference = reference  + ".sus" if not (reference.endswith('.sus') or len(reference.splitlines()) > 1) else reference
 		self.io = io_function
 		self.line = 0
 		self.sub_story = str()
@@ -113,9 +114,11 @@ class Story:
 		"SKIP": self._skip_function,
 		"RETURN": self._return_function,
 		"CHECKATTR": self._checkattr_function,
-		"CHECKNOTATTR": self._checknotattr_function,
+		"CHECKANYATTR": self._checkanyattr_function,
 		"ADDATTR": self._addattr_function,
-		"DELATTR": self._delattr_function
+		"DELATTR": self._delattr_function,
+		"RANDOM": self._random_function,
+		"SAY": self._say_function
 		}
 		self.tags: Dict[str, Tuple[str, int]] = dict()
 		self.attributes: List[str] = list()
@@ -263,21 +266,53 @@ class Story:
 		
 	def _checkattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
-		if attr.strip() in self.attributes:
-			self._run_function(function)
+		attr_list = split("&&|,| ", attr)
+		for i in attr_list:
+			if not i:
+				continue
+			i = i.strip()
+			if i.startswith("!!"):
+				if i[3:] in self.attributes:
+					return
+			else:
+				if i not in self.attributes:
+					return
+		self._run_function(function)
 		
-	def _checknotattr_function(self, args: str) -> None:
+	def _checkanyattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
-		if not attr.strip() in self.attributes:
-			self._run_function(function)
+		attr_list = split("&&|,| ", attr)
+		for i in attr_list:
+			if not i:
+				continue
+			i = i.strip()
+			if i.startswith("!!"):
+				if i[3:] not in self.attributes:
+					self._run_function(function)
+			else:
+				if i in self.attributes:
+					self._run_function(function)
 		
 	def _addattr_function(self, args: str) -> None:
-		if not args in self.attributes:
-			self.attributes.append(args)
+		arg_list = split("&&|,| ", args)
+		for arg in arg_list:
+			arg = arg.strip()
+			if arg and arg not in self.attributes:
+				self.attributes.append(arg)
 			
 	def _delattr_function(self, args: str) -> None:
-		if args in self.attributes:
-			self.attributes.remove(args)
+		arg_list = split("&&|,| ", args)
+		for arg in arg_list:
+			arg = arg.strip()
+			if arg and arg in self.attributes:
+				self.attributes.remove(arg)
+				
+	def _random_function(self, args: str) -> None:
+		funcs = args.split(",")
+		self._run_function(choice(funcs).strip())
+		
+	def _say_function(self, args: str) -> None:
+		self.io(args)
 			
 	def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
@@ -285,12 +320,12 @@ class Story:
 			self.io(curr_line)
 			self._stay_function()
 		else:
-				temp_line = self.line 
+				temp_line = self.line
 				if curr_line.startswith("- "):
 					curr_line = "-" + curr_line[2:]
 				self._run_function(curr_line[1:])
 				if temp_line == self.line:
-					self.line += 1
+					self._stay_function()
 				
 	def start(self) -> None:
 		"""The method called to start the story / game of the corresponding :class:`Story` object
@@ -304,14 +339,14 @@ class Story:
 		the end of the sus file or the END function being called.
 
 		"""
-		print("\n\n====================\nProgram ended, do you want to play again?")
-		answer = input("> ")
+		answer = self.io("\n\n====================\nProgram ended, do you want to play again?\n> ")
 		if answer.lower().strip() in ["yes", "y"]:
 			self.line = 0
 			self.sub_story = list(self.sub_stories.keys())[0]
 			self.attributes = list()
 		else:
-			print("Alright, See you next time!")
+			self.io(error="Alright, See you next time!")
+			sleep(3)
 			quit()
 
 	def io_function(self, function: Callable[[str, Union[str, Iterable[str]]], str]) -> Callable[[str, Union[str, Iterable[str]]], str]:
