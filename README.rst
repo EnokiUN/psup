@@ -49,7 +49,7 @@ Requirements:
 and that's it!
 
 Usage:
------
+------
 Here's a basic story:
 
 .. code-block:: sus
