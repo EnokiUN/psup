@@ -32,7 +32,7 @@ def main():
     # CLI handling
     parser = ArgumentParser(prog='Sus Utility Package CLI', description='Runs a story directly from the terminal')
     parser.add_argument('story', metavar='Story-name', type=str, help='Name of the story')
-    parser.add_argument('--online-story', dest='online', action='store_const', const=True, default=False,
+    parser.add_argument('-online', dest='online', action='store_const', const=True, default=False,
                         help="(Optional) Tries to fetch the story from the github page")
     args = parser.parse_args()
     online = args.online
