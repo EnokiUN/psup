@@ -123,6 +123,7 @@ So there are a set of functions you can use in a sus file, being:
 * ``CHECKATTR`` Checks if the player has **all** the specified attribute(s), if so it runs the function supplied by `$$`.
 * ``CHECKANYATTR`` Works similarly to ``CHECKATTR``, difference is that it runs if the player has **any** of the specified attributes.
 * ``RANDOM`` Runs one of the specified functions at *random*.
+* ``SAY`` Says the provided text.
 
 You can also specify sub stories by typing ``[STORY sub-story-name]``.
 
