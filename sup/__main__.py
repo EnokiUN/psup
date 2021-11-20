@@ -24,7 +24,6 @@ SOFTWARE.
 
 from .story import Story
 from .onlinestory import OnlineStory
-from .storyerror import StoryError
 from argparse import ArgumentParser
 from os import system, name
 
