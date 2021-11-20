@@ -33,6 +33,10 @@ other stuff including the story's script, options, endings, attributes and more 
 designed to be fast and simple with basic syntax that's easy to learn and use for even people
 with little to no programming knowledge and skill allowing anyone to create their own stories.
 
+Doccumentation
+--------------
+There is a readthedocs.io doccumentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
+
 Installation:
 -------------
 Install SUP by simply running ``pip install psup`` in your terminal.
