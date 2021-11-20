@@ -45,6 +45,11 @@ setup(name='psup',
       version=version,
       license='MIT',
       packages=packages,
+      entry_points ={
+            'console_scripts': [
+                'sup = sup.__main__:main'
+            ]
+        },
       description='A simple library for making complex stories and games.',
       long_description=readme,
       long_description_content_type="text/markdown",
