@@ -2,31 +2,31 @@
     :width: 200
     :alt: logo
 
-SUP, The Story Utility Package Module.
+PSUP, The Story Utility Package Module.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SUP helps making stories or games with options, diverging paths, different endings and so on.
+PSUP helps making stories or games with options, diverging paths, different endings and so on.
 
 You can run a story in a minimum of 2 lines of code / 1 terminal command.
 
 .. code-block:: python3
 
-    from sup import Story
+    from psup import Story
 
     Story("YourStoryName").start()
 
-``sup yourstoryname``
+``psup yourstoryname``
 
 You can also run stories online without installing them or upload your own for others to play.
-You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/sup>`_.
+You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/psup>`_.
 
 .. code-block:: python3
 
-    from sup import OnlineStory
+    from psup import OnlineStory
 
     OnlineStory("OnlineStoryName").start()
 
-``sup onlinestoryname -online``
+``psup onlinestoryname -online``
 
 The module has its own file extention (.sus standing for Story Utility Script) where all the
 other stuff including the story's script, options, endings, attributes and more are in a way
@@ -39,7 +39,7 @@ There is a readthedocs.io doccumentation which covers all this but with better a
 
 Installation:
 -------------
-Install SUP by simply running ``pip install psup`` in your terminal.
+Install PSUP by simply running ``pip install psup`` in your terminal.
 
 Check out our `pypi page <https://pypi.org/project/psup/>`_!!
 
@@ -107,7 +107,7 @@ Here's a basic story:
     Jack started to slowly drown but a man helped him get out of the river safely.
    - JUMP hunter
 
-more examples can be found in the `atlas folder <https://github.com/EnokiUN/sup/blob/main/atlas/>`_.
+more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 

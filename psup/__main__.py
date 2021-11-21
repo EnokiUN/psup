@@ -29,7 +29,7 @@ from os import system, name
 
 def main() -> None:
     # CLI handling
-    parser = ArgumentParser(prog='Sus Utility Package CLI', description='Runs a story directly from the terminal')
+    parser = ArgumentParser(prog='Story Utility Package CLI', description='Runs a story directly from the terminal')
     parser.add_argument('story', metavar='Story-name', type=str, help='Name of the story')
     parser.add_argument('-online', dest='online', action='store_const', const=True, default=False,
                         help="(Optional) Tries to fetch the story from the github page")
