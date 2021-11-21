@@ -2,7 +2,7 @@
     :width: 200
     :alt: logo
 
-PSUP, The Story Utility Package Module.
+PSUP, The Python Story Utility Package Module.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PSUP helps making stories or games with options, diverging paths, different endings and so on.
