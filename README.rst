@@ -2,9 +2,42 @@
     :width: 200
     :alt: logo
 
+<<<<<<< HEAD
 PSUP
 ***
 The git for the Python Story Utility Package library. 
+=======
+SUP, The Story Utility Package Module.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SUP helps making stories or games with options, diverging paths, different endings and so on.
+
+You can run a story in a minimum of 2 lines of code / 1 terminal command.
+
+.. code-block:: python3
+
+    from sup import Story
+
+    Story("YourStoryName").start()
+
+``sup yourstoryname``
+
+You can also run stories online without installing them or upload your own for others to play.
+You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/sup>`_.
+
+.. code-block:: python3
+
+    from sup import OnlineStory
+
+    OnlineStory("OnlineStoryName").start()
+
+``sup onlinestoryname -online``
+
+The module has its own file extention (.sus standing for Story Utility Script) where all the
+other stuff including the story's script, options, endings, attributes and more are in a way
+designed to be fast and simple with basic syntax that's easy to learn and use for even people
+with little to no programming knowledge and skill allowing anyone to create their own stories.
+>>>>>>> 04074b010bb99f807c8b2531cac9608f00c962f4
 
 Installation:
 -------------
@@ -21,20 +54,7 @@ Usage:
 -----
 Here's a basic story:
 
-.. code:: py
-
-    from psup import Story
-
-    story = Story("story")
-    story.run()
-
-That's all the code you have to type to make a terminal based text story / game.
-
-As for the actual story script, options paths and more it's all handled automatically from what you've written in your Story Utility Script (sus) file.
-
-An example of a story
-
-.. code:: sus
+.. code-block:: sus
 
     [STORY main]
     Once upon a time a boy named Jack was strolling by the river.
