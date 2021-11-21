@@ -132,3 +132,9 @@ So there are a set of functions you can use in a sus file, being:
 You can also specify sub stories by typing ``[STORY sub-story-name]``.
 
 lines that are empty or start with ``#`` are regarded as comments and are treated as if they don't exist.
+
+
+.. image:: /assets/discord.png
+    :width: 200
+    :alt: discord
+    :target: https://discord.gg/DTdy5ks4j3
