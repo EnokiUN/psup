@@ -135,6 +135,6 @@ lines that are empty or start with ``#`` are regarded as comments and are treate
 
 
 .. image:: /assets/discord.png
-    :width: 200
+    :width: 50
     :alt: discord
     :target: https://discord.gg/DTdy5ks4j3
