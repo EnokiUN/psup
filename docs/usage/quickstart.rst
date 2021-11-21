@@ -1,7 +1,7 @@
 Quickstart
 ==========
 
-To make your first SUP story you need one main thing, a sus file so go ahead and make a file called ``yourstory.sus``.
+To make your first PSUP story you need one main thing, a sus file so go ahead and make a file called ``yourstory.sus``.
 
 Now open that file in your preffered text editor and write some SUScript in it, refer to `the SUScript doccumentation </doccumentation/sus.html>`_.
 
@@ -15,7 +15,7 @@ Now you have to ways to run your story / game:
   
   ``sup <story-name>``.
 
-  for more info on the SUP CLI check the `CLI doccumentation <doccumentation/cli.html>`.
+  for more info on the PSUP CLI check the `CLI doccumentation <doccumentation/cli.html>`.
 
 * Run it with Python: (reccomended)
   
@@ -23,7 +23,7 @@ Now you have to ways to run your story / game:
 
   .. code-block:: python3
     
-    from sup import Story
+    from psup import Story
     
     story = Story("your-story-name")
     story.start()
