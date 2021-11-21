@@ -1,0 +1,344 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>SUP, The Story Utility Package Module. &mdash; SUP 0.2a documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/fonts.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="CLI" href="cli.html" />
+    <link rel="prev" title="Online Atlas" href="../usage/atlas.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> SUP
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../usage/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage/atlas.html">Online Atlas</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SUP, The Story Utility Package Module.</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">CLI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sus.html">Story Utility Script (SUS)</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SUP</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+<div class="git-ribbon">
+  <a href="http://github.com/SwissDataScienceCenter" rel="me">Join us on GitHub</a>
+</div>
+
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>SUP, The Story Utility Package Module.</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/doccumentation/sup.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <span class="target" id="module-sup"></span><div class="section" id="sup-the-story-utility-package-module">
+<h1>SUP, The Story Utility Package Module.<a class="headerlink" href="#sup-the-story-utility-package-module" title="Permalink to this headline">¶</a></h1>
+<p>SUP helps making stories or games with options, diverging paths, different endings and so on.</p>
+<p>You can run a story in a minimum of 2 lines of code / 1 terminal command.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sup</span> <span class="kn">import</span> <span class="n">Story</span>
+
+<span class="n">Story</span><span class="p">(</span><span class="s2">&quot;YourStoryName&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sup</span> <span class="pre">yourstoryname</span></code></p>
+<p>You can also run stories online without installing them or upload your own for others to play.
+You can find / upload stories in the <a class="reference external" href="https://github.com/EnokiUN/sup">GitHub repo’s atlas folder</a>.</p>
+<div class="highlight-python3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sup</span> <span class="kn">import</span> <span class="n">OnlineStory</span>
+
+<span class="n">OnlineStory</span><span class="p">(</span><span class="s2">&quot;OnlineStoryName&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sup</span> <span class="pre">onlinestoryname</span> <span class="pre">-online</span></code></p>
+<p>The module has its own file extention (.sus standing for Story Utility Script) where all the
+other stuff including the story’s script, options, endings, attributes and more are in a way
+designed to be fast and simple with basic syntax that’s easy to learn and use for even people
+with little to no programming knowledge and skill allowing anyone to create their own stories.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="sup.OnlineStory">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sup.</span></span><span class="sig-name descname"><span class="pre">OnlineStory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reference:</span> <span class="pre">str,</span> <span class="pre">io_function:</span> <span class="pre">Callable[[str,</span> <span class="pre">Union[str,</span> <span class="pre">Iterable[str]]],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_story_io&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sup.OnlineStory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#sup.Story" title="sup.story.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">sup.story.Story</span></code></a></p>
+<p>The class to play stories from the ones existing in the GitHub repository.</p>
+<p>To get your own story added make a pull request with it to the atlas folder.
+It will get reviewed and pulled if is passes the review.</p>
+<p>This class inherits from <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> and hence shares all the methods and attributes.
+The only difference is the reference is the file’s name from the GitHub repo.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="sup.Story">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sup.</span></span><span class="sig-name descname"><span class="pre">Story</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">reference:</span> <span class="pre">str,</span> <span class="pre">io_function:</span> <span class="pre">Callable[[str,</span> <span class="pre">Union[str,</span> <span class="pre">Iterable[str]]],</span> <span class="pre">str]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">_story_io&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#sup.Story" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The base class for interpreting sus files.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.1.</span></p>
+</div>
+<dl class="simple">
+<dt>reference: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></dt><dd><p>A String representing the reference of the story, it can be the path of the sus file that the
+story object will interpret and run or the story scrip directly.</p>
+</dd>
+<dt>io: Callable[[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, Union[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, Iterable[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]]], <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</dt><dd><p>A function that handles the input and output of data from the <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a>
+object to the desired location.</p>
+</dd>
+<dt>line: <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></dt><dd><p>The Integer representing the current line number in the current Sub-story.</p>
+</dd>
+<dt>sub_story: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></dt><dd><p>The Sting representing the current Sub-story.</p>
+</dd>
+<dt>function_dict: Dict[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, Callable[[Union[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, None]], None]]</dt><dd><p>The Dictionary that has the pairs of all function names and their corresponding python functions.</p>
+</dd>
+<dt>tags: Dict[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, Itterable[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code>]]</dt><dd><p>The Dictionary containing all the tags and their corresponding Lists that contain the name of
+their Sub-story and the line they’re in.</p>
+</dd>
+<dt>attributes: List[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</dt><dd><p>The List that contains all the Attributes the user / player has gained while using the
+<a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> Object.</p>
+</dd>
+<dt>text: List[<code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>]</dt><dd><p>The List containing every line of text in the sus file that isn’t a comment / empty line</p>
+</dd>
+</dl>
+<p>Low-level use of the story class to make a terminal based story / game with all the
+features from a sus file.
+.. code-block:: python3</p>
+<blockquote>
+<div><p>from sup import Story
+Story(“story”).start()</p>
+</div></blockquote>
+<dl class="py method">
+<dt class="sig sig-object py" id="sup.Story.custom_function">
+<span class="sig-name descname"><span class="pre">custom_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">...</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sup.Story.custom_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method used to add custom functions to the <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> Object to be handled like
+others sus functions.
+For more info check the SUP documentation.</p>
+<p>This method is meant to be used as a decorator.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.6.</span></p>
+</div>
+<dl class="simple">
+<dt>name: :class:<a href="#id1"><span class="problematic" id="id2">`</span></a>str</dt><dd><p>The string representing the name of the function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sup.Story.end">
+<span class="sig-name descname"><span class="pre">end</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sup.Story.end" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method called when the <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> object reaches an end by either hitting
+the end of the sus file or the END function being called.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sup.Story.io_function">
+<span class="sig-name descname"><span class="pre">io_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#sup.Story.io_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method used to set the <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> Object’s I/O function to the corresponding one.</p>
+<p>This method is meant to be used as a decorator.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.1.</span></p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sup.Story.start">
+<span class="sig-name descname"><span class="pre">start</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#sup.Story.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>The method called to start the story / game of the corresponding <a class="reference internal" href="#sup.Story" title="sup.Story"><code class="xref py py-class docutils literal notranslate"><span class="pre">Story</span></code></a> object</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="sup.StoryError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sup.</span></span><span class="sig-name descname"><span class="pre">StoryError</span></span><a class="headerlink" href="#sup.StoryError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseException</span></code></p>
+<p>The base Exception class for SUP.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 0.1.1.</span></p>
+</div>
+<p>These exceptions are almost always present because of a syntax error
+present in your Story Utility Script (SUS) file.</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="cli.html" class="btn btn-neutral float-right" title="CLI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../usage/atlas.html" class="btn btn-neutral float-left" title="Online Atlas" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, EnokiUN.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

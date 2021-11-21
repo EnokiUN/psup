@@ -1,4 +1,4 @@
-.. image:: /assets/logo.png
+.. image:: /assets/og-logo.png
     :width: 200
     :alt: logo
 
@@ -39,6 +39,10 @@ designed to be fast and simple with basic syntax that's easy to learn and use fo
 with little to no programming knowledge and skill allowing anyone to create their own stories.
 >>>>>>> 04074b010bb99f807c8b2531cac9608f00c962f4
 
+Doccumentation
+--------------
+There is a readthedocs.io doccumentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
+
 Installation:
 -------------
 Install PSUP by simply running ``pip install psup`` in your terminal.
@@ -51,7 +55,7 @@ Requirements:
 and that's it!
 
 Usage:
------
+------
 Here's a basic story:
 
 .. code-block:: sus
@@ -129,6 +133,7 @@ So there are a set of functions you can use in a sus file, being:
 * ``CHECKATTR`` Checks if the player has **all** the specified attribute(s), if so it runs the function supplied by `$$`.
 * ``CHECKANYATTR`` Works similarly to ``CHECKATTR``, difference is that it runs if the player has **any** of the specified attributes.
 * ``RANDOM`` Runs one of the specified functions at *random*.
+* ``SAY`` Says the provided text.
 
 You can also specify sub stories by typing ``[STORY sub-story-name]``.
 
