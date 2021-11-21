@@ -23,7 +23,7 @@ SOFTWARE.
 """
 
 class StoryError(BaseException):
-	"""The base Exception class for SUP.
+	"""The base Exception class for PSUP.
 	
 	.. versionadded:: 0.1.1
 	
@@ -31,5 +31,5 @@ class StoryError(BaseException):
 	present in your Story Utility Script (SUS) file.
 	"""
 	def __str__(self) -> str:
-		return f"{self.args[0]}, for more info check the the SUP docs."
+		return f"{self.args[0]}, for more info check the the PSUP docs."
 

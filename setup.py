@@ -2,7 +2,7 @@ from setuptools import setup
 import re
 
 version = ''
-with open('sup/__init__.py') as f:
+with open('psup/__init__.py') as f:
     match = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE)
     if match is not None:
         version = match.group(1)
@@ -31,23 +31,23 @@ with open('README.rst') as f:
     readme = f.read()
 
 packages = [
-    'sup'
+    'psup'
 ]
 
 setup(name='psup',
       author='EnokiUN',
-      url='https://github.com/EnokiUN/sup',
+      url='https://github.com/EnokiUN/psup',
       project_urls={
-        "Documentation": "https://sup.readthedocs.io/en/latest/",
-        "Issue tracker": "https://github.com/enokiun/sup/issues",
+        "Documentation": "https://psup.readthedocs.io/en/latest/",
+        "Issue tracker": "https://github.com/enokiun/psup/issues",
       },
-      download_url='https://github.com/EnokiUN/sup/archive/refs/tags/Release-0-1-1-5a.tar.gz',
+      download_url='https://github.com/EnokiUN/psup/archive/refs/tags/Release-0-1-1-5a.tar.gz',
       version=version,
       license='MIT',
       packages=packages,
       entry_points ={
             'console_scripts': [
-                'sup = sup.__main__:main'
+                'psup = psup.__main__:main'
             ]
         },
       description='A simple library for making complex stories and games.',

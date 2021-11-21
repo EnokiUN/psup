@@ -93,7 +93,7 @@ class Story:
 	features from a sus file.
 	.. code-block:: python3
 	
-		from sup import Story
+		from psup import Story
 		Story("story").start()
 		
 	"""
@@ -363,7 +363,7 @@ class Story:
 	def custom_function(self, name: str) -> Callable[..., Any]:
 		"""The method used to add custom functions to the :class:`Story` Object to be handled like
 		others sus functions.
-		For more info check the SUP documentation.
+		For more info check the PSUP documentation.
 
 		This method is meant to be used as a decorator.
 

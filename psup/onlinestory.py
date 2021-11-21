@@ -37,7 +37,7 @@ class OnlineStory(Story):
 	
 	"""
 	def _get_text(self) -> str:
-		text = urlopen(f"https://raw.github.com/EnokiUN/sup/master/atlas/{self.reference}").read().decode("UTF-8")
+		text = urlopen(f"https://raw.github.com/EnokiUN/psup/master/atlas/{self.reference}").read().decode("UTF-8")
 		if len(text.splitlines()) <= 2:
 			raise StoryError(f"Story not found: {self.reference}")
 		return text

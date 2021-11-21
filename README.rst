@@ -2,13 +2,13 @@
     :width: 200
     :alt: logo
 
-SUP
+PSUP
 ***
 The git for the Python Story Utility Package library. 
 
 Installation:
 -------------
-Install SUP by simply running ``pip install psup`` in your terminal.
+Install PSUP by simply running ``pip install psup`` in your terminal.
 
 Check out our `pypi page <https://pypi.org/project/psup/>`_!!
 
@@ -23,7 +23,7 @@ Here's a basic story:
 
 .. code:: py
 
-    from sup import Story
+    from psup import Story
 
     story = Story("story")
     story.run()
@@ -89,7 +89,7 @@ An example of a story
     Jack started to slowly drown but a man helped him get out of the river safely.
    - JUMP hunter
 
-more examples can be found in the `atlas folder <https://github.com/EnokiUN/sup/blob/main/atlas/>`_.
+more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 

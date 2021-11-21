@@ -1,15 +1,15 @@
-"""SUP, The Story Utility Package Module.
+"""PSUP, The Python Story Utility Package Module.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SUP makes making text based stories or games with options, diverging paths, different endings
+PSUP makes making text based stories or games with options, diverging paths, different endings
 and more take you a minimum of 3 lines of code.
 
 All the other stuff including the story's script, options, endings, attributes and more is
-handled in a Story Utility Script (sus for short) file in a way designed to be fast and simple.
+handled in a Python Story Utility Script (psup for short) file in a way designed to be fast and simple.
 
 """
 
-__title__ = 'SUP'
+__title__ = 'PSUP'
 __author__ = 'EnokiUN'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2021-present EnokiUN'
