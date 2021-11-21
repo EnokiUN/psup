@@ -2,42 +2,36 @@
     :width: 200
     :alt: logo
 
-<<<<<<< HEAD
-PSUP
-***
-The git for the Python Story Utility Package library. 
-=======
-SUP, The Story Utility Package Module.
+PSUP, The Story Utility Package Module.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-SUP helps making stories or games with options, diverging paths, different endings and so on.
+PSUP helps making stories or games with options, diverging paths, different endings and so on.
 
 You can run a story in a minimum of 2 lines of code / 1 terminal command.
 
 .. code-block:: python3
 
-    from sup import Story
+    from psup import Story
 
     Story("YourStoryName").start()
 
-``sup yourstoryname``
+``psup yourstoryname``
 
 You can also run stories online without installing them or upload your own for others to play.
-You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/sup>`_.
+You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/psup>`_.
 
 .. code-block:: python3
 
-    from sup import OnlineStory
+    from psup import OnlineStory
 
     OnlineStory("OnlineStoryName").start()
 
-``sup onlinestoryname -online``
+``psup onlinestoryname -online``
 
 The module has its own file extention (.sus standing for Story Utility Script) where all the
 other stuff including the story's script, options, endings, attributes and more are in a way
 designed to be fast and simple with basic syntax that's easy to learn and use for even people
 with little to no programming knowledge and skill allowing anyone to create their own stories.
->>>>>>> 04074b010bb99f807c8b2531cac9608f00c962f4
 
 Doccumentation
 --------------
