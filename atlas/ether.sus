@@ -47,7 +47,7 @@ The windows and front door themselves were locked.
 Guess I have no choice but to start searching the rooms.
 - STORAGE SET a1-dtries 0
 - TAG a1-o1
-- UTILS SMALLER STORAGE GET a1-dtries, 4 $$SKIP 1
+- UTILS SMALLER STORAGE GET a1-door-tries, 4 $$SKIP 1
 - OPTION {{
                     Search in the kitchen $$STORY a1-k,
                     Search in the Bathroom $$STORY a1-b,
@@ -79,6 +79,6 @@ I start trying to slam the door but it still won't budge.
 - UTILS ISNOT STORAGE GET a1-door-tries, 3 $$SKIP 1
 I kick the door with all my force but still no luck.
 - ADDATTR a1-tired
-- UTILS SMALLER STORAGE GET a1-dtries, 4 $$SKIP 1
+- UTILS SMALLER STORAGE GET a1-door-tries, 4 $$SKIP 1
 I should stop this.
 - JUMP a1-o1 
