@@ -159,7 +159,7 @@ class Story:
 		if not self.text:
 			raise StoryError("Story file is empty") # Raising an error if the story is empty / all comments.
 		# Checking if the story has any Sub stories, if not it raises an error.
-		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
+		if all(findall(r"\[STORY ([a-zA-Z0-9-]+?)\]", i) == [] for i in self.text):
 			raise StoryError("No Story sections found")
 		self.sub_stories: Dict[str, List[str]] = dict()
 		temp_list: List[str] = list()
