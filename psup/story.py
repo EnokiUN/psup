@@ -100,7 +100,7 @@ class Story:
 	def __init__(self,
 	reference: str, 
 	io_function: Callable[[str, Union[str, Iterable[str]]], str]=_story_io):
-		self.reference = refrence = reference  + ".sus" if not (reference.endswith('.sus') or len(reference.splitlines()) > 1) else reference
+		self.reference = refrence + ".sus" if not (reference.endswith('.sus') or len(reference.splitlines()) > 1) else reference
 		self.reference = reference  + ".story" if not (reference.endswith('.story') or len(reference.splitlines()) > 1) else reference
 		self.io = io_function
 		self.io = io_function
