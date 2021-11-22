@@ -1,0 +1,84 @@
+# My personal attempt at making a psychological horror escape the room like game.
+# This is the first of its kind and scale in PSUP
+# SUS version: v0.3
+# Still under work.
+# Made with <3 by Enoki
+# ------------------------------------------------------------
+[STORY main]
+-JUMP a1-o1
+It was an awful day, rain pouring out of the sky, fog everywhere.
+I couldn't even see anything out of my car which stopped working soon after.
+I had just finished paying it's last installment this week too.
+*sigh*
+I waited the rain out in my car being disappointed and a bit wet.
+As the sky began to clear up I found myself and the car in a forest.
+I wondered: "how did I get here?" but it was useless.
+I was driving on a road with nothing but deserted land around it too.
+Confused as I was I got out of my car, locked it and took my car keys with me.
+I tried to look around but it seemed that the further I went, the more fog there was and the more lost I became.
+I naturally tried to trace back my steps to my car.
+Well..... should I really say what happened?
+- OPTION ... $$STAY
+So, basically I found my car upside down and impaled by a tree.
+As I thought "Here goes another 6 months of my life" I noticed that the car was open.
+Further more the keys were in it.
+I put my hands in my pockets only to find that my keys weren't there...
+"That's odd" I thought, I blamed it on me being tired and started investing the area around the car more.
+To my surprise I found 2 sets of footsteps, I naturally assumed that they were the people who destroyed my dear car and was ready to request a refund.
+I traces the footsteps down and found myself at a rather damaged looking tiny shack.
+It looked more like a wooden box than a shack to be honest.
+The door was slightly opened so I pushed it, went in and.......
+{{NEWLINE}}{{NEWLINE}}
+{{NEWLINE}}{{NEWLINE}}
+{{NEWLINE}}{{NEWLINE}}
+...................................{{NEWLINE}}.                                 .{{NEWLINE}}. #####  #####  ## ## ##### ####  .{{NEWLINE}}. ##       #    ## ## ##    #   # .{{NEWLINE}}. #####    #    ##### ####  ##### .{{NEWLINE}}. ##       #    ## ## ##    ## ## .{{NEWLINE}}. #####  #####  ## ## ##### ## ## .{{NEWLINE}}.                                 .{{NEWLINE}}...................................
+{{NEWLINE}}{{NEWLINE}}
+{{NEWLINE}}{{NEWLINE}}
+{{NEWLINE}}{{NEWLINE}}
+As I entered the shack it was like the lights turned off.
+Everything was darkness.
+I took another step forward and....
+...
+
+[STORY a1-main]
+I found myself in what seems like the interior of a rather old looking house.
+It seems that it was raining outside, or that's what I found out by looking from the windows.
+The windows and front door themselves were locked.
+Guess I have no choice but to start searching the rooms.
+- STORAGE SET a1-dtries 0
+- TAG a1-o1
+- UTILS SMALLER STORAGE GET a1-dtries, 4 $$SKIP 1
+- OPTION {{
+                    Search in the kitchen $$STORY a1-k,
+                    Search in the Bathroom $$STORY a1-b,
+                    Search in the corridor $$STORY a1-c
+                  }}
+- OPTION {{
+                    Search in the kitchen $$STORY a1-k,
+                    Search in the Bathroom $$STORY a1-b,
+                    Search in the corridor $$STORY a1-c,
+                    Try to open the main door again $$JUMP a1-door
+                  }}
+
+[STORY a1-k]
+- CHECKATTR a1-k $$SKIP 2
+- ADDATTR a1-k
+I enter the kitchen, seems like an ordinary kitchen other than everything inside it being broken.
+- OPTION {{
+                    Check the sink $$JUMP a1-k-sink,
+                    Check the cup
+                  }}
+                  
+[STORY magic-happens-here]
+- TAG a1-door
+- STORAGE SET a1-door-tries $$UTILS ADD STORAGE GET a1-door-tries, 1
+- UTILS ISNOT STORAGE GET a1-door-tries, 1 $$SKIP 1
+I try to open the door again but to no avail.
+- UTILS ISNOT STORAGE GET a1-door-tries, 2 $$SKIP 1
+I start trying to slam the door but it still won't budge.
+- UTILS ISNOT STORAGE GET a1-door-tries, 3 $$SKIP 1
+I kick the door with all my force but still no luck.
+- ADDATTR a1-tired
+- UTILS SMALLER STORAGE GET a1-dtries, 4 $$SKIP 1
+I should stop this.
+- JUMP a1-o1 
