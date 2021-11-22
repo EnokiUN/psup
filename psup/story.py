@@ -103,7 +103,6 @@ class Story:
 		self.reference = refrence + ".sus" if not (reference.endswith('.sus') or len(reference.splitlines()) > 1) else reference
 		self.reference = reference  + ".story" if not (reference.endswith('.story') or len(reference.splitlines()) > 1) else reference
 		self.io = io_function
-		self.io = io_function
 		self.line = 0
 		self.sub_story = str()
 		self.function_dict = {
