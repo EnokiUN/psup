@@ -231,7 +231,7 @@ class Story:
 		while True:
 			option = self.io(options=option_titles).strip()
 			if option.isdigit():
-				if int(option)-1 > len(option_titles):
+				if int(option) > len(option_titles):
 					self.io(error="Invalid option, try again")
 					continue
 				option_function = option_functions[int(option)-1]
