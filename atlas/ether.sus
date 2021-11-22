@@ -5,7 +5,6 @@
 # Made with <3 by Enoki
 # ------------------------------------------------------------
 [STORY main]
--JUMP a1-o1
 It was an awful day, rain pouring out of the sky, fog everywhere.
 I couldn't even see anything out of my car which stopped working soon after.
 I had just finished paying it's last installment this week too.
@@ -42,6 +41,7 @@ I took another step forward and....
 
 [STORY a1-main]
 I found myself in what seems like the interior of a rather old looking house.
+It's way bigger than what it looks like from the outside apparently.
 It seems that it was raining outside, or that's what I found out by looking from the windows.
 The windows and front door themselves were locked.
 Guess I have no choice but to start searching the rooms.
@@ -64,11 +64,52 @@ Guess I have no choice but to start searching the rooms.
 - CHECKATTR a1-k $$SKIP 2
 - ADDATTR a1-k
 I enter the kitchen, seems like an ordinary kitchen other than everything inside it being broken.
+- CHECKATTR a1-k-fridge $$SKIP 1
 - OPTION {{
                     Check the sink $$JUMP a1-k-sink,
-                    Check the cup
+                    Check the cupboard $$JUMP a1-k-cupboard, 
+                    Check the fridge $$JUMP a1-k-fridge,
+                    Go back $$JUMP a1-o1
+                  }}
+- OPTION {{
+                    Check the sink $$JUMP a1-k-sink,
+                    Check the cupboard $$JUMP a1-k-cupboard, 
+                    Go back $$JUMP a1-o1
                   }}
                   
+[STORY a1-b]
+- CHECKATTR a1-b $$SKIP 3
+- ADDATTR a1-b
+I enter the bathroom, the sink and toilet are smashed.
+As I move in some rats run out of the bathroom, eek.
+- ADDATTR a1-rats
+- CHECKATTR a1-b-lookaround $$SKIP 1
+- OPTION {{
+                    Check the toothbrushes $$JUMP a1-b-toothbrushes,
+                    Look around more $$JUMP a1-b-lookaround,
+                    Go back $$JUMP a1-o1
+                  }}
+- OPTION {{
+                    Turn the faucet $$JUMP a1-b-faucet, 
+                    Go back $$JUMP a1-o1
+                  }}
+
+[STORY a1-c]
+- CHECKATTR a1-key $$SKIP 3
+There's a door at beginning of the corridor for some reason.
+The door is closed with a mean lock, maybe I could find the key.
+- JUMP a1-o1
+I try to open the lock with the key.
+The lock opens and falls on the ground.
+I slowly open the door....
+... 
+... 
+... 
+... 
+And thats the end of this demo lololololololololol
+- END
+
+
 [STORY magic-happens-here]
 - TAG a1-door
 - STORAGE SET a1-door-tries $$UTILS ADD STORAGE GET a1-door-tries, 1
@@ -81,4 +122,67 @@ I kick the door with all my force but still no luck.
 - ADDATTR a1-tired
 - UTILS SMALLER STORAGE GET a1-door-tries, 4 $$SKIP 1
 I should stop this.
-- JUMP a1-o1 
+- JUMP a1-o1
+- TAG a1-k-sink
+- CHECKATTR a1-water $$SKIP 9
+- CHECKATTR a1-k-sink $$SKIP 6
+- ADDATTR a1-k-sink
+I go take a look at the sink.
+I try to turn it on but there's no water apparently.
+there seems to be something in the sink hole however.
+It looks like a small plastic bag, maybe I can fill the sink for it to rise up.
+- STORY a1-k
+Yep, still no water here.
+- STORY a1-k
+I turn the sink on, water starts filling the sink.
+The plastic bag floats up and I pick it up.
+I opened the plastic bag and it had a key in it, this... might be useful.
+- ADDATTR a1-key
+- STORY a1-k
+- TAG a1-k-cupboard
+- CHECKATTR a1-k-cupboard $$SKIP 4
+- ADDATTR a1-k-cupboard
+I open the kitchen cupboard only to find a rat eating another rat.
+I slowly close it and back away.
+- STORY a1-k
+No.
+- STORY a1-k
+- TAG a1-k-fridge
+- CHECKATTR a1-k-fridge $$SKIP 5
+- ADDATTR a1-k-fridge
+I try to open the fridge but as I touched the handle the whole door fell off.
+The fridge is full with rotten food and now the smell is everywhere.
+I feel like I want to vomit.
+- ADDATTR a1-vomit
+- STORY a1-k
+- TAG a1-b-toothbrushes
+- CHECKATTR a1-b-toothbrushes $$SKIP 8
+- ADDATTR a1-b-toothbrushes
+I take a look at the toothbrushes.
+As I hold the cup they're in a couple of cockroaches jump out.
+I drop the cup and it got smashed.
+The cockroaches ran out of the bathroom like the rats.
+Oh lord.
+- ADDATTR a1-cockroaches
+- STORY a1-b
+That's gone now.... lol
+- STORY a1-b
+- TAG a1-b-lookaround
+- CHECKATTR a1-b-lookaround $$SKIP 2
+- ADDATTR a1-b-lookaround
+I looked around for a bit and found a faucet in the wall, maybe I could turn on the water with it?
+- STORY a1-b
+- TAG a1-b-faucet
+- CHECKATTR a1-b-faucet $$SKIP 5
+- ADDATTR a1-b-faucet
+I try turning the faucet on.
+It surprisingly works.... I think.
+- ADDATTR a1-water
+- STORY a1-b
+- CHECKATTR a1-water $$SKIP 3
+I turn the faucet on.
+- ADDATTR a1-water
+- STORY a1-b
+I turn the faucet off.
+- DELATTR a1-water
+- STORY a1-b
