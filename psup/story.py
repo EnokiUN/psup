@@ -22,13 +22,14 @@ SOFTWARE.
 
 """
 
-from re import findall, split
+from re import findall, split, sub
 from sys import stdout
+from os import system, name
 from time import sleep
 from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
-from random import choice
+from random import choice, randrange
 from .storyerror import StoryError
 
 def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
@@ -100,11 +101,18 @@ class Story:
 	def __init__(self,
 	reference: str, 
 	io_function: Callable[[str, Union[str, Iterable[str]]], str]=_story_io):
-		self.reference = reference  + ".sus" if not (reference.endswith('.sus') or len(reference.splitlines()) > 1) else reference
+		# Defining some base stuff.
+		# Making sure that if the reference isn't source code that it ends with the correct file format.
+		# Refractored in v0.3a because the line was too long.
+		if not (reference.endswith('.sus') or len(reference.splitlines()) > 1):
+			self.reference = reference  + ".sus"
+		else:
+			self.reference = reference
 		self.io = io_function
 		self.line = 0
 		self.sub_story = str()
-		self.function_dict = {
+		self.function_dict = { # Core part of the SUScript magic.
+		# ----- Normal Functions -----
 		"OPTION": self._option_function,
 		"JUMP": self._jump_function,
 		"STAY": self._stay_function,
@@ -118,13 +126,18 @@ class Story:
 		"ADDATTR": self._addattr_function,
 		"DELATTR": self._delattr_function,
 		"RANDOM": self._random_function,
-		"SAY": self._say_function
+		"STORAGE": self._storage_function,
+		"UTILS": self._utils_function,
+		# ----- Inline functions -----
+		"NEWLINE": self._newline_inline
 		}
 		self.tags: Dict[str, Tuple[str, int]] = dict()
-		self.attributes: List[str] = list()
-		temp_text = self._get_text()
+		self._storage_unmodifiable: List[str] = ["attributes"]
+		self.storage: Dict[str, Union[str, int, List[str]]] = {"attributes": []}
+		temp_text = self._get_text() # Getting the story's raw text.
 		self.text: List[str] = list()
 		temp_lines = str()
+		# Processing the raw text, disregarding comments and empty lines and merging function ones.
 		for i in temp_text.splitlines():
 			if i and not i.startswith("# "):
 				if i.startswith("-") and "{{" in i:
@@ -142,13 +155,15 @@ class Story:
 						continue
 					temp_lines += i
 					continue
-				self.text.append(i.strip())
+				self.text.append(i.strip()) # Making sure that there's no padding in the lines.
 		if not self.text:
-			raise StoryError("Story file is empty")
+			raise StoryError("Story file is empty") # Raising an error if the story is empty / all comments.
+		# Checking if the story has any Sub stories, if not it raises an error.
 		if all(findall(r"\[STORY ([a-zA-Z-]+?)\]", i) == [] for i in self.text):
 			raise StoryError("No Story sections found")
 		self.sub_stories: Dict[str, List[str]] = dict()
 		temp_list: List[str] = list()
+		# Marking Sub-stories with their text and setting the Tags' location.
 		for x, i in enumerate(self.text):
 			if sub_story := (findall(r"\[STORY ([a-zA-Z-]+?)\]", i)):
 				if not self.sub_story:
@@ -163,6 +178,7 @@ class Story:
 				if i.startswith("- "):
 					i = "-" + i[2:]
 				tag = i.split(" ", 2)[1]
+				# Raising an error if there's a duplicate Tag name.
 				if tag in self.tags:
 					raise StoryError(f"Duplicate Tag: {tag}")
 				self.tags[tag] = (temp_list[0], len(temp_list)-1)
@@ -170,11 +186,14 @@ class Story:
 			if x+1 == len(self.text):
 				if len(temp_list) >= 2:
 					if sub_story:
+						# Raising an error if there's a duplicate Sub-story name.
 						if sub_story[0] in self.sub_stories:
 							raise StoryError(f"Duplicate Sub-story: {sub_story}")
 					self.sub_stories[temp_list[0]] = temp_list[1:]
 					
-	def _get_text(self) -> str:
+	def _get_text(self) -> str: # The function to get the raw text
+		# Checking if the reference is more than one line long, if so it treats it as the raw text instead
+		# of getting a file with its name.
 		if len(self.reference.splitlines()) > 1:
 			temp_text = self.reference
 		else:
@@ -182,24 +201,27 @@ class Story:
 				temp_text = sf.read()
 		return temp_text
 				
-	def _run_function(self, args: str) -> None:
-		arg_list = args.split(" ", 1)
-		if not arg_list[0] in self.function_dict:
+	def _run_function(self, args: str) -> Any: # The function that runs SUScript functions.
+		arg_list = args.split(" ", 1) # Splitting its args.
+		if not arg_list[0] in self.function_dict: # Checking if the function exists, else raises an error.
 			raise StoryError(f"Unknown function: {arg_list[0]}")
 		func = self.function_dict[arg_list[0]]
-		if func.__code__.co_argcount == 1:
-			if ismethod(func):
-				func()
+		if func.__code__.co_argcount == 1: # Checking if the function has arguments.
+			if ismethod(func): # Checking if its a method or a custom function.
+				ret = func()
 			else:
-				func(self)
-		elif func.__code__.co_argcount == 2:
-			if ismethod(func):
-				func(arg_list[1])
+				ret = func(self)
+		elif func.__code__.co_argcount == 2: # Same thing.
+			if ismethod(func): # Same thing.
+				ret = func(arg_list[1])
 			else:
-				func(self, arg_list[1])
-		else:
+				ret = func(self, arg_list[1])
+		else: # Raising an error if the function takes too few or too many parameters.
 			raise StoryError("Invalid parameters for function: {arg_list[0]}")
-					
+		return ret if ret is not None else ''
+			
+	# ----- Normal Functions -----
+			
 	def _option_function(self, args: str) -> None:
 		option_functions = [i[0].strip() for i in findall(r"\$\$(.+?)(,|$)", args)]
 		for i in option_functions:
@@ -272,10 +294,10 @@ class Story:
 				continue
 			i = i.strip()
 			if i.startswith("!!"):
-				if i[3:] in self.attributes:
+				if i[3:] in self.storage["attributes"]:
 					return
 			else:
-				if i not in self.attributes:
+				if i not in self.storage["attributes"]:
 					return
 		self._run_function(function)
 		
@@ -287,37 +309,171 @@ class Story:
 				continue
 			i = i.strip()
 			if i.startswith("!!"):
-				if i[3:] not in self.attributes:
+				if i[3:] not in self.storage["attributes"]:
 					self._run_function(function)
 			else:
-				if i in self.attributes:
+				if i in self.storage["attributes"]:
 					self._run_function(function)
 		
 	def _addattr_function(self, args: str) -> None:
 		arg_list = split("&&|,| ", args)
 		for arg in arg_list:
 			arg = arg.strip()
-			if arg and arg not in self.attributes:
-				self.attributes.append(arg)
+			if arg and arg not in self.storage["attributes"]:
+				self.storage["attributes"].append(arg)
 			
 	def _delattr_function(self, args: str) -> None:
 		arg_list = split("&&|,| ", args)
 		for arg in arg_list:
 			arg = arg.strip()
-			if arg and arg in self.attributes:
-				self.attributes.remove(arg)
+			if arg and arg in self.storage["attributes"]:
+				self.storage["attributes"].remove(arg)
 				
 	def _random_function(self, args: str) -> None:
 		funcs = args.split(",")
 		self._run_function(choice(funcs).strip())
 		
-	def _say_function(self, args: str) -> None:
-		self.io(args)
+	def _storage_function(self, args: str) -> Any:
+		sub_func, args = args.split(" ", 1)
+		if sub_func == "SET":
+			label, value = args.split(" ", 1)
+			if value.startswith("$$"):
+				value = self._run_function(value[2:])
+			self.storage[label.strip()] = int(value) if str(value).isdigit() else value
+		elif sub_func == "GET":
+			if args in self.storage:
+				return self.storage[args.strip()]
+			return 0
+				
+	def _utils_function(self, args: str) -> Any:
+		sub_func, args = args.split(" ", 1)
+		if sub_func == "SAY":
+			self.io(args)
+		elif sub_func == "IS":
+			# There must be a better way to do this.
+			arg_list = args.split("$$")
+			func = arg_list[-1]
+			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			else:
+				var1 = int(var1) if var1.isdigit() else var1
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			else:
+				var2 = int(var2) if var2.isdigit() else var2
+			if var1 == var2:
+				self._run_function(func)
+		elif sub_func == "ISNOT":
+			arg_list = args.split("$$")
+			func = arg_list[-1]
+			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			else:
+				var1 = int(var1) if var1.isdigit() else var1
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			else:
+				var2 = int(var2) if var2.isdigit() else var2
+			if var1 != var2:
+				self._run_function(func)
+		elif sub_func == "GREATER":
+			arg_list = args.split("$$")
+			func = arg_list[-1]
+			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in comparison")
+			if int(var1) > int(var2):
+				self._run_function(func)
+		elif sub_func == "SMALLER":
+			arg_list = args.split("$$")
+			func = arg_list[-1]
+			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in comparison")
+			if int(var1) < int(var2):
+				self._run_function(func)
+		elif sub_func == "ADD":
+			var1, var2 = args.split(",", 1)
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in operations")
+			return int(var1)+int(var2)
+		elif sub_func in ["SUB", "SUBTRACT"]:
+			var1, var2 = args.split(",", 1)
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in operations")
+			return int(var1)-int(var2)
+		elif sub_func in ["MULT", "MULTIPLY"]:
+			var1, var2 = args.split(",", 1)
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in operations")
+			return round(int(var1)*int(var2))
+		elif sub_func in ["DIV", "DIVIDE"]:
+			var1, var2 = args.split(",", 1)
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in operations")
+			return round(int(var1)/int(var2))
+		elif sub_func in ["RAND", "RAND"]:
+			var1, var2 = args.split(",", 1)
+			var1, var2 = var1.strip(), var2.strip()
+			if var1.split()[0] in self.function_dict:
+				var1 = self._run_function(var1)
+			if var2.split()[0] in self.function_dict:
+				var2 = self._run_function(var2)
+			if not str(var1).isdigit() or not str(var2).isdigit():
+				raise StoryError("Both values must be number in random ranges")
+			return randrange(int(var1), int(var2))
+		if sub_func == "INPUT":
+			res =  self.io(args+"\n> ")
+			return int(res) if res.isdigit() else res
+		
+	# ----- Inline Functions -----
+	
+	def _newline_inline(self) -> str:
+		return "\n"
 			
 	def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
 		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
-			self.io(curr_line)
+			inlines = findall("{{.+?}}", curr_line)
+			if inlines:
+				curr_line = sub("{{.+?}}", "{}", curr_line)
+				self.io(curr_line.format(*[self._run_function(i[2:-2]) for i in inlines]))
+			else:
+				self.io(curr_line)
 			self._stay_function()
 		else:
 				temp_line = self.line
@@ -343,7 +499,8 @@ class Story:
 		if answer.lower().strip() in ["yes", "y"]:
 			self.line = 0
 			self.sub_story = list(self.sub_stories.keys())[0]
-			self.attributes = list()
+			self.storage = {"attributes": []}
+			system('cls' if name=='nt' else 'clear')
 		else:
 			self.io(error="Alright, See you next time!")
 			sleep(3)
