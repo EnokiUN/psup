@@ -253,8 +253,9 @@ class Story:
 	def _stay_function(self) -> None:
 		if self.line+1 >= len(self.sub_stories[self.sub_story]):
 			sub_stories = list(self.sub_stories.keys())
-			if story_index := (sub_stories.index(self.sub_story))+1 >= len(sub_stories):
-				self._end_function()
+			story_index = sub_stories.index(self.sub_story)
+			if story_index >= len(sub_stories):
+				self.end()
 			self.sub_story = sub_stories[story_index+1]
 			self.line = 0
 		else:
