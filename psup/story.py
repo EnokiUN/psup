@@ -507,7 +507,7 @@ class Story:
 			quit()
 
 	def io_function(self, function: Callable[[str, Union[str, Iterable[str]]], str]) -> Callable[[str, Union[str, Iterable[str]]], str]:
-		"""The method used to set the :class:`Story` Object's I/O function to the corresponding one.
+		"""The method used to set the :class:`Story` Object's I/O function to the decorated one.
 		
 		This method is meant to be used as a decorator.
 		
@@ -515,6 +515,28 @@ class Story:
 		
 		"""
 		self.io = function
+		return function
+
+	def start_function(self, function: Callable[[], None]) -> Callable[[], None]:
+		"""The method used to set the :class:`Story` Object's start function to the decorated one.
+		
+		This method is meant to be used as a decorator.
+		
+		.. versionadded:: 0.3.4
+		
+		"""
+		self.start = function
+		return function
+		
+	def end_function(self, function: Callable[[], None]) -> Callable[[], None]:
+		"""The method used to set the :class:`Story` Object's end function to the decorated one.
+		
+		This method is meant to be used as a decorator.
+		
+		.. versionadded:: 0.3.4
+		
+		"""
+		self.end = function
 		return function
 
 	def custom_function(self, name: str) -> Callable[..., Any]:
