@@ -25,14 +25,14 @@ SOFTWARE.
 from re import findall, split, sub
 from sys import stdout
 from os import system, name
-from time import sleep
+from asyncio import run, sleep
 from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
 from random import choice, randrange
-from .storyerror import StoryError
+from storyerror import StoryError
 
-def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
+async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
 	
 	.. versionadded:: 0.1.1
@@ -57,7 +57,7 @@ def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	for x in text:
 		print(x, end='')
 		stdout.flush()
-		sleep(uniform(0, 0.01))
+		await sleep(uniform(0, 0.01))
 	return input(out)
 
 class Story:
@@ -201,86 +201,87 @@ class Story:
 				temp_text = sf.read()
 		return temp_text
 				
-	def _run_function(self, args: str) -> Any: # The function that runs SUScript functions.
+	async def _run_function(self, args: str) -> Any: # The function that runs SUScript functions.
 		arg_list = args.split(" ", 1) # Splitting its args.
 		if not arg_list[0] in self.function_dict: # Checking if the function exists, else raises an error.
 			raise StoryError(f"Unknown function: {arg_list[0]}")
 		func = self.function_dict[arg_list[0]]
 		if func.__code__.co_argcount == 1: # Checking if the function has arguments.
 			if ismethod(func): # Checking if its a method or a custom function.
-				ret = func()
+				ret = await func()
 			else:
-				ret = func(self)
+				ret = await func(self)
 		elif func.__code__.co_argcount == 2: # Same thing.
 			if ismethod(func): # Same thing.
-				ret = func(arg_list[1])
+				ret = await func(arg_list[1])
 			else:
-				ret = func(self, arg_list[1])
+				ret = await func(self, arg_list[1])
 		else: # Raising an error if the function takes too few or too many parameters.
 			raise StoryError("Invalid parameters for function: {arg_list[0]}")
 		return ret if ret is not None else ''
 			
 	# ----- Normal Functions -----
 			
-	def _option_function(self, args: str) -> None:
+	async def _option_function(self, args: str) -> None:
 		option_functions = [i[0].strip() for i in findall(r"\$\$(.+?)(,|$)", args)]
 		for i in option_functions:
 				if i.split()[0] not in self.function_dict:
 					raise StoryError(f"Invalid function {i.split()[0]} in Option")
 		option_titles = [i[1].strip() for i in findall(r"(,|^)(.+?)\$\$", args)]
 		while True:
-			option = self.io(options=option_titles).strip()
+			option = await self.io(options=option_titles)
+			option = option.strip()
 			if option.isdigit():
 				if int(option) > len(option_titles):
-					self.io(error="Invalid option, try again")
+					await self.io(error="Invalid option, try again")
 					continue
 				option_function = option_functions[int(option)-1]
 			else:
 				if not option in option_titles:
-					self.io(error="Invalid option, try again")
+					await self.io(error="Invalid option, try again")
 					continue
 				option_function = option_functions[option_titles.index(option)]
-			self._run_function(option_function)
+			await self._run_function(option_function)
 			break
 			
-	def _jump_function(self, args: str) -> None:
+	async def _jump_function(self, args: str) -> None:
 		if args.strip() not in self.tags:
 			raise StoryError(f"Tag {args.strip()} doesn't exist.")
 		tag = self.tags[args.strip()]
 		self.sub_story = tag[0]
 		self.line = tag[1]
 		
-	def _stay_function(self) -> None:
+	async def _stay_function(self) -> None:
 		if self.line+1 >= len(self.sub_stories[self.sub_story]):
 			sub_stories = list(self.sub_stories.keys())
 			story_index = sub_stories.index(self.sub_story)
 			if story_index+1 >= len(sub_stories):
-				self.end()
+				await self.end()
 			else:
 				self.sub_story = sub_stories[story_index+1]
 				self.line = 0
 		else:
 			self.line += 1
 		
-	def _story_function(self, args: str) -> None:
+	async def _story_function(self, args: str) -> None:
 		if args.strip() not in self.sub_stories:
 			raise StoryError(f"Sub-story {args.strip()} doesn't exist.")
 		self.sub_story = args.strip()
 		self.line = 0
 		
-	def _end_function(self) -> None:
-		self.end()
+	async def _end_function(self) -> None:
+		await self.end()
 		
-	def _skip_function(self, args: str) -> None:
+	async def _skip_function(self, args: str) -> None:
 		if not args.strip().isdigit():
 			raise StoryError(f"SKIP argument should be a number not {args.strip}")
 		lines = int(args.strip())
 		if lines <= 0:
 			raise StoryError("Amount of lines to skip must be positive.")
 		for _ in range(lines+1):
-			self._stay_function()
+			await self._stay_function()
 			
-	def _return_function(self, args: str) -> None:
+	async def _return_function(self, args: str) -> None:
 		if not args.strip().isdigit():
 			raise StoryError(F"RETURN argument should be a number not {args.strip}")
 		lines = int(args.strip())
@@ -288,7 +289,7 @@ class Story:
 			raise StoryError("Amount of lines to return must be positive.")
 		self.line = max(0, self.line-lines)
 		
-	def _checkattr_function(self, args: str) -> None:
+	async def _checkattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
 		attr_list = split("&&|,| ", attr)
 		for i in attr_list:
@@ -301,9 +302,9 @@ class Story:
 			else:
 				if i not in self.storage["attributes"]:
 					return
-		self._run_function(function)
+		await self._run_function(function)
 		
-	def _checkanyattr_function(self, args: str) -> None:
+	async def _checkanyattr_function(self, args: str) -> None:
 		attr, function = args.split("$$", 1)
 		attr_list = split("&&|,| ", attr)
 		for i in attr_list:
@@ -312,45 +313,45 @@ class Story:
 			i = i.strip()
 			if i.startswith("!!"):
 				if i[3:] not in self.storage["attributes"]:
-					self._run_function(function)
+					await self._run_function(function)
 			else:
 				if i in self.storage["attributes"]:
-					self._run_function(function)
+					await self._run_function(function)
 		
-	def _addattr_function(self, args: str) -> None:
+	async def _addattr_function(self, args: str) -> None:
 		arg_list = split("&&|,| ", args)
 		for arg in arg_list:
 			arg = arg.strip()
 			if arg and arg not in self.storage["attributes"]:
 				self.storage["attributes"].append(arg)
 			
-	def _delattr_function(self, args: str) -> None:
+	async def _delattr_function(self, args: str) -> None:
 		arg_list = split("&&|,| ", args)
 		for arg in arg_list:
 			arg = arg.strip()
 			if arg and arg in self.storage["attributes"]:
 				self.storage["attributes"].remove(arg)
 				
-	def _random_function(self, args: str) -> None:
+	async def _random_function(self, args: str) -> None:
 		funcs = args.split(",")
-		self._run_function(choice(funcs).strip())
+		await self._run_function(choice(funcs).strip())
 		
-	def _storage_function(self, args: str) -> Any:
+	async def _storage_function(self, args: str) -> Any:
 		sub_func, args = args.split(" ", 1)
 		if sub_func == "SET":
 			label, value = args.split(" ", 1)
 			if value.startswith("$$"):
-				value = self._run_function(value[2:])
+				value = await self._run_function(value[2:])
 			self.storage[label.strip()] = int(value) if str(value).isdigit() else value
 		elif sub_func == "GET":
 			if args in self.storage:
 				return self.storage[args.strip()]
 			return 0
 				
-	def _utils_function(self, args: str) -> Any:
+	async def _utils_function(self, args: str) -> Any:
 		sub_func, args = args.split(" ", 1)
 		if sub_func == "SAY":
-			self.io(args)
+			await self.io(args)
 		elif sub_func == "IS":
 			# There must be a better way to do this.
 			arg_list = args.split("$$")
@@ -358,63 +359,63 @@ class Story:
 			var1, var2 = "".join(arg_list[:-1]).split(",")
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			else:
 				var1 = int(var1) if var1.isdigit() else var1
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			else:
 				var2 = int(var2) if var2.isdigit() else var2
 			if var1 == var2:
-				self._run_function(func)
+				await self._run_function(func)
 		elif sub_func == "ISNOT":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
 			var1, var2 = "".join(arg_list[:-1]).split(",")
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			else:
 				var1 = int(var1) if var1.isdigit() else var1
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			else:
 				var2 = int(var2) if var2.isdigit() else var2
 			if var1 != var2:
-				self._run_function(func)
+				await self._run_function(func)
 		elif sub_func == "GREATER":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
 			var1, var2 = "".join(arg_list[:-1]).split(",")
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in comparison")
 			if int(var1) > int(var2):
-				self._run_function(func)
+				await self._run_function(func)
 		elif sub_func == "SMALLER":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
 			var1, var2 = "".join(arg_list[:-1]).split(",")
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in comparison")
 			if int(var1) < int(var2):
-				self._run_function(func)
+				await self._run_function(func)
 		elif sub_func == "ADD":
 			var1, var2 = args.split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in operations")
 			return int(var1)+int(var2)
@@ -422,9 +423,9 @@ class Story:
 			var1, var2 = args.split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in operations")
 			return int(var1)-int(var2)
@@ -432,9 +433,9 @@ class Story:
 			var1, var2 = args.split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in operations")
 			return round(int(var1)*int(var2))
@@ -442,9 +443,9 @@ class Story:
 			var1, var2 = args.split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in operations")
 			return round(int(var1)/int(var2))
@@ -452,59 +453,65 @@ class Story:
 			var1, var2 = args.split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
-				var1 = self._run_function(var1)
+				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
-				var2 = self._run_function(var2)
+				var2 = await self._run_function(var2)
 			if not str(var1).isdigit() or not str(var2).isdigit():
 				raise StoryError("Both values must be number in random ranges")
 			return randrange(int(var1), int(var2))
 		if sub_func == "INPUT":
-			res =  self.io(args+"\n> ")
+			res =  await self.io(args+"\n> ")
 			return int(res) if res.isdigit() else res
 		
 	# ----- Inline Functions -----
 	
-	def _newline_inline(self) -> str:
+	async def _newline_inline(self) -> str:
 		return "\n"
 			
-	def _run_line(self) -> None:
+	async def _run_line(self) -> None:
 		curr_line = self.sub_stories[self.sub_story][self.line]
 		if not any((curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict):
 			inlines = findall("{{.+?}}", curr_line)
 			if inlines:
 				curr_line = sub("{{.+?}}", "{}", curr_line)
-				self.io(curr_line.format(*[self._run_function(i[2:-2]) for i in inlines]))
+				await self.io(curr_line.format(*[self._run_function(i[2:-2]) for i in inlines]))
 			else:
-				self.io(curr_line)
-			self._stay_function()
+				await self.io(curr_line)
+			await self._stay_function()
 		else:
 				temp_line = self.line
 				if curr_line.startswith("- "):
 					curr_line = "-" + curr_line[2:]
-				self._run_function(curr_line[1:])
+				await self._run_function(curr_line[1:])
 				if temp_line == self.line:
-					self._stay_function()
+					await self._stay_function()
 				
 	def start(self) -> None:
+		"""The non asynchronous method called to start the story / game of the corresponding :class:`Story` object
+
+		"""
+		run(self.astart())
+				
+	async def astart(self) -> None:
 		"""The method called to start the story / game of the corresponding :class:`Story` object
 
 		"""
 		while True:
-				self._run_line()
+				await self._run_line()
 				
-	def end(self) -> None:
+	async def end(self) -> None:
 		"""The method called when the :class:`Story` object reaches an end by either hitting
 		the end of the sus file or the END function being called.
 
 		"""
-		answer = self.io("\n\n====================\nProgram ended, do you want to play again?\n> ")
+		answer = await self.io("\n\n====================\nProgram ended, do you want to play again?\n> ")
 		if answer.lower().strip() in ["yes", "y"]:
 			self.line = 0
 			self.sub_story = list(self.sub_stories.keys())[0]
 			self.storage = {"attributes": []}
 			system('cls' if name=='nt' else 'clear')
 		else:
-			self.io(error="Alright, See you next time!")
+			await self.io(error="Alright, See you next time!")
 			sleep(3)
 			quit()
 
@@ -527,7 +534,7 @@ class Story:
 		.. versionadded:: 0.3.4
 		
 		"""
-		self.start = function
+		self.astart = function
 		return function
 		
 	def end_function(self, function: Callable[[], None]) -> Callable[[], None]:
