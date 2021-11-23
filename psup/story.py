@@ -256,8 +256,9 @@ class Story:
 			story_index = sub_stories.index(self.sub_story)
 			if story_index+1 >= len(sub_stories):
 				self.end()
-			self.sub_story = sub_stories[story_index+1]
-			self.line = 0
+			else:
+				self.sub_story = sub_stories[story_index+1]
+				self.line = 0
 		else:
 			self.line += 1
 		
