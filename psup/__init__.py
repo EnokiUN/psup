@@ -35,7 +35,7 @@ __title__ = 'PSUP'
 __author__ = 'EnokiUN'
 __license__ = 'MIT'
 __copyright__ = 'Copyright (c) 2021-present EnokiUN'
-__version__ = '0.3.7.1'
+__version__ = '0.3.7.2'
 
 __all__ = ["Story", "StoryError", "OnlineStory"]
 
