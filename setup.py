@@ -9,6 +9,10 @@ with open('psup/__init__.py') as f:
     else:
         raise RuntimeError('version is not set')
 
+requirements = []
+with open('requirements.txt') as f:
+  requirements = f.read().splitlines()    
+        
 if version.endswith(('a', 'b', 'rc')):
     # append version identifier based on commit count
     try:
@@ -43,8 +47,9 @@ setup(name='psup',
       },
       download_url='https://github.com/EnokiUN/psup/archive/refs/tags/Release-0-1-1-5a.tar.gz',
       version=version,
-      license='MIT',
+      license='MIT',  
       packages=packages,
+      install_requires=requirements,
       entry_points ={
             'console_scripts': [
                 'psup = psup.__main__:main'
