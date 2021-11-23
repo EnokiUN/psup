@@ -30,7 +30,7 @@ from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
 from random import choice, randrange
-from storyerror import StoryError
+from .storyerror import StoryError
 
 async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
