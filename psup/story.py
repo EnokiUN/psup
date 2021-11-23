@@ -87,6 +87,8 @@ class Story:
 		:class:`Story` Object.
 	text: List[:class:`str`]
 		The List containing every line of text in the sus file that isn't a comment / empty line
+	ended: :class:`tuple`
+		A tuple representing if the story has ended or not.
 		
 	Example
 	-----------
@@ -134,6 +136,7 @@ class Story:
 		self.tags: Dict[str, Tuple[str, int]] = dict()
 		self._storage_unmodifiable: List[str] = ["attributes"]
 		self.storage: Dict[str, Union[str, int, List[str]]] = {"attributes": []}
+		self.ended = False
 		temp_text = self._get_text() # Getting the story's raw text.
 		self.text: List[str] = list()
 		temp_lines = str()
@@ -496,7 +499,7 @@ class Story:
 		"""The method called to start the story / game of the corresponding :class:`Story` object
 
 		"""
-		while True:
+		while not self.ended:
 				await self._run_line()
 				
 	async def end(self) -> None:
@@ -513,7 +516,7 @@ class Story:
 		else:
 			await self.io(error="Alright, See you next time!")
 			sleep(3)
-			quit()
+			self.ended = True
 
 	def io_function(self, function: Callable[[str, Union[str, Iterable[str]]], str]) -> Callable[[str, Union[str, Iterable[str]]], str]:
 		"""The method used to set the :class:`Story` Object's I/O function to the decorated one.
