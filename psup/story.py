@@ -477,7 +477,7 @@ class Story:
 			inlines = findall("{{.+?}}", curr_line)
 			if inlines:
 				curr_line = sub("{{.+?}}", "{}", curr_line)
-				await self.io(curr_line.format(*[self._run_function(i[2:-2]) for i in inlines]))
+				await self.io(curr_line.format(*[await self._run_function(i[2:-2]) for i in inlines]))
 			else:
 				await self.io(curr_line)
 			await self._stay_function()
