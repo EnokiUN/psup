@@ -1,3 +1,11 @@
+.. image:: https://discord.com/api/guilds/843825546719002645/embed.png
+
+   :target: https://discord.gg/DTdy5ks4j3
+
+   :alt: Discord server invite
+
+
+
 .. image:: /assets/og-logo.png
     :width: 200
     :alt: logo
