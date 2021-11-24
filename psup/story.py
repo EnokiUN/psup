@@ -87,8 +87,8 @@ class Story:
 		:class:`Story` Object.
 	text: List[:class:`str`]
 		The List containing every line of text in the sus file that isn't a comment / empty line
-	ended: :class:`tuple`
-		A tuple representing if the story has ended or not.
+	ended: :class:`bool`
+		A Boolean representing if the story has ended or not.
 		
 	Example
 	-----------
