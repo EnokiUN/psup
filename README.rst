@@ -1,4 +1,4 @@
-.. image:: https://discord.com/api/guilds/843825546719002645/embed.png
+.. image:: https://discord.com/api/guilds/843825546719002645/widget.png?style=shield
 
    :target: https://discord.gg/DTdy5ks4j3
 
