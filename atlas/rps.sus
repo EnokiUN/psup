@@ -10,9 +10,9 @@ ADDATTR erock,
 ADDATTR epaper,
 ADDATTR escissors
 }}
--CHECKATTR erock $$SAY I chose rock.
--CHECKATTR epaper $$SAY I chose paper.
--CHECKATTR escissors $$SAY I chose scissors.
+-CHECKATTR erock $$UTILS SAY I chose rock.
+-CHECKATTR epaper $$UTILS SAY I chose paper.
+-CHECKATTR escissors $$UTILS SAY I chose scissors.
 -CHECKATTR rock erock $$JUMP tie
 -CHECKATTR paper epaper $$JUMP tie
 -CHECKATTR scissors escissors $$JUMP tie
