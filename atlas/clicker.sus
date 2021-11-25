@@ -1,0 +1,21 @@
+[STORY main]
+- STORAGE SET coins 0
+- STORAGE SET workmax 100
+- STORAGE SET coinlvl 1
+- TAG o
+coins: {{STORAGE GET coins}}{{NEWLINE}}coinlvl: {{STORAGE GET coinlvl}}{{NEWLINE}}workmax: {{STORAGE GET workmax}}
+- OPTION work $$STAY, shop $$SKIP 3, end $$END
+- STORAGE SET coins $$UTILS ADD STORAGE GET coins, UTILS RAND UTILS SUB STORAGE GET workmax, 200, STORAGE GET workmax
+- JUMP o
+what do you want to upgrade 
+- OPTION coins $$STAY
+This will cost {{UTILS MULT STORAGE GET coinlvl, 100}} coins.
+- STORAGE SET pricecomp $$UTILS MULT STORAGE GET coinlvl, 100
+- STORAGE SET pricecomp $$UTILS SUB STORAGE GET pricecomp, 1
+- UTILS GREATER STORAGE GET coins, STORAGE GET pricecomp $$SKIP 2
+You don't have enough tho.... 
+- JUMP o
+- STORAGE SET coins $$UTILS SUB STORAGE GET coins, UTILS MULT STORAGE GET coinlvl, 100
+- STORAGE SET coinlvl $$UTILS ADD STORAGE GET coinlvl, 1
+- STORAGE SET workmax $$UTILS ADD STORAGE GET workmax, 100 
+- JUMP o
