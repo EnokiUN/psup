@@ -5,6 +5,8 @@
 # Made with <3 by Enoki
 # ------------------------------------------------------------
 [STORY main]
+This story is split into multiple chapters, you may choose where you start.
+- OPTION Chapter 0 $$STAY, Chapter 1 $$STORY a1-main
 It was an awful day, rain pouring out of the sky, fog everywhere.
 I couldn't even see anything out of my car which stopped working soon after.
 I had just finished paying it's last installment this week too.
