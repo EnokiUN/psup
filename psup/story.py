@@ -359,7 +359,7 @@ class Story:
 			# There must be a better way to do this.
 			arg_list = args.split("$$")
 			func = arg_list[-1]
-			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = "".join(arg_list[:-1]).split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -374,7 +374,7 @@ class Story:
 		elif sub_func == "ISNOT":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
-			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = "".join(arg_list[:-1]).split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -389,7 +389,7 @@ class Story:
 		elif sub_func == "GREATER":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
-			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = "".join(arg_list[:-1]).split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -402,7 +402,7 @@ class Story:
 		elif sub_func == "SMALLER":
 			arg_list = args.split("$$")
 			func = arg_list[-1]
-			var1, var2 = "".join(arg_list[:-1]).split(",")
+			var1, var2 = "".join(arg_list[:-1]).split(",", 1)
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -420,8 +420,10 @@ class Story:
 				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
 				var2 = await self._run_function(var2)
-			if not str(var1).isdigit() or not str(var2).isdigit():
-				raise StoryError("Both values must be number in operations")
+			if not str(var1).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations")
+			if not str(var2).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations")
 			return int(var1)+int(var2)
 		elif sub_func in ["SUB", "SUBTRACT"]:
 			arg_list = args.split(",")
@@ -431,8 +433,10 @@ class Story:
 				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
 				var2 = await self._run_function(var2)
-			if not str(var1).isdigit() or not str(var2).isdigit():
-				raise StoryError("Both values must be number in operations")
+			if not str(var1).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations")
+			if not str(var2).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations")
 			return int(var1)-int(var2)
 		elif sub_func in ["MULT", "MULTIPLY"]:
 			arg_list = args.split(",")
@@ -442,8 +446,10 @@ class Story:
 				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
 				var2 = await self._run_function(var2)
-			if not str(var1).isdigit() or not str(var2).isdigit():
-				raise StoryError("Both values must be number in operations")
+			if not str(var1).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations")
+			if not str(var2).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations")
 			return round(int(var1)*int(var2))
 		elif sub_func in ["DIV", "DIVIDE"]:
 			arg_list = args.split(",")
@@ -453,8 +459,10 @@ class Story:
 				var1 = await self._run_function(var1)
 			if var2.split()[0] in self.function_dict:
 				var2 = await self._run_function(var2)
-			if not str(var1).isdigit() or not str(var2).isdigit():
-				raise StoryError("Both values must be number in operations")
+			if not str(var1).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations")
+			if not str(var2).isdigit():
+				raise StoryError(f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations")
 			return round(int(var1)/int(var2))
 		elif sub_func in ["RAND", "RAND"]:
 			arg_list = args.split(",")
