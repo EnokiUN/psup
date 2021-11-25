@@ -4,18 +4,42 @@
 - STORAGE SET coinlvl 1
 - TAG o
 coins: {{STORAGE GET coins}}{{NEWLINE}}coinlvl: {{STORAGE GET coinlvl}}{{NEWLINE}}workmax: {{STORAGE GET workmax}}
-- OPTION work $$STAY, shop $$SKIP 3, end $$END
-- STORAGE SET coins $$UTILS ADD STORAGE GET coins, UTILS RAND UTILS SUB STORAGE GET workmax, 200, STORAGE GET workmax
+- OPTION work $$STAY, shop $$STORY shop, gamble $$STORY gamble, end $$END
+
+# --------------- Work Stuff ---------------
+
+- STORAGE SET temp 0
+- STORAGE SET temp $$UTILS SUB STORAGE GET workmax, 100
+- STORAGE SET temp $$UTILS RAND STORAGE GET temp, STORAGE GET workmax
+- STORAGE SET coins $$UTILS ADD STORAGE GET coins, STORAGE GET temp
+You worked and gained {{STORAGE GET temp}} coins!
 - JUMP o
+
+# --------------- Shop Stuff ---------------
+
+[STORY shop]
 what do you want to upgrade 
 - OPTION coins $$STAY
 This will cost {{UTILS MULT STORAGE GET coinlvl, 100}} coins.
-- STORAGE SET pricecomp $$UTILS MULT STORAGE GET coinlvl, 100
-- STORAGE SET pricecomp $$UTILS SUB STORAGE GET pricecomp, 1
-- UTILS GREATER STORAGE GET coins, STORAGE GET pricecomp $$SKIP 2
+- STORAGE SET price $$UTILS MULT STORAGE GET coinlvl, 100
+- UTILS GREATER STORAGE GET coins, $$UTILS SUB STORAGE GET price, 1 $$SKIP 2
 You don't have enough tho.... 
 - JUMP o
-- STORAGE SET coins $$UTILS SUB STORAGE GET coins, UTILS MULT STORAGE GET coinlvl, 100
+- STORAGE SET coins $$UTILS SUB STORAGE GET coins, STORAGE GET price
 - STORAGE SET coinlvl $$UTILS ADD STORAGE GET coinlvl, 1
 - STORAGE SET workmax $$UTILS ADD STORAGE GET workmax, 100 
+- JUMP o
+
+# --------------- Gambling Stuff ---------------
+
+[STORY gamble]
+How much do you want to gamble?
+- OPTION quarter my money $$STORAGE SET mult 4, half my money $$STORAGE SET mult 2, all my money $$STORAGE SET mult 1
+- STORAGE SET temp $$UTILS DIV STORAGE GET coins, STORAGE GET mult
+- RANDOM STAY, SKIP 3
+- STORAGE SET coins $$UTILS ADD STORAGE GET coins, STORAGE GET temp
+You won {{STORAGE GET temp}} coins, lucky.
+- JUMP o
+- STORAGE SET coins $$UTILS SUB STORAGE GET coins, STORAGE GET temp
+You lost {{STORAGE GET temp}} coins, better luck next time.
 - JUMP o
