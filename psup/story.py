@@ -413,7 +413,8 @@ class Story:
 			if int(var1) < int(var2):
 				await self._run_function(func)
 		elif sub_func == "ADD":
-			var1, var2 = args.split(",", 1)
+			arg_list = args.split(",")
+			var1, var2 = ",".join(args[:-1]), args[-1]
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -423,7 +424,8 @@ class Story:
 				raise StoryError("Both values must be number in operations")
 			return int(var1)+int(var2)
 		elif sub_func in ["SUB", "SUBTRACT"]:
-			var1, var2 = args.split(",", 1)
+			arg_list = args.split(",")
+			var1, var2 = ",".join(args[:-1]), args[-1]
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -433,7 +435,8 @@ class Story:
 				raise StoryError("Both values must be number in operations")
 			return int(var1)-int(var2)
 		elif sub_func in ["MULT", "MULTIPLY"]:
-			var1, var2 = args.split(",", 1)
+			arg_list = args.split(",")
+			var1, var2 = ",".join(args[:-1]), args[-1]
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -443,7 +446,8 @@ class Story:
 				raise StoryError("Both values must be number in operations")
 			return round(int(var1)*int(var2))
 		elif sub_func in ["DIV", "DIVIDE"]:
-			var1, var2 = args.split(",", 1)
+			arg_list = args.split(",")
+			var1, var2 = ",".join(args[:-1]), args[-1]
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
@@ -453,7 +457,8 @@ class Story:
 				raise StoryError("Both values must be number in operations")
 			return round(int(var1)/int(var2))
 		elif sub_func in ["RAND", "RAND"]:
-			var1, var2 = args.split(",", 1)
+			arg_list = args.split(",")
+			var1, var2 = ",".join(args[:-1]), args[-1]
 			var1, var2 = var1.strip(), var2.strip()
 			if var1.split()[0] in self.function_dict:
 				var1 = await self._run_function(var1)
