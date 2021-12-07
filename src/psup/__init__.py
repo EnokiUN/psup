@@ -44,6 +44,6 @@ __all__ = [
     "OnlineStory"
 ]
 
-from .story import *
-from .errors import *
-from .onlinestory import *
+from .story import Story
+from .errors import StoryError
+from .onlinestory import OnlineStory
