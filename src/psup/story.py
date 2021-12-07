@@ -166,7 +166,8 @@ class Story:
 		temp_list: List[str] = list()
 		# Marking Sub-stories with their text and setting the Tags' location.
 		for x, i in enumerate(self.text):
-			if sub_story := (findall(r"\[STORY ([a-zA-Z0-9-]+?)\]", i)):
+			sub_story = findall(r"\[STORY ([a-zA-Z0-9-]+?)\]", i)
+			if sub_story:
 				if not self.sub_story:
 					self.sub_story = sub_story[0]
 				if len(temp_list) >= 2:
