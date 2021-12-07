@@ -23,7 +23,7 @@ You can run a story in a minimum of 2 lines of code / 1 terminal command.
 ``psup yourstoryname``
 
 You can also run stories online without installing them or upload your own for others to play.
-You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/psup>`_.
+You can find / upload stories in the `GitHub repo's SUSMon folder <https://github.com/EnokiUN/psup>`_.
 
 .. code-block:: python3
 
@@ -112,7 +112,7 @@ Here's a basic story:
     Jack started to slowly drown but a man helped him get out of the river safely.
    - JUMP hunter
 
-more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
+more examples can be found in the `SUSMon folder <https://github.com/EnokiUN/psup/blob/main/SUSMon/>`_.
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 
