@@ -22,7 +22,7 @@ copyright = '2021, EnokiUN'
 author = 'EnokiUN'
 
 # The full version, including alpha/beta/rc tags
-release = '0.2a'
+release = '0.4.0'
 
 
 # -- General configuration ---------------------------------------------------
@@ -47,7 +47,28 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'default'
+html_theme = 'furo'
+
+# Logo
+html_logo = '../assets/logo.png'
+
+# Favicon
+# html_favicon = '../assets/logo.ico'
+
+# Material theme options (see theme.conf for more information)
+html_theme_options = {
+    'light_css_variables': {
+        'color-brand-primary': '#4C8CBF',
+        'color-brand-content': '#306998',
+        'color-admonition-background': 'blue',
+    },
+    'dark_css_variables': {
+        'color-brand-primary': '#306998',
+        'color-brand-content': '#FFE871',
+        'color-admonition-background': 'yellow',
+    },
+    "sidebar_hide_name": True,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

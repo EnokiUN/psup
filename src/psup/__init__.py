@@ -1,5 +1,7 @@
-"""PSUP, The Python Story Utility Package Module.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""
+PSUP
+~~~~
+The Python Story Utility Package Module.
 
 PSUP helps making stories or games with options, diverging paths, different endings and so on.
 
@@ -42,6 +44,6 @@ __all__ = [
     "OnlineStory"
 ]
 
-from .story import Story
-from .errors import StoryError
-from .onlinestory import OnlineStory
+from .story import *
+from .errors import *
+from .onlinestory import *
