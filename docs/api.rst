@@ -7,20 +7,20 @@ Story
 
 .. currentmodule:: psup
 
-.. attributetable:: psup.story.Story
+.. attributetable:: Story
 
-.. autoclass:: psup.story.Story
+.. autoclass:: Story
    :members:
 
 Online Story
 ------------
 
-.. arrtibutetable:: psup.onlinestory.OnlineStory
+.. arrtibutetable:: OnlineStory
 
-.. autoclass:: psup.onlinestory.OnlineStory
+.. autoclass:: OnlineStory
    :members:
 
 Errors
 ------
 
-.. autoexception:: psup.errors.StoryError
+.. autoexception:: StoryError
