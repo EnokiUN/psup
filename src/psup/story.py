@@ -1,4 +1,5 @@
-"""MIT License
+"""
+MIT License
 
 Copyright (c) 2021-present EnokiUN
 
@@ -19,7 +20,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 """
 
 from re import findall, split, sub
@@ -30,7 +30,7 @@ from random import uniform
 from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
 from inspect import ismethod
 from random import choice, randrange
-from .storyerror import StoryError
+from .errors import StoryError
 
 async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
 	"""The default I/O (input and output) function for the :class:`Story` class
@@ -45,7 +45,6 @@ async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> s
 		The options to be displayed for the user / player to choose one.
 	error: :class:`str`
 		The player /user action relatted error for handling small mistakes like wrong input.
-		
 	"""
 	if "error" in kwargs:
 		print(kwargs["error"])
@@ -61,7 +60,7 @@ async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> s
 	return input(out)
 
 class Story:
-	"""The base class for interpreting sus files.
+	"""The base class for interpreting .sus.
 	
 	..  versionadded:: 0.1.1
 	
@@ -98,7 +97,6 @@ class Story:
 	
 		from psup import Story
 		Story("story").start()
-		
 	"""
 	def __init__(self,
 	reference: str, 

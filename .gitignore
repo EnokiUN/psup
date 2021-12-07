@@ -130,6 +130,7 @@ dmypy.json
 
 # Jetbrains IDE's
 .idea/*
+.vscode/*
 
 # Tests
 test.py

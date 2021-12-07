@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 import re
 
 version = ''
@@ -34,10 +34,6 @@ readme = ''
 with open('README.rst') as f:
     readme = f.read()
 
-packages = [
-    'psup'
-]
-
 setup(name='psup',
       author='EnokiUN',
       url='https://github.com/EnokiUN/psup',
@@ -48,7 +44,8 @@ setup(name='psup',
       download_url='https://github.com/EnokiUN/psup/archive/refs/tags/Release-0-1-1-5a.tar.gz',
       version=version,
       license='MIT',  
-      packages=packages,
+      packages=find_packages(where="src"),
+      package_dir={"": "src"},
       install_requires=requirements,
       entry_points ={
             'console_scripts': [

@@ -3,7 +3,7 @@
     :alt: logo
 
 PSUP, The Python Story Utility Package Module.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. image:: https://discord.com/api/guilds/843825546719002645/embed.png
    :target: https://discord.gg/DTdy5ks4j3
    :alt: Discord server invite
@@ -23,7 +23,7 @@ You can run a story in a minimum of 2 lines of code / 1 terminal command.
 ``psup yourstoryname``
 
 You can also run stories online without installing them or upload your own for others to play.
-You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/psup>`_.
+You can find / upload stories in the `GitHub repo's SUSMon folder <https://github.com/EnokiUN/psup>`_.
 
 .. code-block:: python3
 
@@ -38,9 +38,9 @@ other stuff including the story's script, options, endings, attributes and more 
 designed to be fast and simple with basic syntax that's easy to learn and use for even people
 with little to no programming knowledge and skill allowing anyone to create their own stories.
 
-Doccumentation
+documentation
 --------------
-There is a readthedocs.io doccumentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
+There is a readthedocs.io documentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
 
 Installation:
 -------------
@@ -112,7 +112,7 @@ Here's a basic story:
     Jack started to slowly drown but a man helped him get out of the river safely.
    - JUMP hunter
 
-more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
+more examples can be found in the `SUSMon folder <https://github.com/EnokiUN/psup/blob/main/SUSMon/>`_.
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 

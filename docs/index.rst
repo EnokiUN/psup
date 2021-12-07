@@ -8,7 +8,7 @@
     :alt: logo
 
 Welcome to PSUP's documentation!
-===============================
+================================
 
 .. toctree::
    :maxdepth: 2
@@ -16,14 +16,7 @@ Welcome to PSUP's documentation!
 
    usage/installation
    usage/quickstart
-   usage/atlas
-   doccumentation/psup
-   doccumentation/cli
-   doccumentation/sus
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   usage/SUSMon
+   psup
+   cli
+   sus
