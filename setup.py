@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import re
 
 version = ''
-with open('psup/__init__.py') as f:
+with open('src/psup/__init__.py') as f:
     match = re.search(r'^__version__\s*=\s*[\'"]([^\'"]*)[\'"]', f.read(), re.MULTILINE)
     if match is not None:
         version = match.group(1)
