@@ -7,14 +7,10 @@ assignees: ''
 
 ---
 
-### **Bug Description**
-
-### **Reproduction Steps**
+### **Minimal Reproduction Steps**
 
 ### **Expected Result**
 
 ### **Actual Result**
-
-### **Attachments**
 
 ### **Additional Info**

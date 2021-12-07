@@ -13,7 +13,7 @@ To run a SUScript file from the atlas there are two methods:
 
   ``psup <story-name> -online``.
   
-  for more info on the PSUP CLI check the `CLI doccumentation <doccumentation/cli.html>`_.
+  for more info on the PSUP CLI check the `CLI documentation <cli.html>`_.
 
 * Run it with Python:
   
