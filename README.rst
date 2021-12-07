@@ -1,4 +1,4 @@
-.. image:: /assets/logo.png
+.. image:: https://raw.githubusercontent.com/EnokiUN/psup/main/assets/logo.png
     :width: 200
     :alt: logo
 
@@ -38,7 +38,7 @@ other stuff including the story's script, options, endings, attributes and more 
 designed to be fast and simple with basic syntax that's easy to learn and use for even people
 with little to no programming knowledge and skill allowing anyone to create their own stories.
 
-documentation
+Documentation
 --------------
 There is a readthedocs.io documentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
 
