@@ -17,6 +17,6 @@ Welcome to PSUP's documentation!
    usage/installation
    usage/quickstart
    usage/SUSMon
-   psup
+   api
    cli
    sus
