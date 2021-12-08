@@ -30,8 +30,11 @@ jobs:
       run: |
         mypy *.py */*.py --ignore-missing-imports --strict --warn-unreachable
         
-    - name: run black linter
-      run: | 
-        black ./
-        git add .
-        git push
+  black:
+      name: Black
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: rickstaa/action-black@v1
+          with:
+            black_args: "./"
