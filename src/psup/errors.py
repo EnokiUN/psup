@@ -22,14 +22,15 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
-class StoryError(BaseException):
-	"""The base Exception class for PSUP.
-	
-	.. versionadded:: 0.1.1
-	
-	These exceptions are almost always present because of a syntax error
-	present in your Story Utility Script (SUS) file.
-	"""
-	def __str__(self) -> str:
-		return f"{self.args[0]}, for more info check the the PSUP docs."
 
+class StoryError(BaseException):
+    """The base Exception class for PSUP.
+
+    .. versionadded:: 0.1.1
+
+    These exceptions are almost always present because of a syntax error
+    present in your Story Utility Script (SUS) file.
+    """
+
+    def __str__(self) -> str:
+        return f"{self.args[0]}, for more info check the the PSUP docs."

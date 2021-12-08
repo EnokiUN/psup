@@ -26,17 +26,25 @@ from urllib.request import urlopen
 from .story import Story
 from .errors import StoryError
 
+
 class OnlineStory(Story):
-	"""The class to play stories from the ones existing in the GitHub repository.
-	
-	To get your own story added make a pull request with it to the SUSMon folder.
-	It will get reviewed and pulled if is passes the review.
-	
-	This class inherits from :class:`.Story` and hence shares all the methods and attributes.
-	The only difference is the reference is the file's name from the GitHub repo.
-	"""
-	def _get_text(self) -> str:
-		text = urlopen(f"https://raw.github.com/EnokiUN/psup/master/SUSMon/{self.reference}").read().decode("UTF-8")
-		if len(text.splitlines()) <= 2:
-			raise StoryError(f"Story not found: {self.reference}")
-		return text
+    """The class to play stories from the ones existing in the GitHub repository.
+
+    To get your own story added make a pull request with it to the SUSMon folder.
+    It will get reviewed and pulled if is passes the review.
+
+    This class inherits from :class:`.Story` and hence shares all the methods and attributes.
+    The only difference is the reference is the file's name from the GitHub repo.
+    """
+
+    def _get_text(self) -> str:
+        text = (
+            urlopen(
+                f"https://raw.github.com/EnokiUN/psup/master/SUSMon/{self.reference}"
+            )
+            .read()
+            .decode("UTF-8")
+        )
+        if len(text.splitlines()) <= 2:
+            raise StoryError(f"Story not found: {self.reference}")
+        return text
