@@ -22,10 +22,16 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install base deps
       run: |
-        python -m pip install pyflakes mypy
+        python -m pip install pyflakes mypy black
     - name: run pyflakes before running expensive tests
       run: |
         pyflakes .
     - name: run mypy type checking
       run: |
         mypy *.py */*.py --ignore-missing-imports --strict --warn-unreachable
+        
+    - name: run black linter
+      run: | 
+        black ./
+        git add .
+        git push
