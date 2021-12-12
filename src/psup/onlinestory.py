@@ -23,8 +23,9 @@ SOFTWARE.
 """
 
 from urllib.request import urlopen
-from .story import Story
+
 from .errors import StoryError
+from .story import Story
 
 
 class OnlineStory(Story):

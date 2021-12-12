@@ -21,10 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-from .story import Story
-from .onlinestory import OnlineStory
 from argparse import ArgumentParser
-from os import system, name
+from os import name, system
+
+from .onlinestory import OnlineStory
+from .story import Story
 
 
 def main() -> None:

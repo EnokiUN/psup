@@ -40,6 +40,6 @@ __version__ = "0.4.0"
 
 __all__ = ["Story", "StoryError", "OnlineStory"]
 
-from .story import Story
 from .errors import StoryError
 from .onlinestory import OnlineStory
+from .story import Story

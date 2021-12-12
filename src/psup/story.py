@@ -22,14 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
 
+from asyncio import run, sleep
+from inspect import ismethod
+from os import name, system
+from random import choice, randrange, uniform
 from re import findall, split, sub
 from sys import stdout
-from os import system, name
-from asyncio import run, sleep
-from random import uniform
-from typing import Callable, List, Any, Dict, Union, Iterable, Tuple
-from inspect import ismethod
-from random import choice, randrange
+from typing import Any, Callable, Dict, Iterable, List, Tuple, Union
+
 from .errors import StoryError
 
 
