@@ -33,4 +33,4 @@ jobs:
           git pull
           git add .
           git diff-index --quiet HEAD || git commit -m "Automatic Linting Of The Code"
-          git push origin master
+          git push origin main
