@@ -42,6 +42,12 @@ readme = ""
 with open("README.rst") as f:
     readme = f.read()
 
+extra_requirements = {
+    "speed": [
+        "uvloop>=0.16.0"
+    ]
+}
+    
 setup(
     name="psup",
     author="EnokiUN",
@@ -56,6 +62,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=requirements,
+    extra_requires=extra_requirements
     entry_points={"console_scripts": ["psup = psup.__main__:main"]},
     description="A simple library for making complex stories and games.",
     long_description=readme,
