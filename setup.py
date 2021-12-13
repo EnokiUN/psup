@@ -62,7 +62,7 @@ setup(
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     install_requires=requirements,
-    extra_requires=extra_requirements
+    extra_requires=extra_requirements,
     description="A simple library for making complex stories and games.",
     long_description=readme,
     long_description_content_type="text/x-rst",
