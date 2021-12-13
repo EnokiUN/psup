@@ -63,7 +63,6 @@ setup(
     package_dir={"": "src"},
     install_requires=requirements,
     extra_requires=extra_requirements
-    entry_points={"console_scripts": ["psup = psup.__main__:main"]},
     description="A simple library for making complex stories and games.",
     long_description=readme,
     long_description_content_type="text/x-rst",
@@ -77,6 +76,8 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Internet",
         "Topic :: Software Development :: Libraries",
         "Topic :: Utilities",
