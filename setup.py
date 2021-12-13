@@ -42,12 +42,8 @@ readme = ""
 with open("README.rst") as f:
     readme = f.read()
 
-extra_requirements = {
-    "speed": [
-        "uvloop>=0.16.0"
-    ]
-}
-    
+extra_requirements = {"speed": ["uvloop>=0.16.0"]}
+
 setup(
     name="psup",
     author="EnokiUN",
