@@ -410,7 +410,7 @@ class Story:
             if var2.split()[0] in self.function_dict:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit() or not str(var2).isdigit():
-                raise StoryError("Both values must be number in comparison")
+                raise StoryError("Both values must be numbers in comparison")
             if int(var1) > int(var2):
                 await self._run_function(func)
         elif sub_func == "SMALLER":
@@ -423,7 +423,7 @@ class Story:
             if var2.split()[0] in self.function_dict:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit() or not str(var2).isdigit():
-                raise StoryError("Both values must be number in comparison")
+                raise StoryError("Both values must be numbers in comparison")
             if int(var1) < int(var2):
                 await self._run_function(func)
         elif sub_func == "ADD":
@@ -436,11 +436,11 @@ class Story:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 1: {var1}. Both values must be numbers in operations"
                 )
             if not str(var2).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 2: {var2}. Both values must be numbers in operations"
                 )
             return int(var1) + int(var2)
         elif sub_func in ["SUB", "SUBTRACT"]:
@@ -453,11 +453,11 @@ class Story:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 1: {var1}. Both values must be numbers in operations"
                 )
             if not str(var2).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 2: {var2}. Both values must be numbers in operations"
                 )
             return int(var1) - int(var2)
         elif sub_func in ["MULT", "MULTIPLY"]:
@@ -470,11 +470,11 @@ class Story:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 1: {var1}. Both values must be numbers in operations"
                 )
             if not str(var2).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 2: {var2}. Both values must be numbers in operations"
                 )
             return round(int(var1) * int(var2))
         elif sub_func in ["DIV", "DIVIDE"]:
@@ -487,11 +487,11 @@ class Story:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 1: {var1}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 1: {var1}. Both values must be numbers in operations"
                 )
             if not str(var2).isdigit():
                 raise StoryError(
-                    f"Error in {sub_func}, var 2: {var2}. Both values must be number in operations"
+                    f"Error in {sub_func}, var 2: {var2}. Both values must be numbers in operations"
                 )
             return round(int(var1) / int(var2))
         elif sub_func in ["RAND", "RAND"]:
@@ -503,7 +503,7 @@ class Story:
             if var2.split()[0] in self.function_dict:
                 var2 = await self._run_function(var2)
             if not str(var1).isdigit() or not str(var2).isdigit():
-                raise StoryError("Both values must be number in random ranges")
+                raise StoryError("Both values must be numbers in random ranges")
             return randrange(int(var1), int(var2))
         if sub_func == "INPUT":
             res = await self.io(args + "\n> ")
