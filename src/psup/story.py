@@ -83,7 +83,7 @@ class Story:
     sub_stories:  Dict[:class:`str`, List[:str:`]]
         A dictionary which has a list of Sub-stories and their lines.
     functions:  Dict[:class:`str`, List[:str:`]]
-        A dictionary which has a list of functions and their lines.  
+        A dictionary which has a list of functions and their lines.
     function_dict: Dict[:class:`str`, Callable[[Union[:class:`str`, None]], None]]
             The Dictionary that has the pairs of all function names and their corresponding python functions.
     tags: Dict[:class:`str`, Itterable[:class:`str`, :class:`int`]]
@@ -197,7 +197,9 @@ class Story:
                         self.sub_story = sub_story[1]
                 if len(temp_list) >= 2:
                     if sub_story[0] in self.sub_stories:
-                        raise StoryError(f"Duplicate {'Sub-story' if sub_story[0] == 'STORY' else 'Function'}: {sub_story}")
+                        raise StoryError(
+                            f"Duplicate {'Sub-story' if sub_story[0] == 'STORY' else 'Function'}: {sub_story}"
+                        )
                 temp_list = [sub_story[0], sub_story[1]]
                 continue
             if i.startswith(("-TAG", "- TAG")):
@@ -215,7 +217,7 @@ class Story:
             else:
                 self.functions[temp_list[1]] = temp_list[2:]
             temp_list.clear()
-            
+
     def _get_text(self) -> str:  # The function to get the raw text
         # Checking if the reference is more than one line long, if so it treats it as the raw text instead
         # of getting a file with its name.
@@ -531,8 +533,10 @@ class Story:
     async def _newline_inline(self) -> str:
         return "\n"
 
-    async def _run_line(self, line: str=None) -> None:
-        curr_line = self.sub_stories[self.sub_story][self.line] if line is None else line
+    async def _run_line(self, line: str = None) -> None:
+        curr_line = (
+            self.sub_stories[self.sub_story][self.line] if line is None else line
+        )
         if not any(
             (curr_line.startswith((f"-{i}", f"- {i}"))) for i in self.function_dict
         ):
@@ -540,9 +544,7 @@ class Story:
             if inlines:
                 curr_line = sub("{{.+?}}", "{}", curr_line)
                 await self.io(
-                    curr_line.format(
-                        *[await self._run(i[2:-2]) for i in inlines]
-                    )
+                    curr_line.format(*[await self._run(i[2:-2]) for i in inlines])
                 )
             else:
                 await self.io(curr_line)
