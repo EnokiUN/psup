@@ -3,12 +3,11 @@ Welcome to the SUSScript Guide!
 
 This will teach the full SUSScript syntax and highlighting.
 
-- JUMP o
 
 # Sub-Storys
 
 [STORY sub-storys]
-Sub-stories are a easy and convinient way to seperate your SUS file’s components to smaller parts to be easier to work with.
+Sub-stories are a easy and convinient way to seperate your SUS file's components to smaller parts to be easier to work with.
 
 They also act as anchor points to navigate while running the SUS file.
 
@@ -16,7 +15,6 @@ To make a Sub-Story simply type: [STORY sub-story-name]
 
 To jump to a story file use the STORY function.
 
-- JUMP o
 
 # Tags
 
@@ -25,7 +23,6 @@ Tags are an easy way to navigate your SUS file as they act as Sub-story dependan
 
 To create a tag type: -TAG <tag-name>
 
-- JUMP o
 
 # Attributes
 
@@ -37,7 +34,6 @@ Attributes can be used for alot of stuff ranging from checking if the player has
 
 Attributes have a variety of functions ranging from ADDATTR and DELATTR to CHECKATTR and CHECKANYATTR which are used to make stuff with them.
 
-- JUMP o
 
 # Functions
 
@@ -57,7 +53,6 @@ For this the function must be at the start of the line.
 
 Anything after it in the same line will be treated as it’s arguments.
 
-- JUMP o
 
 # Syntax
 [STORY syntax]
