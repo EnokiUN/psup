@@ -24,7 +24,7 @@ SOFTWARE.
 
 from asyncio import run, sleep
 from inspect import ismethod
-from os import linesep, name, system
+from os import name, system
 from random import choice, randrange, uniform
 from re import findall, split, sub
 from sys import stdout
