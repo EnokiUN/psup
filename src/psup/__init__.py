@@ -38,8 +38,8 @@ __license__ = "MIT"
 __copyright__ = "Copyright (c) 2021-present EnokiUN"
 __version__ = "0.4.0-rc1"
 
-__all__ = ["Story", "StoryError", "OnlineStory"]
-
 from .errors import StoryError
 from .onlinestory import OnlineStory
 from .story import Story
+
+__all__ = ["Story", "StoryError", "OnlineStory"]
