@@ -10,10 +10,6 @@ with open("src/psup/__init__.py") as f:
     else:
         raise RuntimeError("version is not set")
 
-requirements = []
-with open("requirements.txt") as f:
-    requirements = f.read().splitlines()
-
 if version.endswith(("a", "b", "rc")):
     # append version identifier based on commit count
     try:
@@ -57,7 +53,6 @@ setup(
     license="MIT",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
-    install_requires=requirements,
     extra_requires=extra_requirements,
     description="A simple library for making complex stories and games.",
     long_description=readme,
