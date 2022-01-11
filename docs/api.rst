@@ -1,9 +1,11 @@
+-------------
 API Reference
-=============
+-------------
+
 The PSUP API Reference
 
 Story
------
+=====
 
 .. currentmodule:: psup
 
@@ -13,7 +15,7 @@ Story
    :members:
 
 Online Story
-------------
+============
 
 .. arrtibutetable:: OnlineStory
 
@@ -21,6 +23,6 @@ Online Story
    :members:
 
 Errors
-------
+======
 
 .. autoexception:: StoryError

@@ -1,8 +1,9 @@
+--------------------------
 Story Utility Script (SUS)
-==========================
+--------------------------
 
 Introduction
-------------
+============
 SUS is a semi-programming language format used to make text based games and stories with lightweight syntax.
 
 .. warning::
@@ -11,7 +12,7 @@ SUS is a semi-programming language format used to make text based games and stor
     Also everything is case sensitive so be aware of that.
 
 Components
-----------
+==========
 SUS has 4 main components:
 
 * Sub-stories
@@ -22,8 +23,8 @@ SUS has 4 main components:
 These four components are the building foundation of any SUS file, they are simple concepts which work together to make complex stories and games.
 
 Sub-stories
------------
-Sub-stories are a easy and convinient way to seperate your SUS file's components to smaller parts to be easier to work with.
+===========
+Sub-stories are a easy and convenient way to separate your SUS file's components to smaller parts to be easier to work with.
 
 They also act as anchor points to navigate while running the SUS file.
 
@@ -34,13 +35,13 @@ To make a Sub-Story simply type:
 To jump to a story file use the ``STORY`` function.
 
 .. warning::
-    If you have a repeating Sub-story name the Interpreter will throw a StoryError at you so dont try it.
+    If you have a repeating Sub-story name the Interpreter will throw a StoryError at you so don't try it.
 
 .. note:: 
     It's good practice to always start your SUS file with a Sub-story called ``main``
 
 Tags
-----
+====
 Tags are an easy way to navigate your SUS file as they act as Sub-story dependant anchors that you are able to jump to anywhere in the file using the ``JUMP`` function.
 
 To create a tag type:
@@ -48,24 +49,24 @@ To create a tag type:
 ``-TAG <tag-name>``
 
 Attributes
-----------
-Attributes are a way to make your stories and games (mainly) more intruiging and flexible.
+==========
+Attributes are a way to make your stories and games (mainly) more intriguing and flexible.
 
-Attributes can be used for alot of stuff ranging from checking if the player has been in a certain part of the story before to making game logic (someone even made `rock paper scissors <https://github.com/EnokiUN/sup/blob/main/atlas/rps.sus>`_).
+Attributes can be used for a lot of stuff ranging from checking if the player has been in a certain part of the story before to making game logic (someone even made `rock paper scissors <https://github.com/EnokiUN/sup/blob/main/atlas/rps.sus>`_).
 
 Attributes have a variety of functions ranging from ``ADDATTR`` and ``DELATTR`` to ``CHECKATTR`` and ``CHECKANYATTR`` which are used to make stuff with them.
 
 Functions
----------
+========
 Functions are the one undeniable most important building part of SUS.
 
 They are what makes it more than printing stuff to the terminal.
 
-There are a pletohra of functions which do different things from giving the player some options to ending the story.
+There are a plethora of functions which do different things from giving the player some options to ending the story.
 
 They are also combined together to make the cogs of SUS.
 
-Functions can be run dependantly in the SUS file using this syntax:
+Functions can be run dependently in the SUS file using this syntax:
 
 ``-FUNCTION [args]``
 
@@ -84,10 +85,16 @@ Anything after it in the same line will be treated as it's arguments.
                   Option 3 $$STORY sub-story
                 }}
 
+There are also are function groups which help function names stay short and simple.
+
+For example the ``UTILS`` function, it has a lot of sub_functions like ``ADD``, ``SUB``, ``MULT``, ``RAND`` and so on, instead of having ``UTILSADD``, ``UTILSMULT`` and so on ``UTILS SUBFUNCTION`` is a way to invoke the function.
+
+There also are some functions which can be called inline like the ``NEWLINE``, ``STORAG GET`` or ``UTILS ADD`` function, these functions can be called inside a story line, for example ``You have {{STORAGE GET coins}} coins.`` will be output as ``You have 10 coins.``
+
 The functions are:
 
 TAG
-^^^
+---
 The function used to create a `tag <#Tags>`_.
 
 Syntax:
@@ -98,7 +105,7 @@ Syntax:
     If you have a repeating tag name the Interpreter will throw a StoryError at you.
 
 JUMP
-^^^^
+----
 The function used to jump to a `Sub-story <#Sub-stories>`_.
 
 Syntax:
@@ -106,7 +113,7 @@ Syntax:
 ``JUMP <sub-story-name>``
 
 SKIP
-^^^^
+----
 The function used to skip some lines, be pure story lines or lines with functions.
 
 Syntax:
@@ -120,7 +127,7 @@ Syntax:
     If you skip to or past the end of the SUS file the story will end (the :meth:`Story.end` function will be called).
 
 RETURN
-^^^^^^
+------
 The function used to go back some lines, be pure story lines or lines with functions.
 
 Syntax:
@@ -134,7 +141,7 @@ Syntax:
     If you return to or past the start of the current Sub-story it will just stop at the first line in that Sub-story so use the ``JUMP`` method if you want to go back through Sub-stories.
 
 OPTION
-^^^^^^
+------
 The function used to provide the player with options and act on them using functions.
 
 Syntax:
@@ -159,17 +166,17 @@ The syntax of a choice is ``<choice-text> $$<function>`` and are split using com
         3) Option three
 
 STAY
-^^^^
+----
 This function does nothing.
 
-While it may seem useless at first you will soon realize that it's one of the most important functions esspecially if you're using it in combination with another function.
+While it may seem useless at first you will soon realize that it's one of the most important functions especially if you're using it in combination with another function.
 
 Syntax:
 
 ``STAY``
 
 END
-^^^
+---
 This function immediately ends the story when ran.
 
 Syntax:
@@ -177,7 +184,7 @@ Syntax:
 ``END``
 
 ADDATTR
-^^^^^^^
+-------
 This function is used to add `attributes <#Attributes>`_ to the player.
 
 Syntax:
@@ -190,7 +197,7 @@ Syntax:
     Attributes can be split using ``&&``, ``,`` or just spaces.
 
 DELATTR
-^^^^^^^
+-------
 This function is used to remove `attributes <#Attributes>`_ from the player.
 
 Syntax:
@@ -203,7 +210,7 @@ Syntax:
     Attributes can be split using ``&&``, ``,`` or just spaces.
 
 CHECKATTR
-^^^^^^^^^
+---------
 This option is used to check if the player has an `attribute <#Attributes>`_, if so it executes a function.
 
 Syntax:
@@ -218,7 +225,7 @@ Syntax:
     You can prefix the attribute with ``!!`` to check if that attribute doesn't exist instead.
 
 CHECKANYATTR
-^^^^^^^^^^^^
+------------
 This option is used to check if the player has any `attribute <#Attributes>`_, if so it executes a function.
 
 Syntax:
@@ -233,7 +240,7 @@ Syntax:
     You can prefix the attribute with ``!!`` to check if that attribute doesn't exist instead.
 
 RANDOM
-^^^^^^
+------
 This function is used to execute a function from a provided set at random.
 
 Syntax:
@@ -243,13 +250,97 @@ Syntax:
 .. note::
     Functions can be split using ``&&``, ``,`` or just spaces.
 
+NEWLINE
+-------
+This function inserts a new line in the middle of a line.
+
+This function is meant to solely be used as an inline function.
+
+Syntax:
+
+``{{NEWLINE}}``
+
+STORAGE
+-------
+The function group to process storage of variables.
+
+.. warning::
+    You shouldn't overwrite the ``attributes`` slot as it houses the attributes which are altered using the ``ATTR`` functions.
+
+GET
+```
+The function used to fetch the value of a storage slot.
+
+This function can be used as an inline function.
+
+If the slot is empty it returns ``0`` by default.
+
+Syntax:
+
+``STORAGE GET <slot-name>``
+
+SET
+```
+The function used to set the value of a storage slot.
+
+Syntax:
+
+``STORAGE SET <slot-name> <value>``
+
+.. note::
+    This function is optimized for numbers but also works for text.
+
+    If the value is prefixed with ``$$`` eg: ``STORAGE SET thing $$UTILS RANDOM 10 100`` it will be treated as a function and will be expected to return a value.
+
+UTILS
+-----
+The function group which houses utility functions like math, random numbers and the ``say`` function.
+
+.. note::
+    Argument prefixes:
+    - ``S$`` a subfunction which isn't prefixed with ``$$``
+    - ``$$`` expected to be a function and shouldn't be prefixed with ``$$``.
+    - ``$!`` expected to be a function but must be prefixed with ``$$``.
+    - ``$?`` can be a function or a raw value but must be prefixed with ``$$`` to be treated like so.
+    - ``??`` can be a function or a raw value but is treated as a function is a function with the same name exists.
+
 SAY
-^^^
+```
 A function used to straight up send something to the terminal.
 
 Syntax:
 
-``SAY <text>``
+``UTILS SAY <text>``
 
 .. note::
     The arguments of this function are sent to the terminal regardless if they're functions or not.
+
+IS, ISNOT, GREATER, SMALLER
+```````````````````````````
+The functions used to check the equality of two values.
+
+If the operation is true a function is executed.
+
+Syntax:
+
+``UTILS S$<sub-function> ??<first-value> ??<second-value> $$<function>``
+
+ADD, SUB, MULT, DIV
+```````````````````
+The functions used to do simple math.
+
+Both values must be numbers.
+
+This function can be used as an inline function.
+
+Syntax:
+
+``UTILS S$<sub-function> ??<first-value> ??<second-value>``
+
+RAND
+````
+The function used to return a random number between two values.
+
+Syntax:
+
+``UTILS RAND ??<first-value> ??<second-value>``

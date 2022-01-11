@@ -1,5 +1,6 @@
+------------
 Online atlas
-=============
+------------
 
 PSUP provides a built-in way to view and play SUScript files without installing them, you could also add your own SUScript for them to be accessible for anyone to give them a try.
 
@@ -9,7 +10,7 @@ Similarly to add your own SUScript files to the atlas just make a Pull Request i
 
 To run a SUScript file from the atlas there are two methods:
 
-* Run it directly from the terminal by typing: (reccomended)
+* Run it directly from the terminal by typing: (recommended)
 
   ``psup <story-name> -online``.
   
@@ -17,7 +18,7 @@ To run a SUScript file from the atlas there are two methods:
 
 * Run it with Python:
   
-  To run a SUScript file with Pyhton make a .py file in the story's directory and type in it:
+  To run a SUScript file with Python make a .py file in the story's directory and type in it:
 
   .. code-block:: python3
     

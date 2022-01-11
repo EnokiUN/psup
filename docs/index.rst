@@ -7,6 +7,7 @@
     :width: 200
     :alt: logo
 
+================================
 Welcome to PSUP's documentation!
 ================================
 

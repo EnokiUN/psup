@@ -363,6 +363,7 @@ class Story:
             if args in self.storage:
                 return self.storage[args.strip()]
             return 0
+        raise StoryError("Unknown Function")
 
     async def _utils_function(self, args: str) -> Any:
         sub_func, args = args.split(" ", 1)
@@ -493,7 +494,7 @@ class Story:
                     f"Error in {sub_func}, var 2: {var2}. Both values must be numbers in operations"
                 )
             return round(int(var1) / int(var2))
-        elif sub_func in ["RAND", "RAND"]:
+        elif sub_func in ["RAND", "RANDOM"]:
             arg_list = args.split(",")
             var1, var2 = ",".join(arg_list[:-1]), arg_list[-1]
             var1, var2 = var1.strip(), var2.strip()
@@ -507,6 +508,7 @@ class Story:
         if sub_func == "INPUT":
             res = await self.io(args + "\n> ")
             return int(res) if res.isdigit() else res
+        raise StoryError("Unknown Function")
 
     # ----- Inline Functions -----
 

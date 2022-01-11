@@ -2,13 +2,12 @@
     :width: 200
     :alt: logo
 
+----------------------------------------------
 PSUP, The Python Story Utility Package Module.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------
 .. image:: https://discord.com/api/guilds/843825546719002645/embed.png
    :target: https://discord.gg/DTdy5ks4j3
    :alt: Discord server invite
-
-
 
 PSUP helps making stories or games with options, diverging paths, different endings and so on.
 
@@ -33,28 +32,28 @@ You can find / upload stories in the `GitHub repo's atlas folder <https://github
 
 ``psup onlinestoryname -online``
 
-The module has its own file extention (.sus standing for Story Utility Script) where all the
+The module has its own file extension (.sus standing for Story Utility Script) where all the
 other stuff including the story's script, options, endings, attributes and more are in a way
 designed to be fast and simple with basic syntax that's easy to learn and use for even people
 with little to no programming knowledge and skill allowing anyone to create their own stories.
 
 Documentation
---------------
+=============
 There is a readthedocs.io documentation which covers all this but with better and greater detail available `here <https://psup.readthedocs.io/en/latest/index.html>`_, feel free to check it out.
 
 Installation:
--------------
+=============
 Install PSUP by simply running ``pip install psup`` in your terminal.
 
 Check out our `pypi page <https://pypi.org/project/psup/>`_!!
 
 Requirements:
--------------
+=============
 `Python 3.8+ <https://www.python.org/downloads/>`_
 and that's it!
 
 Usage:
-------
+======
 Here's a basic story:
 
 .. code-block:: sus
@@ -115,29 +114,6 @@ Here's a basic story:
 more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
-
-The Syntax:
------------
-So there are a set of functions you can use in a sus file, being:
-
-* ``TAG`` Creates a tag at the line that it's on.
-* ``JUMP`` Jumps to a tag ignoring which sub-story it exists in.
-* ``SKIP`` Skips a provided amount of lines.
-* ``RETURN`` Goes back a provided amount of lines.
-* ``OPTION`` Makes options, each option has some text and the function ran when that option is selected separated by `$$`.
-* ``STAY`` Does nothing, used with other functions to do nothing.
-* ``END`` Ends the whole story.
-* ``ADDATTR`` Adds attributes to the player.
-* ``DELATTR`` Deleted attributes from the player.
-* ``CHECKATTR`` Checks if the player has **all** the specified attribute(s), if so it runs the function supplied by `$$`.
-* ``CHECKANYATTR`` Works similarly to ``CHECKATTR``, difference is that it runs if the player has **any** of the specified attributes.
-* ``RANDOM`` Runs one of the specified functions at *random*.
-* ``SAY`` Says the provided text.
-
-You can also specify sub stories by typing ``[STORY sub-story-name]``.
-
-lines that are empty or start with ``#`` are regarded as comments and are treated as if they don't exist.
-
 
 .. image:: /assets/discord.png
     :width: 50

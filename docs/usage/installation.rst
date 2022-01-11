@@ -1,5 +1,6 @@
+------------
 Installation
-============
+------------
 
 To install the stable build:
 
@@ -11,7 +12,7 @@ To install the stable build:
     # Windows
     py -3 -m pip install -U psup
 
-Hoever ``pip install psup`` generally works.
+However ``pip install psup`` generally works.
 
 For the less stable development function:
 
