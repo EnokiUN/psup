@@ -26,6 +26,6 @@ jobs:
     - name: run pyflakes before running expensive tests
       run: |
         pyflakes .
-    - name: run mypy type checking
-      run: |
-        mypy *.py */*.py --warn-unreachable
+#    - name: run mypy type checking
+#      run: |
+#        mypy *.py */*.py --warn-unreachable
