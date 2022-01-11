@@ -24,7 +24,7 @@ SOFTWARE.
 
 from asyncio import run, sleep
 from inspect import ismethod
-from os import linesep, name, system
+from os import name, system
 from random import choice, randrange, uniform
 from re import findall, split, sub
 from sys import stdout
@@ -82,8 +82,6 @@ class Story:
             The Sting representing the current Sub-story.
     sub_stories:  Dict[:class:`str`, List[:str:`]]
         A dictionary which has a list of Sub-stories and their lines.
-    functions:  Dict[:class:`str`, List[:str:`]]
-        A dictionary which has a list of functions and their lines.  
     function_dict: Dict[:class:`str`, Callable[[Union[:class:`str`, None]], None]]
             The Dictionary that has the pairs of all function names and their corresponding python functions.
     tags: Dict[:class:`str`, Itterable[:class:`str`, :class:`int`]]
@@ -138,7 +136,6 @@ class Story:
             "DELATTR": self._delattr_function,
             "RANDOM": self._random_function,
             "STORAGE": self._storage_function,
-            "RUN": self._run_function,
             "UTILS": self._utils_function,
             # ----- Inline functions -----
             "NEWLINE": self._newline_inline,
@@ -179,26 +176,19 @@ class Story:
         if all(findall(r"\[STORY ([a-zA-Z0-9-]+?)\]", i) == [] for i in self.text):
             raise StoryError("No Story sections found")
         self.sub_stories: Dict[str, List[str]] = dict()
-        self.functions: Dict[str, List[str]] = dict()
         temp_list: List[str] = list()
         # Marking Sub-stories with their text and setting the Tags' location.
         for i in self.text:
-            sub_story = findall(r"\[(STORY|FUNC) ([a-zA-Z0-9-]+?)\]", i)
+            sub_story = findall(r"\[STORY ([a-zA-Z0-9-]+?)\]", i)
             if sub_story:
                 if temp_list:
-                    if temp_list[0] == "STORY":
-                        self.sub_stories[temp_list[1]] = temp_list[2:]
-                    else:
-                        self.functions[temp_list[1]] = temp_list[2:]
+                    self.sub_stories[temp_list[0]] = temp_list[1:]
                     temp_list.clear()
-                sub_story = sub_story[0]
-                if sub_story[0] == "STORY":
-                    if not self.sub_story:
-                        self.sub_story = sub_story[1]
-                if len(temp_list) >= 2:
-                    if sub_story[0] in self.sub_stories:
-                        raise StoryError(f"Duplicate {'Sub-story' if sub_story[0] == 'STORY' else 'Function'}: {sub_story}")
-                temp_list = [sub_story[0], sub_story[1]]
+                if not self.sub_story:
+                    self.sub_story = sub_story[0]
+                if sub_story[0] in self.sub_stories:
+                    raise StoryError(f"Duplicate 'Sub-story': {sub_story}")
+                temp_list = [sub_story[0]]
                 continue
             if i.startswith(("-TAG", "- TAG")):
                 if i.startswith("- "):
@@ -210,10 +200,7 @@ class Story:
                 self.tags[tag] = (temp_list[0], len(temp_list) - 1)
             temp_list.append(i)
         if temp_list:
-            if temp_list[0] == "STORY":
-                self.sub_stories[temp_list[1]] = temp_list[2:]
-            else:
-                self.functions[temp_list[1]] = temp_list[2:]
+            self.sub_stories[temp_list[0]] = temp_list[1:]
             temp_list.clear()
             
     def _get_text(self) -> str:  # The function to get the raw text
@@ -377,11 +364,6 @@ class Story:
                 return self.storage[args.strip()]
             return 0
 
-    async def _run_function(self, args: str) -> None:
-        if args in self.functions:
-            for i in self.functions[args]:
-                await self._run_line(i)
-
     async def _utils_function(self, args: str) -> Any:
         sub_func, args = args.split(" ", 1)
         if sub_func == "SAY":
@@ -530,6 +512,8 @@ class Story:
 
     async def _newline_inline(self) -> str:
         return "\n"
+
+    # ----- Internal Functions -----
 
     async def _run_line(self, line: str=None) -> None:
         curr_line = self.sub_stories[self.sub_story][self.line] if line is None else line

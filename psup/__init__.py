@@ -16,7 +16,7 @@ You can run a story in a minimum of 2 lines of code / 1 terminal command.
 ``psup yourstoryname``
 
 You can also run stories online without installing them or upload your own for others to play.
-You can find / upload stories in the `GitHub repo's SUSMon folder <https://github.com/EnokiUN/psup>`_.
+You can find / upload stories in the `GitHub repo's atlas folder <https://github.com/EnokiUN/psup>`_.
 
 .. code-block:: python3
 

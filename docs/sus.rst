@@ -51,7 +51,7 @@ Attributes
 ----------
 Attributes are a way to make your stories and games (mainly) more intruiging and flexible.
 
-Attributes can be used for alot of stuff ranging from checking if the player has been in a certain part of the story before to making game logic (someone even made `rock paper scissors <https://github.com/EnokiUN/sup/blob/main/SUSMon/rps.sus>`_).
+Attributes can be used for alot of stuff ranging from checking if the player has been in a certain part of the story before to making game logic (someone even made `rock paper scissors <https://github.com/EnokiUN/sup/blob/main/atlas/rps.sus>`_).
 
 Attributes have a variety of functions ranging from ``ADDATTR`` and ``DELATTR`` to ``CHECKATTR`` and ``CHECKANYATTR`` which are used to make stuff with them.
 

@@ -1,4 +1,4 @@
 include README.rst
 include LICENSE
 include requirements.txt
-include src/psup/py.typed
+include psup/py.typed

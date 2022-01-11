@@ -1,13 +1,13 @@
-Online SUSMon
+Online atlas
 =============
 
 PSUP provides a built-in way to view and play SUScript files without installing them, you could also add your own SUScript for them to be accessible for anyone to give them a try.
 
-To view all the SUScript files in the SUSMon visit the PSUP `GitHub page <https://github.com/EnokiUN/psup/blob/main/SUSMon/>`_.
+To view all the SUScript files in the atlas visit the PSUP `GitHub page <https://github.com/EnokiUN/psup/blob/main/atlas/>`_.
 
-Similarly to add your own SUScript files to the SUSMon just make a Pull Request in the GitHub page to the SUSMon file and it will get reviewed and accepted if it runs without issues.
+Similarly to add your own SUScript files to the atlas just make a Pull Request in the GitHub page to the atlas file and it will get reviewed and accepted if it runs without issues.
 
-To run a SUScript file from the SUSMon there are two methods:
+To run a SUScript file from the atlas there are two methods:
 
 * Run it directly from the terminal by typing: (reccomended)
 
