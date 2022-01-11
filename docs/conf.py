@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.abspath("../psup"))
 # -- Project information -----------------------------------------------------
 
 project = "PSUP"
-copyright = "2021, EnokiUN"
+copyright = "2021-present, EnokiUN"
 author = "EnokiUN"
 
 # The full version, including alpha/beta/rc tags

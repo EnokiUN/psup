@@ -14,6 +14,8 @@ requirements = []
 with open("requirements.txt") as f:
     requirements = f.read().splitlines()
 
+extra_requirements = []
+
 readme = ""
 with open("README.rst") as f:
     readme = f.read()

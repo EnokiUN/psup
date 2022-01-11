@@ -202,7 +202,7 @@ class Story:
         if temp_list:
             self.sub_stories[temp_list[0]] = temp_list[1:]
             temp_list.clear()
-            
+
     def _get_text(self) -> str:  # The function to get the raw text
         # Checking if the reference is more than one line long, if so it treats it as the raw text instead
         # of getting a file with its name.
@@ -524,9 +524,7 @@ class Story:
             if inlines:
                 curr_line = sub("{{.+?}}", "{}", curr_line)
                 await self.io(
-                    curr_line.format(
-                        *[await self._run(i[2:-2]) for i in inlines]
-                    )
+                    curr_line.format(*[await self._run(i[2:-2]) for i in inlines])
                 )
             else:
                 await self.io(curr_line)
