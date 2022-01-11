@@ -1,6 +1,6 @@
 import re
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 version = ""
 with open("psup/__init__.py") as f:
