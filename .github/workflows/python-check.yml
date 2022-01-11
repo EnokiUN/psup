@@ -28,4 +28,4 @@ jobs:
         pyflakes .
     - name: run mypy type checking
       run: |
-        mypy *.py */*.py --ignore-missing-imports --strict --warn-unreachable
+        mypy *.py */*.py --warn-unreachable
