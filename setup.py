@@ -1,6 +1,6 @@
 import re
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 version = ""
 with open("psup/__init__.py") as f:
@@ -31,8 +31,7 @@ setup(
     download_url="https://github.com/EnokiUN/psup/archive/refs/tags/Release-0-1-1-5a.tar.gz",
     version=version,
     license="MIT",
-    packages=find_packages(where="psup"),
-    package_dir={"": "psup"},
+    packages=["psup"],
     install_requires=requirements,
     extra_requires=extra_requirements,
     description="A simple library for making complex stories and games.",
