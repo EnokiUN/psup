@@ -359,6 +359,7 @@ class Story:
             if value.startswith("$$"):
                 value = await self._run(value[2:])
             self.storage[label.strip()] = int(value) if str(value).isdigit() else value
+            return self.storage[label.strip()]
         elif sub_func == "GET":
             if args in self.storage:
                 return self.storage[args.strip()]
@@ -505,7 +506,7 @@ class Story:
             if not str(var1).isdigit() or not str(var2).isdigit():
                 raise StoryError("Both values must be numbers in random ranges")
             return randrange(int(var1), int(var2))
-        if sub_func == "INPUT":
+        elif sub_func == "INPUT":
             res = await self.io(args + "\n> ")
             return int(res) if res.isdigit() else res
         raise StoryError("Unknown Function")

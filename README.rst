@@ -6,7 +6,7 @@
 PSUP, The Python Story Utility Package Module.
 ----------------------------------------------
 .. image:: https://discord.com/api/guilds/843825546719002645/embed.png
-   :target: https://discord.gg/DTdy5ks4j3
+   :target: https://discord.gg/XFrExEJMsK
    :alt: Discord server invite
 
 PSUP helps making stories or games with options, diverging paths, different endings and so on.
@@ -115,7 +115,7 @@ more examples can be found in the `atlas folder <https://github.com/EnokiUN/psup
 
 This might look like a bit too much to understand at once but I'll break it bit by bit.
 
-.. image:: /assets/discord.png
+.. image:: /https://raw.githubusercontent.com/EnokiUN/psup/main/assets/discord.png
     :width: 50
     :alt: discord
-    :target: https://discord.gg/DTdy5ks4j3
+    :target: https://discord.gg/XFrExEJMsK
