@@ -28,6 +28,7 @@ You don't have enough tho....
 - STORAGE SET coins $$UTILS SUB STORAGE GET coins, STORAGE GET price
 - STORAGE SET coinlvl $$UTILS ADD STORAGE GET coinlvl, 1
 - STORAGE SET workmax $$UTILS ADD STORAGE GET workmax, 100 
+Thanks for your patreonage good sir!
 - JUMP o
 
 # --------------- Gambling Stuff ---------------

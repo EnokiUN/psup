@@ -28,19 +28,22 @@ from os import name, system
 from random import choice, randrange, uniform
 from re import findall, split, sub
 from sys import stdout
-from typing import Any, Callable, Dict, Iterable, List, Tuple, Union
+from typing import Any, Callable, Coroutine, Dict, Iterable, List, Optional, Protocol, Tuple, Union
 
 from .errors import StoryError
 
 
-async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> str:
+class IoFunction(Protocol):
+    def __call__(self, text: Optional[str] = None, **kwargs: Union[str, Iterable[str]]) -> Coroutine[Any, Any, str]: ...
+
+async def _story_io(text: Optional[str] = None, **kwargs: Union[str, Iterable[str]]) -> str:
     """The default I/O (input and output) function for the :class:`Story` class
 
     .. versionadded:: 0.1.1
 
     Parameters
     -----------
-    text: :class:`str`
+    text: Optional[:class:`str`]
             The story script and text to be sent to the desired location.
     options: List[:class:`str`]
             The options to be displayed for the user / player to choose one.
@@ -56,10 +59,11 @@ async def _story_io(text: str = str(), **kwargs: Union[str, Iterable[str]]) -> s
             [f"{x+1}) {i}" for x, i in enumerate(kwargs["options"])]
         )
         out = "\n> "
-    for x in text:
-        print(x, end="")
-        stdout.flush()
-        await sleep(uniform(0, 0.01))
+    if text is not None:
+        for x in text:
+            print(x, end="")
+            stdout.flush()
+            await sleep(uniform(0, 0.01))
     return input(out)
 
 
@@ -73,7 +77,7 @@ class Story:
     reference: :class:`str`
             A String representing the reference of the story, it can be the path of the sus file that the
             story object will interpret and run or the story scrip directly.
-    io: Callable[[:class:`str`, Union[:class:`str`, Iterable[:class:`str`]]], :class:`str`]
+    io: :class:`IoFunction`
             A function that handles the input and output of data from the :class:`Story`
             object to the desired location.
     line: :class:`int`
@@ -108,7 +112,7 @@ class Story:
     def __init__(
         self,
         reference: str,
-        io_function: Callable[[str, Union[str, Iterable[str]]], str] = _story_io,
+        io_function: IoFunction = _story_io,
     ):
         # Defining some base stuff.
         # Making sure that if the reference isn't source code that it ends with the correct file format.
@@ -312,11 +316,13 @@ class Story:
             if not i:
                 continue
             i = i.strip()
+            attributes = self.storage["attributes"]
+            assert isinstance(attributes, list), "Attributes isn't a list"
             if i.startswith("!!"):
-                if i[3:] in self.storage["attributes"]:
+                if i[3:] in attributes:
                     return
             else:
-                if i not in self.storage["attributes"]:
+                if i not in attributes:
                     return
         await self._run(function)
 
@@ -327,26 +333,32 @@ class Story:
             if not i:
                 continue
             i = i.strip()
+            attributes = self.storage["attributes"]
+            assert isinstance(attributes, list), "Attributes isn't a list"
             if i.startswith("!!"):
-                if i[3:] not in self.storage["attributes"]:
+                if i[3:] not in attributes:
                     await self._run(function)
             else:
-                if i in self.storage["attributes"]:
+                if i in attributes:
                     await self._run(function)
 
     async def _addattr_function(self, args: str) -> None:
         arg_list = split("&&|,| ", args)
         for arg in arg_list:
             arg = arg.strip()
-            if arg and arg not in self.storage["attributes"]:
-                self.storage["attributes"].append(arg)
+            attributes = self.storage["attributes"]
+            assert isinstance(attributes, list), "Attributes isn't a list"
+            if arg and arg not in attributes:
+                attributes.append(arg)
 
     async def _delattr_function(self, args: str) -> None:
         arg_list = split("&&|,| ", args)
         for arg in arg_list:
             arg = arg.strip()
-            if arg and arg in self.storage["attributes"]:
-                self.storage["attributes"].remove(arg)
+            attributes = self.storage["attributes"]
+            assert isinstance(attributes, list), "Attributes isn't a list"
+            if arg and arg in attributes:
+                attributes.remove(arg)
 
     async def _random_function(self, args: str) -> None:
         funcs = args.split(",")
@@ -364,7 +376,7 @@ class Story:
             if args in self.storage:
                 return self.storage[args.strip()]
             return 0
-        raise StoryError("Unknown Function")
+        raise StoryError(f"Unknown Function: {sub_func}")
 
     async def _utils_function(self, args: str) -> Any:
         sub_func, args = args.split(" ", 1)
@@ -509,7 +521,8 @@ class Story:
         elif sub_func == "INPUT":
             res = await self.io(args + "\n> ")
             return int(res) if res.isdigit() else res
-        raise StoryError("Unknown Function")
+        else:
+            raise StoryError(f"Unknown Function: {sub_func}")
 
     # ----- Inline Functions -----
 
@@ -565,7 +578,6 @@ class Story:
             system("cls" if name == "nt" else "clear")
         else:
             await self.io(error="Alright, See you next time!")
-            await sleep(3)
             self.ended = True
 
     def io_function(
